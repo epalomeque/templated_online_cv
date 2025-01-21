@@ -1,30 +1,43 @@
 {
+  "about": {
+    "title": "Technical Leader | FullStack Developer",
+    "description": "I am a Full Stack developer with +15 years of experience specializing in building robust and scalable applications. I have extensive expertise in FastAPI for high-performance backend development and React and Angular for creating dynamic, user-friendly frontend interfaces. Throughout my career, I have also led development teams, ensuring efficient collaboration and delivery of high-quality software. My work focuses on delivering efficient, maintainable code while optimizing performance and ensuring smooth integration with databases and external services.\nI am committed to writing high-quality code, following best development practices, and continuously improving my skills. With experience in both SQL and NoSQL databases, RESTful API integration, cloud deployment, and team leadership, I am looking for a challenging environment where I can contribute my expertise and grow further as a developer."
+  },
   "personal_info": {
     "name": "Emmanuel",
-    "lastname": "Palomeque Alcázar",
+    "lastname": "Palomeque",
+    "second_lastname": "Alcázar",
     "birthdate": "1979-12-24"
   },
   "contact_info": {
     "email": ["epalomeque@gmail.com", "epalomeque@hotmail.com"],
-    "phone_number": {
-      "cel": {
-        "country_code": "52",
-        "number": "9933114902"
-      },
-      "local": {}
-    },
+    "phone_number": [
+      { "type": "cel", "country_code": "52", "number": "9933114902" }
+    ],
     "address": {
       "street_name": "Prolongación 27 de Febrero",
       "ext_number": "4026",
       "int_number": "29",
-      "city": "Villhermosa",
+      "city": "Villahermosa",
       "state": "Tabasco",
       "country": "México"
     }
   },
-  "education": {},
-  "experience": {},
-  "abilities": {},
-  "interests": {},
-  "picture": {}
+  "education": [],
+  "experience": [
+    {
+      "job_name": "IT Seekers",
+      "addr": "Villahermosa,Tab., MEX",
+      "duration_start": "Mar. 2022",
+      "duration_end": "Jan. 2025",
+      "position_name": "UI Developer / Technical Leader",
+      "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP\n"
+    }
+  ],
+  "abilities": [
+    "Python (Django, FastAPI, Flask)", "SQL", "GIT", "Javascript (React, TypeScript)",
+    "Linux / OS X / Windows", "Docker", "PHP (Wordpress, Drupal)", "Jenkins", "Photoshop", "Illustrator", "InDesign"],
+  "interests": ["Read", "Travels", "Music", "AI Technologies", "TCG´s", "Videogames", "Programming"],
+  "picture": {},
+  "projects": []
 }

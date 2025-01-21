@@ -8,15 +8,7 @@ function App() {
   return (
     <>
       <h1>{title}</h1>
-      <div className="card">
-        <p>
-          JSON File <code>{cvData.personal_info.name} {cvData.personal_info.lastname}</code>
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <SimpleResume />
+      <SimpleResume cvData={ cvData } />
     </>
   )
 }
