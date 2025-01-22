@@ -1,9 +1,6 @@
 export default function SimpleResumeDetails(detailsData: any) {
-    console.info('detailsData ->', detailsData);
 
     const ExperienceItem = (item: any) => {
-      console.info("ExperienceItem ->", item);
-
 
       return (
         <div className="section__list-item">
