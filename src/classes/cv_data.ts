@@ -1,17 +1,31 @@
 import HeaderInfoInterface from '../interfaces/header_Info.ts';
+import DetailsInfoInterface from '../interfaces/details_info.ts';
 import AboutInfoInterface from '../interfaces/about_info.ts';
 import ContactInfoInterface from '../interfaces/contact_info.ts';
 import PersonalInfoInterface from '../interfaces/personal_info.ts';
+import ExperienceInterface from '../interfaces/experience_info.ts';
 
 export default class CVData {
     about_info: AboutInfoInterface;
     contact_info: ContactInfoInterface;
     personal_info: PersonalInfoInterface;
+    education?: string[];
+    experience?: ExperienceInterface[];
+    abilities?: string[];
+    interests?: string[];
+    picture?: string;
+    projects?: string[]
 
-    public constructor(header: HeaderInfoInterface) {
+    public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
         this.about_info = header.about_info;
         this.contact_info = header.contact_info;
         this.personal_info = header.personal_info;
+        this.education = details.education;
+        this.experience = details.experience;
+        this.abilities = details.abilities;
+        this.interests = details.interests;
+        this.picture = details.picture;
+        this.projects = details.projects;
     }
 
     public getName(): string {
@@ -48,8 +62,6 @@ export default class CVData {
         const celNumber = cellPhone.number ? `${cellPhone.number}` : '';
 
         return countryCode && celNumber ? `${ countryCode }${ celNumber }` : '---';
-
-
     }
 
     public getAboutTitle():string {
@@ -58,5 +70,9 @@ export default class CVData {
 
     public getAboutDescription():string {
         return this.about_info.description ? this.about_info.description : '';
+    }
+
+    public getExperience():ExperienceInterface[] | undefined {
+        return this.experience;
     }
 }

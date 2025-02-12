@@ -1,39 +1,15 @@
-export default function SimpleResumeDetails(detailsData: any) {
+import SimpleResumePropsInterface from '../../interfaces/simpleResumeProps.ts';
+import SimpleResumeSectionExperience from "./simple_resume_section_experience.tsx";
 
-    const ExperienceItem = (item: any) => {
-
-      return (
-        <div className="section__list-item">
-          <div className="left">
-            <div className="name">{ item.job_name}</div>
-            <div className="addr">San Fr, CA</div>
-            <div className="duration">Jan 2011 - Feb 2015</div>
-          </div>
-          <div className="right">
-            <div className="name">Fr developer</div>
-            <div className="desc">did This and that</div>
-          </div>
-        </div>
-      )
-    }
-    const ExperienceData = (experienceData: Array) => {
-        const expData = experienceData.experienceData;
-        if (!expData) return;
-
-        return expData.map((item: any) => {
-            return <ExperienceItem item={ item }></ExperienceItem>
-        });
-    }
+export default function SimpleResumeDetails(props: SimpleResumePropsInterface) {
+    const {
+        cvData
+    } = props;
 
     return (
         <>
             <div className="details">
-                <div className="section">
-                    <div className="section__title">Experience</div>
-                    <div className="section__list">
-                        <ExperienceData experienceData={ detailsData.detailsData.experience }></ExperienceData>
-                    </div>
-                </div>
+                <SimpleResumeSectionExperience ExperienceData = { cvData.getExperience() } TitleSection={ 'Experience' }></SimpleResumeSectionExperience>
                 <div className="section">
                     <div className="section__title">Education</div>
                     <div className="section__list">

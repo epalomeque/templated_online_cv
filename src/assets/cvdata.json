@@ -23,7 +23,7 @@
       "country": "México"
     }
   },
-  "education": [],
+  "education": ["Universidad del Valle de México"],
   "experience": [
     {
       "job_name": "IT Seekers",
@@ -31,7 +31,23 @@
       "duration_start": "Mar. 2022",
       "duration_end": "Jan. 2025",
       "position_name": "UI Developer / Technical Leader",
-      "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP\n"
+      "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP)\n"
+    },
+    {
+      "job_name": "Mandarin Projects",
+      "addr": "CDMX, MEX",
+      "duration_start": "Sep. 2019",
+      "duration_end": "Oct. 2021",
+      "position_name": "Solutions Developer",
+      "pos_description": "• Development of customized projects using Python and React as the core technologies, analyzing data and integrating information sources into PostgreSQL databases, as well as making custom modifications to opensource software Apache Superset.\n• Involved in planning, deployment, and fine-tuning of developments in private datacenters using Ubuntu Linux servers"
+    },
+    {
+      "job_name": "Secretaría de la Función Pública",
+      "addr": "Villahermosa,Tab., MEX",
+      "duration_start": "Jan. 2019",
+      "duration_end": "Sep. 2019",
+      "position_name": "lead Developer",
+      "pos_description": "• Analisys, and development of software, or create upgrades for already implemented entities for operation and control of activites in the secretariat. Help in deployment of new services and server configuration. Developments based on docker containers for the best use of the secretarial infrastructure.\n• Planning, deployment, and fine-tuning of developments in private datacenters using Linux servers and VMWare Software."
     }
   ],
   "abilities": [
