@@ -23,7 +23,14 @@
       "country": "México"
     }
   },
-  "education": ["Universidad del Valle de México"],
+  "education": [{
+    "institute_name": "Universidad del Valle de México",
+    "addr": "",
+    "duration_start": "",
+    "duration_end": "",
+    "grade_name":"",
+    "pos_description": ""
+  }],
   "experience": [
     {
       "job_name": "IT Seekers",

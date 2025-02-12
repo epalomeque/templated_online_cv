@@ -4,17 +4,18 @@ import AboutInfoInterface from '../interfaces/about_info.ts';
 import ContactInfoInterface from '../interfaces/contact_info.ts';
 import PersonalInfoInterface from '../interfaces/personal_info.ts';
 import ExperienceInterface from '../interfaces/experience_info.ts';
+import EducationInterface from "../interfaces/education_info.ts";
 
 export default class CVData {
     about_info: AboutInfoInterface;
     contact_info: ContactInfoInterface;
     personal_info: PersonalInfoInterface;
-    education?: string[];
-    experience?: ExperienceInterface[];
-    abilities?: string[];
-    interests?: string[];
-    picture?: string;
-    projects?: string[]
+    education?: EducationInterface[] | undefined;
+    experience?: ExperienceInterface[] | undefined;
+    abilities?: string[] | undefined;
+    interests?: string[] | undefined;
+    picture?: string | undefined;
+    projects?: string[] | undefined;
 
     public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
         this.about_info = header.about_info;
@@ -69,10 +70,14 @@ export default class CVData {
     }
 
     public getAboutDescription():string {
-        return this.about_info.description ? this.about_info.description : '';
+      return this.about_info.description ? this.about_info.description : '';
     }
 
     public getExperience():ExperienceInterface[] | undefined {
-        return this.experience;
+      return this.experience;
+    }
+
+    public getEducation():EducationInterface[] | undefined {
+        return this.education;
     }
 }

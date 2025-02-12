@@ -1,7 +1,8 @@
 import ExperienceInterface from './experience_info.ts';
+import EducationInterface from './education_info.ts';
 
 export default interface DetailsInfoInterface {
-    education?: string[];
+    education?: EducationInterface[];
     experience?: ExperienceInterface[];
     abilities?: string[];
     interests?: string[];

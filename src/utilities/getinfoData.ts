@@ -1,8 +1,10 @@
-import HeaderInfoInterface from "../interfaces/header_Info.ts";
-import AboutInfoInterface from "../interfaces/about_info.ts";
-import ContactInfoInterface from "../interfaces/contact_info.ts";
-import PersonalInfoInterface from "../interfaces/personal_info.ts";
-import DetailsInfoInterface from "../interfaces/details_info.ts";
+import HeaderInfoInterface from '../interfaces/header_Info.ts';
+import AboutInfoInterface from '../interfaces/about_info.ts';
+import ContactInfoInterface from '../interfaces/contact_info.ts';
+import PersonalInfoInterface from '../interfaces/personal_info.ts';
+import DetailsInfoInterface from '../interfaces/details_info.ts';
+import ExperienceInterface from '../interfaces/experience_info.ts';
+import EducationInterface from '../interfaces/education_info.ts';
 
 export function getHeaderDataFromJson(cvData: any):HeaderInfoInterface {
     const aboutData:AboutInfoInterface = {
@@ -29,20 +31,23 @@ export function getHeaderDataFromJson(cvData: any):HeaderInfoInterface {
 
 export function getDetailsDataFromJson(cvData: any): DetailsInfoInterface {
     const {
-        cvData: {
-            abilities,
-            education,
-            experience,
-            interests,
-            picture,
-            projects,
-        },
+      cvData: {
+        abilities,
+        education,
+        experience,
+        interests,
+        picture,
+        projects,
+      },
     } = cvData;
+
+    const ExperienceData:ExperienceInterface[] = experience;
+    const EducationData:EducationInterface[] = education;
 
     return {
         abilities: abilities,
-        education: education,
-        experience: experience,
+        education: EducationData,
+        experience: ExperienceData,
         interests: interests,
         picture: picture,
         projects: projects,
