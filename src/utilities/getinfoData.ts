@@ -3,6 +3,7 @@ import AboutInfoInterface from "../interfaces/about_info.ts";
 import ContactInfoInterface from "../interfaces/contact_info.ts";
 import PersonalInfoInterface from "../interfaces/personal_info.ts";
 import DetailsInfoInterface from "../interfaces/details_info.ts";
+import ExperienceInterface from "../interfaces/experience_info.ts";
 
 export function getHeaderDataFromJson(cvData: any):HeaderInfoInterface {
     const aboutData:AboutInfoInterface = {
@@ -39,10 +40,12 @@ export function getDetailsDataFromJson(cvData: any): DetailsInfoInterface {
         },
     } = cvData;
 
+    const ExperienceData:ExperienceInterface[] = experience;
+
     return {
         abilities: abilities,
         education: education,
-        experience: experience,
+        experience: ExperienceData,
         interests: interests,
         picture: picture,
         projects: projects,
