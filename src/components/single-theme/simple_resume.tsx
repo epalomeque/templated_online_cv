@@ -1,9 +1,9 @@
 import './simple_resume.scss';
 import CVData from '../../classes/cv_data';
 
-import { getHeaderDataFromJson, getDetailsDataFromJson } from '../../utilities/getinfoData.ts';
-import SimpleResumeHeader from './simple_resume_header';
 import SimpleResumeDetails from './simple_resume_details';
+import SimpleResumeHeader from './simple_resume_header';
+import { getHeaderDataFromJson, getDetailsDataFromJson } from '../../utilities/getinfoData.ts';
 
 
 export default function SimpleResume (cvData:any) {

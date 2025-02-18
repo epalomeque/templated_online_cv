@@ -12,7 +12,7 @@ export default function SimpleResumeSectionExperience(props: SectionExperiencePr
     } = props;
 
     return <>
-        <div className="section">
+        <div className="section" key={ TitleSection }>
             <div className="section__title">{ TitleSection }</div>
             <div className="section__list">
                 <ExperienceDataMap ExperienceData = { ExperienceData }></ExperienceDataMap>
@@ -33,9 +33,9 @@ function ExperienceDataMap(props:ExperienceDataMapProps) {
 
     if (!ExperienceData) return;
 
-    return ExperienceData.map((ExperienceItemData: ExperienceInterface) => {
+    return ExperienceData.map((ExperienceItemData: ExperienceInterface)  => {
         return <>
-          <ExperienceItem ExperienceDataItem={ ExperienceItemData }></ExperienceItem>
+          <ExperienceItem ExperienceDataItem={ ExperienceItemData } />
         </>
     });
 }
@@ -48,19 +48,29 @@ interface ExperienceItemProps {
 }
 
 function ExperienceItem(props: ExperienceItemProps)  {
-    const { ExperienceDataItem } = props;
-    return (
-        <>
-        <div className="section__list-item">
-            <div className="left">
-                <div className="name">{ ExperienceDataItem.job_name }</div>
-                <div className="addr">{ ExperienceDataItem.addr }</div>
-                <div className="duration">{ ExperienceDataItem.duration_start } - { ExperienceDataItem.duration_end }</div>
-            </div>
-            <div className="right">
-                <div className="name">{ ExperienceDataItem.position_name }</div>
-                <div className="desc">{ ExperienceDataItem.pos_description }</div>
-            </div>
+  const {
+    ExperienceDataItem: {
+      addr,
+      duration_end,
+      duration_start,
+      id,
+      job_name,
+      pos_description,
+      position_name,
+    },
+  } = props;
+  return (
+    <>
+      <div className="section__list-item" key={ `experience_${id}` }>
+        <div className="left">
+          <div className="name">{ job_name }</div>
+          <div className="addr">{ addr }</div>
+          <div className="duration">{ duration_start } - { duration_end }</div>
         </div>
-        </>
-    )}
+        <div className="right">
+          <div className="name">{ position_name }</div>
+          <div className="desc">{ pos_description }</div>
+        </div>
+      </div>
+    </>
+  )}

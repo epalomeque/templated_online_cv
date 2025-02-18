@@ -1,63 +1,115 @@
-import ExperienceInterface from "../../interfaces/experience_info.ts";
+import AbilitiesInterface from '../../interfaces/abilities_info.ts'
 
 interface SectionSkillsProps {
-    SkillsData: ExperienceInterface[] | undefined,
+    SkillsData: AbilitiesInterface[] | undefined,
     TitleSection: string,
 }
 
 export default function SimpleResumeSectionSkills(props: SectionSkillsProps) {
     const {
-        // EducationData,
+        SkillsData,
         TitleSection,
     } = props;
 
+    console.info('SkillsData ->', SkillsData);
+    console.info('TitleSection ->', TitleSection);
     return <>
-        <div className="section">
+        <div className="section" key={ TitleSection }>
             <div className="section__title">{ TitleSection }</div>
             <div className="skills">
-                <div className="skills__item">
-                    <div className="left"><div className="name">
-                        Javascript
-                    </div></div>
-                    <div className="right">
-                        <input  id="ck1" type="checkbox" checked/>
-
-                        <label htmlFor="ck1"></label>
-                        <input id="ck2" type="checkbox" checked/>
-
-                        <label htmlFor="ck2"></label>
-                        <input id="ck3" type="checkbox" />
-
-                        <label htmlFor="ck3"></label>
-                        <input id="ck4" type="checkbox" />
-                        <label htmlFor="ck4"></label>
-                        <input id="ck5" type="checkbox" />
-                        <label htmlFor="ck5"></label>
-
-                    </div>
-                </div>
+                <SkillsDataMap SkillsData={ SkillsData } />
             </div>
-            <div className="skills__item">
-                <div className="left"><div className="name">
-                    CSS</div></div>
-                <div className="right">
-                    <input  id="ck1" type="checkbox" checked/>
-
-                    <label htmlFor="ck1"></label>
-                    <input id="ck2" type="checkbox" checked/>
-
-                    <label htmlFor="ck2"></label>
-                    <input id="ck3" type="checkbox" />
-
-                    <label htmlFor="ck3"></label>
-                    <input id="ck4" type="checkbox" />
-                    <label htmlFor="ck4"></label>
-                    <input id="ck5" type="checkbox" />
-                    <label htmlFor="ck5"></label>
-
-                </div>
-            </div>
-
         </div>
     </>
+}
+
+
+/**
+ * SkillsDataMap
+ **/
+interface SkillsDataMapProps {
+    SkillsData: AbilitiesInterface[] | undefined,
+}
+
+function SkillsDataMap(props:SkillsDataMapProps) {
+  const { SkillsData } = props;
+
+  if (!SkillsData) return;
+
+  return SkillsData.map((SkillsItemData: AbilitiesInterface) => {
+    return <>
+      <SkillsItem SkillsDataItem={ SkillsItemData } key={ SkillsItemData.id } />
+    </>
+  });
+}
+
+/**
+ * SkillsItem
+ **/
+interface SkillsItemProps {
+    SkillsDataItem: AbilitiesInterface,
+}
+
+function SkillsItem(props: SkillsItemProps)  {
+  const {
+    SkillsDataItem: {
+      id,
+      name,
+      level,
+    },
+  } = props;
+
+  const itemId = `${name}_${id}`
+
+  return (
+    <>
+      <div className="skills__item" key={ itemId } >
+        <div className="left"><div className="name">{ name }</div></div>
+        <div className="right">
+          <LevelInputs level={ level } itemId={ itemId } />
+         </div>
+        </div>
+    </>
+  )}
+
+/**
+ * LevelInputs
+ **/
+interface LevelInputsProps {
+    level: number,
+    itemId: string,
+}
+
+function LevelInputs(props: LevelInputsProps) {
+  const {
+    level,
+    itemId,
+  } = props;
+
+  const MAX_SKILL_LEVEL = 10;
+  const lvlArray = [];
+  for (let lvl=0; lvl < level; lvl++ ) {
+    lvlArray.push({
+      idNumber: lvl,
+      isChecked: true,
+      itemId: itemId,
+    })
+  }
+
+  if (level < 10) {
+    for (let lvl=0; lvl < (MAX_SKILL_LEVEL-level); lvl++ ) {
+      lvlArray.push({
+        idNumber: lvl,
+        isChecked: false,
+        itemId: itemId,
+      })
+    }
+  }
+
+  return lvlArray.map(( { ...item } ) => {
+      return <>
+        <input id={ `${item.itemId}_ck${item.idNumber}` } type="checkbox" checked={ item.isChecked } readOnly={ true } />
+        <label htmlFor={ `${itemId}_ck${item.idNumber}` }></label>
+      </>
+  });
 }

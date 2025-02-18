@@ -12,7 +12,7 @@ export default function SimpleResumeSectionEducation(props: SectionEducationProp
   } = props;
 
   return <>
-    <div className="section">
+    <div className="section" key={ TitleSection }>
       <div className="section__title">{ TitleSection }</div>
       <div className="section__list">
         <EducationDataMap EducationData={ EducationData } />

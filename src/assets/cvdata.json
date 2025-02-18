@@ -24,6 +24,7 @@
     }
   },
   "education": [{
+    "id": 0,
     "institute_name": "Universidad del Valle de México",
     "addr": "Villahermosa, TAB. MEX",
     "duration_start": "Sep-2001",
@@ -33,6 +34,7 @@
   }],
   "experience": [
     {
+      "id": 0,
       "job_name": "IT Seekers",
       "addr": "Villahermosa,Tab., MEX",
       "duration_start": "Mar. 2022",
@@ -41,6 +43,7 @@
       "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP)\n"
     },
     {
+      "id": 1,
       "job_name": "Mandarin Projects",
       "addr": "CDMX, MEX",
       "duration_start": "Sep. 2019",
@@ -49,6 +52,7 @@
       "pos_description": "• Development of customized projects using Python and React as the core technologies, analyzing data and integrating information sources into PostgreSQL databases, as well as making custom modifications to opensource software Apache Superset.\n• Involved in planning, deployment, and fine-tuning of developments in private datacenters using Ubuntu Linux servers"
     },
     {
+      "id": 2,
       "job_name": "Secretaría de la Función Pública",
       "addr": "Villahermosa,Tab., MEX",
       "duration_start": "Jan. 2019",
@@ -57,8 +61,19 @@
       "pos_description": "• Analisys, and development of software, or create upgrades for already implemented entities for operation and control of activites in the secretariat. Help in deployment of new services and server configuration. Developments based on docker containers for the best use of the secretarial infrastructure.\n• Planning, deployment, and fine-tuning of developments in private datacenters using Linux servers and VMWare Software."
     }
   ],
-  "abilities": ["Python (Django, FastAPI, Flask)", "SQL", "GIT", "Javascript (React, TypeScript)",
-    "Linux / OS X / Windows", "Docker", "PHP (Wordpress, Drupal)", "Jenkins", "Photoshop", "Illustrator", "InDesign"],
+  "abilities": [
+    { "id": 0, "name": "Python (Django, FastAPI, Flask)", "level": 9 },
+    { "id": 1, "name": "SQL", "level": 5 },
+    { "id": 2, "name": "GIT", "level": 8 },
+    { "id": 3, "name": "Javascript (React, TypeScript)", "level": 8 },
+    { "id": 4, "name": "Linux / OS X / Windows", "level": 7 },
+    { "id": 5, "name": "Docker", "level": 6 },
+    { "id": 6, "name": "PHP (Wordpress, Drupal)", "level": 7 },
+    { "id": 7, "name": "Jenkins", "level": 5 },
+    { "id": 8, "name": "Photoshop", "level": 7 },
+    { "id": 9, "name": "Illustrator", "level": 5 },
+    { "id": 10, "name": "InDesign", "level": 8 }
+  ],
   "interests": ["Read", "Travels", "Music", "AI Technologies", "TCG´s", "Videogames", "Programming"],
   "picture": {},
   "projects": []

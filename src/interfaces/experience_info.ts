@@ -1,8 +1,9 @@
 export default interface ExperienceInterface {
-    job_name: string;
     addr: string;
-    duration_start: string;
     duration_end: string;
-    position_name:string;
+    duration_start: string;
+    id: number;
+    job_name: string;
     pos_description: string;
+    position_name:string;
 }
