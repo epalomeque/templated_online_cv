@@ -6,21 +6,19 @@ interface SectionSkillsProps {
 }
 
 export default function SimpleResumeSectionSkills(props: SectionSkillsProps) {
-    const {
-        SkillsData,
-        TitleSection,
-    } = props;
+  const {
+    SkillsData,
+    TitleSection,
+  } = props;
 
-    console.info('SkillsData ->', SkillsData);
-    console.info('TitleSection ->', TitleSection);
-    return <>
-        <div className="section" key={ TitleSection }>
-            <div className="section__title">{ TitleSection }</div>
-            <div className="skills">
-                <SkillsDataMap SkillsData={ SkillsData } />
-            </div>
-        </div>
-    </>
+  return <>
+    <div className="section" key={ TitleSection }>
+      <div className="section__title">{ TitleSection }</div>
+      <div className="skills">
+        <SkillsDataMap SkillsData={ SkillsData } />
+      </div>
+    </div>
+  </>
 }
 
 

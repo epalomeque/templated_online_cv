@@ -5,23 +5,29 @@ import PersonalInfoInterface from '../interfaces/personal_info.ts';
 import DetailsInfoInterface from '../interfaces/details_info.ts';
 import ExperienceInterface from '../interfaces/experience_info.ts';
 import EducationInterface from '../interfaces/education_info.ts';
-import AbilitiesInterface from "../interfaces/abilities_info.ts";
+import AbilitiesInterface from '../interfaces/abilities_info.ts';
 
-export function getHeaderDataFromJson(cvData: any):HeaderInfoInterface {
+interface getHeaderDataProps {
+  cvData: any | unknown,
+}
+
+export function getHeaderDataFromJson(props: getHeaderDataProps):HeaderInfoInterface {
+  const { cvData } = props;
+
   const aboutData:AboutInfoInterface = {
-    title: cvData.cvData.about.title,
-    description: cvData.cvData.about.description
+    title: cvData.about.title,
+    description: cvData.about.description
   };
   const contactData:ContactInfoInterface = {
-    email: cvData.cvData.contact_info.email,
-    phone_number: cvData.cvData.contact_info.phone_number,
-    address: cvData.cvData.contact_info.address,
+    email: cvData.contact_info.email,
+    phone_number: cvData.contact_info.phone_number,
+    address: cvData.contact_info.address,
   };
   const personalData:PersonalInfoInterface = {
-    name: cvData.cvData.personal_info.name,
-    lastname: cvData.cvData.personal_info.lastname,
-    second_lastname: cvData.cvData.personal_info.second_lastname,
-    birthdate: cvData.cvData.personal_info.birthdate,
+    name: cvData.personal_info.name,
+    lastname: cvData.personal_info.lastname,
+    second_lastname: cvData.personal_info.second_lastname,
+    birthdate: cvData.personal_info.birthdate,
   }
   return {
     about_info: aboutData,
@@ -43,14 +49,15 @@ export function getDetailsDataFromJson(cvData: any): DetailsInfoInterface {
   } = cvData;
 
   const ExperienceData:ExperienceInterface[] = experience;
-  const EducationData:EducationInterface[] = education
-  const AbilitiesData:AbilitiesInterface[] = abilities
+  const EducationData:EducationInterface[] = education;
+  const AbilitiesData:AbilitiesInterface[] = abilities;
+  const InterestData:string[] = interests;
 
   return {
     abilities: AbilitiesData,
     education: EducationData,
     experience: ExperienceData,
-    interests: interests,
+    interests: InterestData,
     picture: picture,
     projects: projects,
   }

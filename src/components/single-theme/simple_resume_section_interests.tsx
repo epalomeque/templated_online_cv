@@ -1,26 +1,24 @@
-import ExperienceInterface from "../../interfaces/experience_info.ts";
-
 interface SectionInterestsProps {
-    InterestsData: ExperienceInterface[] | undefined,
+    InterestsData: string[] | undefined,
     TitleSection: string,
 }
 
 export default function SimpleResumeSectionInterests(props: SectionInterestsProps) {
-    const {
-        // EducationData,
-        TitleSection,
-    } = props;
+  const {
+    InterestsData,
+    TitleSection,
+  } = props;
 
-    return <>
-        <div className="section">
-            <div className="section__title">
-                { TitleSection }
-            </div>
-            <div className="section__list">
-                <div className="section__list-item">
-                    Football, programming.
-                </div>
-            </div>
+  return <>
+    <div className="section">
+      <div className="section__title">{ TitleSection }</div>
+      <div className="section__list">
+        <div className="section__list-item">
+          { InterestsData && InterestsData.map((item: string, index:number ) => (
+            <span key={ index }>{ item } - </span>
+          )) }
         </div>
+      </div>
+    </div>
     </>
 }

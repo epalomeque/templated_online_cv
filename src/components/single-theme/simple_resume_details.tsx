@@ -18,7 +18,7 @@ export default function SimpleResumeDetails(props: SimpleResumePropsInterface) {
           <SimpleResumeSectionEducation EducationData={ cvData.getEducation() } TitleSection={'Education'} />
           <SimpleResumeSectionProjects ProjectsData={ undefined } TitleSection={'Projects'} />
           <SimpleResumeSectionSkills SkillsData={ cvData.getAbilities() } TitleSection={'Skills'} />
-          <SimpleResumeSectionInterests InterestsData={ undefined } TitleSection={ 'Interests' } />
+          <SimpleResumeSectionInterests InterestsData={ cvData.getInterests() } TitleSection={ 'Interests' } />
         </div>
       </>
     );

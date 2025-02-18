@@ -85,4 +85,8 @@ export default class CVData {
   public getAbilities():AbilitiesInterface[] | undefined {
     return this.abilities;
   }
+
+  public getInterests():string[] | undefined {
+    return this.interests;
+  }
 }
