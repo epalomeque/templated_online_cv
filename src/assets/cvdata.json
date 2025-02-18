@@ -25,11 +25,11 @@
   },
   "education": [{
     "institute_name": "Universidad del Valle de México",
-    "addr": "",
-    "duration_start": "",
-    "duration_end": "",
-    "grade_name":"",
-    "pos_description": ""
+    "addr": "Villahermosa, TAB. MEX",
+    "duration_start": "Sep-2001",
+    "duration_end": "Dec-2006",
+    "grade_name":"Bachelors Degree",
+    "pos_description": "Ingeniería en Sistemas Computacionales"
   }],
   "experience": [
     {
@@ -57,8 +57,7 @@
       "pos_description": "• Analisys, and development of software, or create upgrades for already implemented entities for operation and control of activites in the secretariat. Help in deployment of new services and server configuration. Developments based on docker containers for the best use of the secretarial infrastructure.\n• Planning, deployment, and fine-tuning of developments in private datacenters using Linux servers and VMWare Software."
     }
   ],
-  "abilities": [
-    "Python (Django, FastAPI, Flask)", "SQL", "GIT", "Javascript (React, TypeScript)",
+  "abilities": ["Python (Django, FastAPI, Flask)", "SQL", "GIT", "Javascript (React, TypeScript)",
     "Linux / OS X / Windows", "Docker", "PHP (Wordpress, Drupal)", "Jenkins", "Photoshop", "Illustrator", "InDesign"],
   "interests": ["Read", "Travels", "Music", "AI Technologies", "TCG´s", "Videogames", "Programming"],
   "picture": {},
