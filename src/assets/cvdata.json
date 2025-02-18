@@ -57,24 +57,28 @@
       "addr": "Villahermosa,Tab., MEX",
       "duration_start": "Jan. 2019",
       "duration_end": "Sep. 2019",
-      "position_name": "lead Developer",
+      "position_name": "Lead Developer",
       "pos_description": "• Analisys, and development of software, or create upgrades for already implemented entities for operation and control of activites in the secretariat. Help in deployment of new services and server configuration. Developments based on docker containers for the best use of the secretarial infrastructure.\n• Planning, deployment, and fine-tuning of developments in private datacenters using Linux servers and VMWare Software."
     }
   ],
   "abilities": [
     { "id": 0, "name": "Python (Django, FastAPI, Flask)", "level": 9 },
-    { "id": 1, "name": "SQL", "level": 5 },
+    { "id": 1, "name": "SQL", "level": 7 },
     { "id": 2, "name": "GIT", "level": 8 },
     { "id": 3, "name": "Javascript (React, TypeScript)", "level": 8 },
     { "id": 4, "name": "Linux / OS X / Windows", "level": 7 },
     { "id": 5, "name": "Docker", "level": 6 },
     { "id": 6, "name": "PHP (Wordpress, Drupal)", "level": 7 },
-    { "id": 7, "name": "Jenkins", "level": 5 },
+    { "id": 7, "name": "Jenkins", "level": 6 },
     { "id": 8, "name": "Photoshop", "level": 7 },
-    { "id": 9, "name": "Illustrator", "level": 5 },
+    { "id": 9, "name": "Illustrator", "level": 6 },
     { "id": 10, "name": "InDesign", "level": 8 }
   ],
   "interests": ["Read", "Travels", "Music", "AI Technologies", "TCG´s", "Videogames", "Programming"],
   "picture": {},
-  "projects": []
+  "projects": [
+    {
+      "id": 0, "name": "Test Name", "pos_description": "Se hizo esto y aquello y muchas cosas más"
+    }
+  ]
 }

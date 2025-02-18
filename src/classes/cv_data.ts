@@ -1,11 +1,12 @@
-import AboutInfoInterface from '../interfaces/about_info.ts';
 import AbilitiesInterface from '../interfaces/abilities_info.ts';
+import AboutInfoInterface from '../interfaces/about_info.ts';
 import ContactInfoInterface from '../interfaces/contact_info.ts';
 import DetailsInfoInterface from '../interfaces/details_info.ts';
 import EducationInterface from "../interfaces/education_info.ts";
 import ExperienceInterface from '../interfaces/experience_info.ts';
 import HeaderInfoInterface from '../interfaces/header_Info.ts';
 import PersonalInfoInterface from '../interfaces/personal_info.ts';
+import ProjectsInterface from '../interfaces/projects_info.ts';
 
 export default class CVData {
   about_info: AboutInfoInterface;
@@ -16,7 +17,7 @@ export default class CVData {
   abilities?: AbilitiesInterface[] | undefined;
   interests?: string[] | undefined;
   picture?: string | undefined;
-  projects?: string[] | undefined;
+  projects?: ProjectsInterface[] | undefined;
 
   public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
     this.about_info = header.about_info;
@@ -88,5 +89,9 @@ export default class CVData {
 
   public getInterests():string[] | undefined {
     return this.interests;
+  }
+
+  public getProjects():ProjectsInterface[] | undefined {
+    return this.projects;
   }
 }

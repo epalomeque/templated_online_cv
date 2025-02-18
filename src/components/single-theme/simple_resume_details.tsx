@@ -10,13 +10,12 @@ export default function SimpleResumeDetails(props: SimpleResumePropsInterface) {
       cvData
     } = props;
 
-    console.info('cvData', cvData);
     return (
       <>
         <div className="details">
           <SimpleResumeSectionExperience ExperienceData = { cvData.getExperience() } TitleSection={ 'Experience' } />
           <SimpleResumeSectionEducation EducationData={ cvData.getEducation() } TitleSection={'Education'} />
-          <SimpleResumeSectionProjects ProjectsData={ undefined } TitleSection={'Projects'} />
+          <SimpleResumeSectionProjects ProjectsData={ cvData.getProjects() } TitleSection={'Projects'} />
           <SimpleResumeSectionSkills SkillsData={ cvData.getAbilities() } TitleSection={'Skills'} />
           <SimpleResumeSectionInterests InterestsData={ cvData.getInterests() } TitleSection={ 'Interests' } />
         </div>
