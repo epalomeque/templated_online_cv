@@ -1,6 +1,7 @@
 import React from 'react';
 import './resume_actions.scss';
 import { generateResumeDocx } from '../../utilities/generateDocx';
+import { generateResumePdf } from '../../utilities/generatePdf';
 
 interface ResumeActionsProps {
     title: string;
@@ -22,9 +23,13 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {
                 >
                     <i className="fa fa-file-word-o"></i> DOC
                 </button>
-                <a href="/cv.pdf" download className="btn btn-pdf" title="Descargar PDF">
+                <button 
+                    onClick={() => generateResumePdf(resumeData)} 
+                    className="btn btn-pdf" 
+                    title="Descargar PDF"
+                >
                     <i className="fa fa-file-pdf-o"></i> PDF
-                </a>
+                </button>
                 {emailToUse && (
                     <a href={`mailto:${emailToUse}`} className="btn btn-email" title="Enviar correo">
                         <i className="fa fa-envelope-o"></i> Email
