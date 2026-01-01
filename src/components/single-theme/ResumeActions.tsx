@@ -5,7 +5,7 @@ import { generateResumePdf } from '../../utilities/generatePdf';
 
 interface ResumeActionsProps {
     title: string;
-    resumeData: any;
+    resumeData: never;
 }
 
 const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {

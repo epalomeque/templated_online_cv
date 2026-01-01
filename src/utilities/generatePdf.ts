@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 
-export const generateResumePdf = (resumeData: any) => {
+export const generateResumePdf = (resumeData: never) => {
     if (!resumeData) return;
 
     const { personal_info, contact_info, about, experience, education, abilities, interests } = resumeData;
@@ -47,7 +47,7 @@ export const generateResumePdf = (resumeData: any) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    experience.forEach((exp: any) => {
+    experience.forEach((exp: never) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -80,7 +80,7 @@ export const generateResumePdf = (resumeData: any) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    education.forEach((edu: any) => {
+    education.forEach((edu: never) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -115,7 +115,7 @@ export const generateResumePdf = (resumeData: any) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const skills = abilities.map((a: any) => a.name).join(", ");
+    const skills = abilities.map((a: never) => a.name).join(", ");
     const skillsText = doc.splitTextToSize(skills, 182);
     doc.text(skillsText, 14, currentY);
     currentY += skillsText.length * 5 + 10;
