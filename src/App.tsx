@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { getResumeInfo } from "./utilities/getinfoData.ts";
 import SimpleResume from './components/single-theme/simple_resume.tsx';
+import ResumeActions from './components/single-theme/ResumeActions.tsx';
 
 function App() {
   const title = import.meta.env.VITE_APP_TITLE;
@@ -33,7 +34,10 @@ function App() {
 
   return (
     <>
-      <h1>{ title }</h1>
+      <ResumeActions 
+        title={title} 
+        email={resumeData?.contact_info?.email} 
+      />
       {resumeData && <SimpleResume cvData={ resumeData } />}
     </>
   )

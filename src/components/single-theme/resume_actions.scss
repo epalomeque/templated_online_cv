@@ -1,0 +1,57 @@
+.resume-actions-container {
+    max-width: 700px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+
+    .resume-title {
+        font-size: 24px;
+        margin: 0;
+        color: #333;
+    }
+
+    .actions-buttons {
+        display: flex;
+        gap: 10px;
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &.btn-doc {
+                background-color: #2b579a;
+            }
+
+            &.btn-pdf {
+                background-color: #f40f02;
+            }
+
+            &.btn-email {
+                background-color: #444;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .resume-actions-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 0 20px;
+    }
+}
