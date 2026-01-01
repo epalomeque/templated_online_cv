@@ -8,7 +8,7 @@ import EducationInterface from '../interfaces/education_info.ts';
 import AbilitiesInterface from '../interfaces/abilities_info.ts';
 
 interface getHeaderDataProps {
-  cvData: any | unknown,
+  cvData: any | JSON | unknown,
 }
 
 export function getHeaderDataFromJson(props: getHeaderDataProps):HeaderInfoInterface {
@@ -36,7 +36,7 @@ export function getHeaderDataFromJson(props: getHeaderDataProps):HeaderInfoInter
   }
 }
 
-export function getDetailsDataFromJson(cvData: any): DetailsInfoInterface {
+export function getDetailsDataFromJson(cvData: any | JSON): DetailsInfoInterface {
   const {
     cvData: {
       abilities,
@@ -61,4 +61,12 @@ export function getDetailsDataFromJson(cvData: any): DetailsInfoInterface {
     picture: picture,
     projects: projects,
   }
+}
+
+export async function getResumeInfo(url:string):Promise<any> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Error on fetch request: ' + response.statusText);
+  }
+  return await response.json();
 }

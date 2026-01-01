@@ -1,14 +1,40 @@
+import { useState, useEffect } from 'react'
 import './App.css'
-import { default as cvData } from './assets/cvdata.json';
+import { getResumeInfo } from "./utilities/getinfoData.ts";
 import SimpleResume from './components/single-theme/simple_resume.tsx';
 
 function App() {
   const title = import.meta.env.VITE_APP_TITLE;
+  const urlResumeData: string = '/cvdata.json';
+  const [resumeData, setResumeData] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getResumeInfo(urlResumeData)
+      .then((data) => {
+        setResumeData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching resume data:', error);
+        setLoading(false);
+      });
+  }, []);
+
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <h1>{title}</h1>
+        <p>Loading resume data...</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <h1>{ title }</h1>
-      <SimpleResume cvData={ cvData } />
+      {resumeData && <SimpleResume cvData={ resumeData } />}
     </>
   )
 }
