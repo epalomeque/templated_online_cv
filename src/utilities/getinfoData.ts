@@ -7,27 +7,29 @@ import ExperienceInterface from '../interfaces/experience_info.ts';
 import EducationInterface from '../interfaces/education_info.ts';
 import AbilitiesInterface from '../interfaces/abilities_info.ts';
 
-interface getHeaderDataProps {
-  cvData: any | JSON | unknown,
-}
 
-export function getHeaderDataFromJson(props: getHeaderDataProps):HeaderInfoInterface {
-  const { cvData } = props;
+export function getHeaderDataFromJson(props:JSON|any):HeaderInfoInterface {
+  const {
+    cvData: {
+      about,
+      contact_info,
+      personal_info },
+  } = props;
 
   const aboutData:AboutInfoInterface = {
-    title: cvData.about.title,
-    description: cvData.about.description
+    title: about.title,
+    description: about.description
   };
   const contactData:ContactInfoInterface = {
-    email: cvData.contact_info.email,
-    phone_number: cvData.contact_info.phone_number,
-    address: cvData.contact_info.address,
+    email: contact_info.email,
+    phone_number: contact_info.phone_number,
+    address: contact_info.address,
   };
   const personalData:PersonalInfoInterface = {
-    name: cvData.personal_info.name,
-    lastname: cvData.personal_info.lastname,
-    second_lastname: cvData.personal_info.second_lastname,
-    birthdate: cvData.personal_info.birthdate,
+    name: personal_info.name,
+    lastname: personal_info.lastname,
+    second_lastname: personal_info.second_lastname,
+    birthdate: personal_info.birthdate,
   }
   return {
     about_info: aboutData,
@@ -36,7 +38,7 @@ export function getHeaderDataFromJson(props: getHeaderDataProps):HeaderInfoInter
   }
 }
 
-export function getDetailsDataFromJson(cvData: any | JSON): DetailsInfoInterface {
+export function getDetailsDataFromJson(cvData: JSON|any): DetailsInfoInterface {
   const {
     cvData: {
       abilities,

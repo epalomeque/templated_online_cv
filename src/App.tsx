@@ -7,7 +7,7 @@ import ResumeActions from './components/single-theme/ResumeActions.tsx';
 function App() {
   const title = import.meta.env.VITE_APP_TITLE;
   const urlResumeData: string = '/cvdata.json';
-  const [resumeData, setResumeData] = useState<any>(null);
+  const [resumeData, setResumeData] = useState<JSON|any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -35,8 +35,8 @@ function App() {
   return (
     <>
       <ResumeActions 
-        title={title} 
-        resumeData={resumeData}
+        title={ title }
+        resumeData={ resumeData }
       />
       {resumeData && <SimpleResume cvData={ resumeData } />}
     </>

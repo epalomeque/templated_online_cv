@@ -6,7 +6,7 @@ import SimpleResumeHeader from './simple_resume_header';
 import { getHeaderDataFromJson, getDetailsDataFromJson } from '../../utilities/getinfoData.ts';
 
 
-export default function SimpleResume (cvData:any | JSON) {
+export default function SimpleResume (cvData:any|JSON) {
   const CV_Data: CVData = new CVData(
       getHeaderDataFromJson(cvData),
       getDetailsDataFromJson(cvData));

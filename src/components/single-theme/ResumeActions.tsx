@@ -2,14 +2,20 @@ import React from 'react';
 import './resume_actions.scss';
 import { generateResumeDocx } from '../../utilities/generateDocx';
 import { generateResumePdf } from '../../utilities/generatePdf';
+import CVData from "../../classes/cv_data.ts";
+import {getDetailsDataFromJson, getHeaderDataFromJson} from "../../utilities/getinfoData.ts";
 
 interface ResumeActionsProps {
     title: string;
-    resumeData: never;
+    resumeData: JSON|never;
 }
 
 const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {
-    const email = resumeData?.contact_info?.email;
+    const CV_Data: CVData = new CVData(
+        getHeaderDataFromJson({ cvData: resumeData }),
+        getDetailsDataFromJson({ cvData: resumeData }));
+
+    const email = CV_Data?.contact_info?.email;
     const emailToUse = Array.isArray(email) ? email[0] : email;
 
     return (

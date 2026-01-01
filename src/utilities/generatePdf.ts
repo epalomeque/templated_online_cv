@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 
-export const generateResumePdf = (resumeData: never) => {
+export const generateResumePdf = (resumeData: JSON|any) => {
     if (!resumeData) return;
 
     const { personal_info, contact_info, about, experience, education, abilities, interests } = resumeData;
@@ -47,23 +47,23 @@ export const generateResumePdf = (resumeData: never) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    experience.forEach((exp: never) => {
+    experience.forEach((exp: any) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
         }
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
-        doc.setFont(undefined, 'bold');
+        doc.setFont('helvetica', 'bold');
         doc.text(`${exp.position_name} | ${exp.job_name}`, 14, currentY);
         currentY += 6;
         
         doc.setFontSize(10);
-        doc.setFont(undefined, 'italic');
+        doc.setFont('helvetica', 'italic');
         doc.text(`${exp.duration_start} - ${exp.duration_end} | ${exp.addr}`, 14, currentY);
         currentY += 6;
         
-        doc.setFont(undefined, 'normal');
+        doc.setFont('helvetica', 'normal');
         const expDesc = doc.splitTextToSize(exp.pos_description, 182);
         doc.text(expDesc, 14, currentY);
         currentY += expDesc.length * 5 + 8;
@@ -80,23 +80,23 @@ export const generateResumePdf = (resumeData: never) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    education.forEach((edu: never) => {
+    education.forEach((edu: any) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
         }
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
-        doc.setFont(undefined, 'bold');
+        doc.setFont('helvetica', 'bold');
         doc.text(`${edu.grade_name} | ${edu.institute_name}`, 14, currentY);
         currentY += 6;
         
         doc.setFontSize(10);
-        doc.setFont(undefined, 'italic');
+        doc.setFont('helvetica', 'italic');
         doc.text(`${edu.duration_start} - ${edu.duration_end}`, 14, currentY);
         currentY += 6;
         
-        doc.setFont(undefined, 'normal');
+        doc.setFont('helvetica', 'normal');
         const eduDesc = doc.splitTextToSize(edu.pos_description, 182);
         doc.text(eduDesc, 14, currentY);
         currentY += eduDesc.length * 5 + 8;
@@ -115,7 +115,7 @@ export const generateResumePdf = (resumeData: never) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const skills = abilities.map((a: never) => a.name).join(", ");
+    const skills = abilities.map((a: any) => a.name).join(", ");
     const skillsText = doc.splitTextToSize(skills, 182);
     doc.text(skillsText, 14, currentY);
     currentY += skillsText.length * 5 + 10;
