@@ -36,7 +36,7 @@ function App() {
     <>
       <ResumeActions 
         title={title} 
-        email={resumeData?.contact_info?.email} 
+        resumeData={resumeData}
       />
       {resumeData && <SimpleResume cvData={ resumeData } />}
     </>

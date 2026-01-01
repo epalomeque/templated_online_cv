@@ -27,6 +27,9 @@
             align-items: center;
             gap: 5px;
             transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
 
             &:hover {
                 opacity: 0.8;
