@@ -1,0 +1,84 @@
+{
+  "about": {
+    "title": "Technical Leader | FullStack Developer",
+    "description": "I am a Full Stack developer with +15 years of experience specializing in building robust and scalable applications. I have extensive expertise in FastAPI for high-performance backend development and React and Angular for creating dynamic, user-friendly frontend interfaces. Throughout my career, I have also led development teams, ensuring efficient collaboration and delivery of high-quality software. My work focuses on delivering efficient, maintainable code while optimizing performance and ensuring smooth integration with databases and external services.\nI am committed to writing high-quality code, following best development practices, and continuously improving my skills. With experience in both SQL and NoSQL databases, RESTful API integration, cloud deployment, and team leadership, I am looking for a challenging environment where I can contribute my expertise and grow further as a developer."
+  },
+  "personal_info": {
+    "name": "Emmanuel",
+    "lastname": "Palomeque",
+    "second_lastname": "Alcázar",
+    "birthdate": "1979-12-24"
+  },
+  "contact_info": {
+    "email": ["epalomeque@gmail.com", "epalomeque@hotmail.com"],
+    "phone_number": [
+      { "type": "cel", "country_code": "52", "number": "9933114902" }
+    ],
+    "address": {
+      "street_name": "Prolongación 27 de Febrero",
+      "ext_number": "4026",
+      "int_number": "29",
+      "city": "Villahermosa",
+      "state": "Tabasco",
+      "country": "México"
+    }
+  },
+  "education": [{
+    "id": 0,
+    "institute_name": "Universidad del Valle de México",
+    "addr": "Villahermosa, TAB. MEX",
+    "duration_start": "Sep-2001",
+    "duration_end": "Dec-2006",
+    "grade_name":"Bachelors Degree",
+    "pos_description": "Ingeniería en Sistemas Computacionales"
+  }],
+  "experience": [
+    {
+      "id": 0,
+      "job_name": "IT Seekers",
+      "addr": "Villahermosa,Tab., MEX",
+      "duration_start": "Mar. 2022",
+      "duration_end": "Jan. 2025",
+      "position_name": "UI Developer / Technical Leader",
+      "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP)\n"
+    },
+    {
+      "id": 1,
+      "job_name": "Mandarin Projects",
+      "addr": "CDMX, MEX",
+      "duration_start": "Sep. 2019",
+      "duration_end": "Oct. 2021",
+      "position_name": "Solutions Developer",
+      "pos_description": "• Development of customized projects using Python and React as the core technologies, analyzing data and integrating information sources into PostgreSQL databases, as well as making custom modifications to opensource software Apache Superset.\n• Involved in planning, deployment, and fine-tuning of developments in private datacenters using Ubuntu Linux servers"
+    },
+    {
+      "id": 2,
+      "job_name": "Secretaría de la Función Pública",
+      "addr": "Villahermosa,Tab., MEX",
+      "duration_start": "Jan. 2019",
+      "duration_end": "Sep. 2019",
+      "position_name": "Lead Developer",
+      "pos_description": "• Analisys, and development of software, or create upgrades for already implemented entities for operation and control of activites in the secretariat. Help in deployment of new services and server configuration. Developments based on docker containers for the best use of the secretarial infrastructure.\n• Planning, deployment, and fine-tuning of developments in private datacenters using Linux servers and VMWare Software."
+    }
+  ],
+  "abilities": [
+    { "id": 0, "name": "Python (Django, FastAPI, Flask)", "level": 9 },
+    { "id": 1, "name": "SQL", "level": 7 },
+    { "id": 2, "name": "GIT", "level": 8 },
+    { "id": 3, "name": "Javascript (React, TypeScript)", "level": 8 },
+    { "id": 4, "name": "Linux / OS X / Windows", "level": 7 },
+    { "id": 5, "name": "Docker", "level": 6 },
+    { "id": 6, "name": "PHP (Wordpress, Drupal)", "level": 7 },
+    { "id": 7, "name": "Jenkins", "level": 6 },
+    { "id": 8, "name": "Photoshop", "level": 7 },
+    { "id": 9, "name": "Illustrator", "level": 6 },
+    { "id": 10, "name": "InDesign", "level": 8 }
+  ],
+  "interests": ["Read", "Travels", "Music", "AI Technologies", "TCG´s", "Videogames", "Programming"],
+  "picture": {},
+  "projects": [
+    {
+      "id": 0, "name": "Test Name", "pos_description": "Se hizo esto y aquello y muchas cosas más"
+    }
+  ]
+}

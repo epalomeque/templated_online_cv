@@ -1,34 +1,44 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
-
-import {default as cvData} from "./assets/cvdata.json";
+import { getResumeInfo } from "./utilities/getinfoData.ts";
+import SimpleResume from './components/single-theme/simple_resume.tsx';
+import ResumeActions from './components/single-theme/ResumeActions.tsx';
 
 function App() {
   const title = import.meta.env.VITE_APP_TITLE;
-  // const dataFile = import.meta.env.VITE_JSON_FILE;
+  const urlResumeData: string = '/cvdata.json';
+  const [resumeData, setResumeData] = useState<JSON|any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getResumeInfo(urlResumeData)
+      .then((data) => {
+        setResumeData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching resume data:', error);
+        setLoading(false);
+      });
+  }, []);
+
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <h1>{title}</h1>
+        <p>Loading resume data...</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{title}</h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <p>
-          JSON File <code>{cvData.personal_info.name} {cvData.personal_info.lastname}</code>
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ResumeActions 
+        title={ title }
+        resumeData={ resumeData }
+      />
+      {resumeData && <SimpleResume cvData={ resumeData } />}
     </>
   )
 }
