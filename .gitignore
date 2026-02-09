@@ -22,4 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-cvdata.json
+./public/cvdata.json
+.env

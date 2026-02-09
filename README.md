@@ -1,4 +1,4 @@
-# MLK Online CV
+# Templated Resume App
 
 A modern, responsive online resume/CV built with React, TypeScript, and Vite.
 
@@ -8,8 +8,8 @@ To get started with this project, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
-    cd mlk-onlinecv
+    git clone https://github.com/epalomeque/templated_online_cv.git
+    cd templated_online_cv
     ```
 
 2.  **Install dependencies:**
@@ -52,6 +52,7 @@ The resume content is driven by a JSON file. To update your information:
 
 You can customize the application title by creating a `.env` file in the root directory:
 
-```env
-VITE_APP_TITLE=My Online Resume
+```env content
+VITE_APP_TITLE="My Online Resume"
+SHOW_CELLPHONE=false
 ```
