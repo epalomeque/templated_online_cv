@@ -50,13 +50,17 @@ The resume content is driven by a JSON file. To update your information:
 
 ## Environment Configuration
 
-You can customize the application title by creating a `.env` file in the root directory:
+You can customize some options in the application by creating a `.env` file in the root directory, use the following template (copy from env.example):
 
 ```env content
+# Environment variables for the Templated Resume App
+## Customize the title and resume URL as needed
 VITE_APP_TITLE="My Online Resume"
 VITE_RESUME_URL="/my_url_to_resume.json"
+## Toggle visibility of phone information and buttons
 VITE_CONFIG_SHOW_CELLPHONE=false
 VITE_CONFIG_SHOW_BTNDOC=false
 VITE_CONFIG_SHOW_BTNPDF=false
 VITE_CONFIG_SHOW_BTNEMAIL=false
+VITE_GITHUB_HOSTED_URL="https://github.com/epalomeque/templated_online_cv"
 ```
