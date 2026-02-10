@@ -2,21 +2,18 @@ import React from 'react';
 import './resume_actions.scss';
 
 import CVData from "../../classes/cv_data.ts";
-import { getCVDataFromJson } from "../../utilities/getinfoData.ts";
+import {getAppSettings} from "../../utilities/getAppSettings.ts";
 
 interface ResumeActionsFooterProps {
     title: string;
-    resumeData: JSON|never;
+    cv_data: CVData;
 }
 
-const ResumeActionsFooter: React.FC<ResumeActionsFooterProps> = ({ title, resumeData }: ResumeActionsFooterProps) => {
-    console.log('ResumeActionsFooter', resumeData);
-    const cvData: CVData = getCVDataFromJson(resumeData);
-    console.log('ResumeActionsFooter cvData ->', cvData)
+const ResumeActionsFooter: React.FC<ResumeActionsFooterProps> = () => {
+    const app_settings = getAppSettings();
     return (
-        <div className="resume-actions-container">
-            <h4 className="resume-footer-title">{ title }</h4>
-            <h4 className="resume-footer-title">'footer_url'</h4>s
+        <div className="resume-actions-footer-container">
+            <h4 className="resume-footer-url">Github: { app_settings.githubHostedUrl }</h4>
         </div>
     );
 };
