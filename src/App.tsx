@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { getResumeInfo } from "./utilities/getinfoData.ts";
 import SimpleResume from './components/single-theme/simple_resume.tsx';
-import ResumeActions from './components/single-theme/ResumeActions.tsx';
+import ResumeActions from './components/resume-base/ResumeActions.tsx';
 
 function App() {
   const APP_CONFIG = import.meta.env as ImportMetaEnv;
+  console.log(APP_CONFIG);
   const TITLE:string = APP_CONFIG.VITE_APP_TITLE;
   const URL_RESUME_DATA: string = APP_CONFIG.VITE_RESUME_URL;
 

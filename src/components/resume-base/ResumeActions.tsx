@@ -1,7 +1,7 @@
 import React from 'react';
 import './resume_actions.scss';
-import { generateResumeDocx } from '../../utilities/generateDocx';
-import { generateResumePdf } from '../../utilities/generatePdf';
+import { generateResumeDocx } from '../../utilities/generateDocx.ts';
+import { generateResumePdf } from '../../utilities/generatePdf.ts';
 import CVData from "../../classes/cv_data.ts";
 import {getDetailsDataFromJson, getHeaderDataFromJson} from "../../utilities/getinfoData.ts";
 

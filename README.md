@@ -44,7 +44,7 @@ The output will be in the `dist` directory.
 The resume content is driven by a JSON file. To update your information:
 
 1.  Navigate to the `public` directory.
-2.  Open `cvdata.json`.
+2.  Copy `cvdata.json.example` to `cvdata.json`.
 3.  Modify the JSON content with your own data (personal info, experience, education, skills, etc.).
 4.  Save the file. The changes will be reflected in the application (if running in dev mode, it will reload automatically).
 
@@ -56,7 +56,7 @@ You can customize some options in the application by creating a `.env` file in t
 # Environment variables for the Templated Resume App
 ## Customize the title and resume URL as needed
 VITE_APP_TITLE="My Online Resume"
-VITE_RESUME_URL="/my_url_to_resume.json"
+VITE_RESUME_URL="/cvdata.json"
 ## Toggle visibility of phone information and buttons
 VITE_CONFIG_SHOW_CELLPHONE=false
 VITE_CONFIG_SHOW_BTNDOC=false
