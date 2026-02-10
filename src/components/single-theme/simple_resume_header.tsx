@@ -4,7 +4,6 @@ import SocialMediaInterface from "../../interfaces/social_media_info.ts";
 export default function SimpleResumeHeader(props: SimpleResumePropsInterface) {
     const { cvData } = props;
     const socialData: SocialMediaInterface[] | undefined = cvData.getSocialMedia();
-    console.log(socialData);
     return (
         <>
             <div className="header">

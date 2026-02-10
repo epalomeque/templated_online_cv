@@ -1,23 +1,26 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { getResumeInfo } from "./utilities/getinfoData.ts";
-import SimpleResume from './components/single-theme/simple_resume.tsx';
+import CVData from "./classes/cv_data.ts";
 import ResumeActions from './components/resume-base/ResumeActions.tsx';
+// import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
+// import SimpleResume from './components/single-theme/simple_resume.tsx';
+import { getCVDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 
 function App() {
   const APP_CONFIG = import.meta.env as ImportMetaEnv;
-  console.log(APP_CONFIG);
   const TITLE:string = APP_CONFIG.VITE_APP_TITLE;
   const URL_RESUME_DATA: string = APP_CONFIG.VITE_RESUME_URL;
 
   const [resumeData, setResumeData] = useState<JSON|any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadError, setLoadError] = useState<string|null>(null);
+  const [cvData, setCvData] = useState<CVData|null>(null);
 
   useEffect(() => {
     getResumeInfo(URL_RESUME_DATA)
       .then((data:JSON) => {
         setResumeData(data);
+        setCvData(getCVDataFromJson(resumeData));
         setLoading(false);
       })
       .catch((error) => {
@@ -26,7 +29,6 @@ function App() {
         setLoadError(error.message);
       });
   }, [URL_RESUME_DATA]);
-
 
   if (loading) {
     return (
@@ -48,15 +50,9 @@ function App() {
 
   return (
     <>
-      { !loading && !loadError && resumeData &&
-        <ResumeActions
-            title={ TITLE }
-            resumeData={ resumeData }
-        />
-      }
-      { !loading && !loadError && resumeData &&
-          <SimpleResume cvData={ resumeData } />
-      }
+      { !loading && !loadError && cvData && (
+        <ResumeActions title={ TITLE } cv_data={ cvData } />
+      )}
     </>
   )
 }

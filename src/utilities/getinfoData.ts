@@ -8,16 +8,15 @@ import EducationInterface from '../interfaces/education_info.ts';
 import AbilitiesInterface from '../interfaces/abilities_info.ts';
 import LanguagesInterface from "../interfaces/languages_info.ts";
 import SocialMediaInterface from "../interfaces/social_media_info.ts";
+import CVData from "../classes/cv_data.ts";
 
 
 export function getHeaderDataFromJson(props:JSON|any): HeaderInfoInterface {
   const {
-    cvData: {
       about,
       contact_info,
       personal_info,
       social_media,
-    },
   } = props;
 
   const aboutData: AboutInfoInterface = {
@@ -45,9 +44,8 @@ export function getHeaderDataFromJson(props:JSON|any): HeaderInfoInterface {
   }
 }
 
-export function getDetailsDataFromJson(cvData: JSON|any): DetailsInfoInterface {
+export function getDetailsDataFromJson(props: JSON|any): DetailsInfoInterface {
   const {
-    cvData: {
       abilities,
       education,
       experience,
@@ -55,8 +53,7 @@ export function getDetailsDataFromJson(cvData: JSON|any): DetailsInfoInterface {
       languages,
       picture,
       projects,
-    },
-  } = cvData;
+  } = props;
 
   const ExperienceData: ExperienceInterface[] = experience;
   const EducationData: EducationInterface[] = education;
@@ -81,4 +78,10 @@ export async function getResumeInfo(url:string):Promise<any> {
     throw new Error('Error on fetch request: ' + response.statusText);
   }
   return await response.json();
+}
+
+export function getCVDataFromJson(resumeCvData: JSON|any): CVData {
+  return new CVData(
+      getHeaderDataFromJson(resumeCvData),
+      getDetailsDataFromJson(resumeCvData));
 }
