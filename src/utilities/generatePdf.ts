@@ -1,9 +1,24 @@
 import jsPDF from 'jspdf';
+import CVData from "../classes/cv_data.ts";
+import AbilitiesInterface from "../interfaces/abilities_info.ts";
+import AboutInfoInterface from "../interfaces/about_info.ts";
+import ContactInfoInterface from "../interfaces/contact_info.ts";
+import EducationInterface from "../interfaces/education_info.ts";
+import ExperienceInterface from "../interfaces/experience_info.ts";
+// import LanguagesInterface from "../interfaces/languages_info.ts";
+// import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
-export const generateResumePdf = (resumeData: JSON|any) => {
-    if (!resumeData) return;
+export const generateResumePdf = (cv_data: CVData) => {
+    if (!cv_data) return;
 
-    const { personal_info, contact_info, about, experience, education, abilities, interests } = resumeData;
+    const abilities: AbilitiesInterface[] | undefined = cv_data.getAbilities()
+    const about: AboutInfoInterface = cv_data.getAboutInfo()
+    const contact_info: ContactInfoInterface = cv_data.getContactInfo()
+    const education: EducationInterface[] | undefined = cv_data.getEducation()
+    const experience: ExperienceInterface[] | undefined = cv_data.getExperience()
+    const interests: string[] | undefined = cv_data.getInterests()
+    // const languages: LanguagesInterface[] | undefined = cv_data.getLanguages()
+    // const socialMedia: SocialMediaInterface[] | undefined = cv_data.getSocialMedia()
     const doc = new jsPDF();
 
     const primaryColor = [84, 175, 228]; // #54AFE4
@@ -11,7 +26,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     // Header: Name
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
-    const fullName = `${personal_info.name} ${personal_info.lastname} ${personal_info.second_lastname}`;
+    const fullName = `${cv_data.getFullName()}`;
     doc.text(fullName, 105, 20, { align: 'center' });
 
     // Contact Info

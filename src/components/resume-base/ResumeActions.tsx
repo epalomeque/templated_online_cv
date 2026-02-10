@@ -3,7 +3,7 @@ import './resume_actions.scss';
 import CVData from "../../classes/cv_data.ts";
 import {getAppSettings} from "../../utilities/getAppSettings.ts";
 import { generateResumeDocx } from '../../utilities/generateDocx.ts';
-// import { generateResumePdf } from '../../utilities/generatePdf.ts';
+import { generateResumePdf } from '../../utilities/generatePdf.ts';
 
 interface ResumeActionsProps {
     title: string;
@@ -30,7 +30,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({title, cv_data}: ResumeAct
                     app_settings.showBtnPdf &&
                     <button
                         // TODO: Implementar generación de PDF
-                        // onClick={() => generateResumePdf(resumeData)}
+                        onClick={() => generateResumePdf(cv_data)}
                         className="btn btn-pdf"
                         title="Descargar PDF"
                     >
