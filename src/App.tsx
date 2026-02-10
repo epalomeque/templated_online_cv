@@ -3,7 +3,7 @@ import './App.css'
 import CVData from "./classes/cv_data.ts";
 import ResumeActions from './components/resume-base/ResumeActions.tsx';
 import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
-// import SimpleResume from './components/single-theme/simple_resume.tsx';
+import SimpleResume from './components/single-theme/simple_resume.tsx';
 import { getCVDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 
@@ -47,12 +47,12 @@ function App() {
     )
   }
 
-  console.info('app ->', cvData)
   return (
     <>
       { !loading && !loadError && cvData && (
           <>
             <ResumeActions title={ app_title } cv_data={cvData} />
+            <SimpleResume cv_data={ cvData } />
             <ResumeActionsFooter title={ app_title } cv_data={ cvData }/>
           </>
       )}

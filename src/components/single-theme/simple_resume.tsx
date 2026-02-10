@@ -3,25 +3,21 @@ import CVData from '../../classes/cv_data';
 
 import SimpleResumeDetails from './simple_resume_details';
 import SimpleResumeHeader from './simple_resume_header';
-import {// getHeaderDataFromJson, getDetailsDataFromJson,
-  getCVDataFromJson} from '../../utilities/getinfoData.ts';
+import SimpleResumePropsInterface from "../../interfaces/simpleResumeProps.ts";
 
 
-export default function SimpleResume (cvData:any|JSON) {
-  console.info('SimpleResume');
-  // const CV_Data: CVData = new CVData(
-  //     getHeaderDataFromJson(cvData),
-  //     getDetailsDataFromJson(cvData));
+export default function SimpleResume (cv_data:SimpleResumePropsInterface) {
+  const cvData:CVData = cv_data.cv_data
+  console.log( 'SimpleResume cv_data -> ', cv_data );
+  console.log( 'SimpleResume cvData -> ', cvData );
 
-  const CV_Data: CVData = getCVDataFromJson(cvData);
   const FontApi: string = 'https://fonts.googleapis.com/css?family=Lato:400,300,700';
-  console.info('SimpleResume CV_Data ->', CV_Data);
   return (
     <>
       <link href={ FontApi }  rel='stylesheet' type='text/css' />
         <div className="container">
-          <SimpleResumeHeader cvData={ CV_Data } />
-          <SimpleResumeDetails cvData={ CV_Data } />
+          <SimpleResumeHeader cv_data={ cvData }  />
+          <SimpleResumeDetails cv_data={ cvData } />
         </div>
     </>
   )
