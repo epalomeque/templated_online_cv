@@ -2,7 +2,7 @@ import React from 'react';
 import './resume_actions.scss';
 import CVData from "../../classes/cv_data.ts";
 import {getAppSettings} from "../../utilities/getAppSettings.ts";
-// import { generateResumeDocx } from '../../utilities/generateDocx.ts';
+import { generateResumeDocx } from '../../utilities/generateDocx.ts';
 // import { generateResumePdf } from '../../utilities/generatePdf.ts';
 
 interface ResumeActionsProps {
@@ -19,8 +19,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({title, cv_data}: ResumeAct
             <div className="actions-buttons">
                 { app_settings.showBtnDoc &&
                     <button
-                        // TODO: Implementar generación de DOCX
-                        // onClick={() => generateResumeDocx(resumeData)}
+                        onClick={() => generateResumeDocx(cv_data)}
                         className="btn btn-doc"
                         title="Descargar DOCX"
                     >

@@ -39,6 +39,10 @@ export default class CVData {
     this.projects = details.projects;
   }
 
+  public getPersonalInfo(): PersonalInfoInterface {
+    return this.personal_info;
+  }
+
   public getName(): string {
     return this.personal_info.name;
   };
@@ -75,12 +79,20 @@ export default class CVData {
     return countryCode && celNumber ? `${ countryCode }${ celNumber }` : '---';
   }
 
+  public getAboutInfo(): AboutInfoInterface {
+    return this.about_info;
+  }
+
   public getAboutTitle():string {
     return this.about_info.title ? this.about_info.title : '';
   }
 
   public getAboutDescription():string {
     return this.about_info.description ? this.about_info.description : '';
+  }
+
+  public getContactInfo():ContactInfoInterface {
+    return this.contact_info;
   }
 
   public getExperience():ExperienceInterface[] | undefined {

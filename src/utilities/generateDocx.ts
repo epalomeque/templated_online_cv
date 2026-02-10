@@ -8,19 +8,27 @@ import {
     TextRun,
 } from 'docx';
 import { saveAs } from 'file-saver';
+import AbilitiesInterface from "../interfaces/abilities_info.ts";
+import AboutInfoInterface from "../interfaces/about_info.ts";
+import ContactInfoInterface from "../interfaces/contact_info.ts";
+import CVData from "../classes/cv_data.ts";
+import EducationInterface from "../interfaces/education_info.ts";
+import ExperienceInterface from "../interfaces/experience_info.ts";
+import LanguagesInterface from "../interfaces/languages_info.ts";
+import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
-export const generateResumeDocx = async (resumeData: any) => {
-    if (!resumeData) return;
+export const generateResumeDocx = async (cv_data: CVData) => {
+    if (!cv_data) return;
 
-    const {
-        abilities,
-        about,
-        contact_info,
-        education,
-        experience,
-        interests,
-        personal_info,
-    } = resumeData;
+    const abilities: AbilitiesInterface[] | undefined = cv_data.getAbilities()
+    const about: AboutInfoInterface = cv_data.getAboutInfo()
+    const contact_info: ContactInfoInterface = cv_data.getContactInfo()
+    const education: EducationInterface[] | undefined = cv_data.getEducation()
+    const experience: ExperienceInterface[] | undefined = cv_data.getExperience()
+    const interests: string[] | undefined = cv_data.getInterests()
+    const languages: LanguagesInterface[] | undefined = cv_data.getLanguages()
+    const socialMedia: SocialMediaInterface[] | undefined = cv_data.getSocialMedia()
+
 
     const doc = new Document({
         styles: {
@@ -42,7 +50,7 @@ export const generateResumeDocx = async (resumeData: any) => {
                         heading: HeadingLevel.HEADING_1,
                         children: [
                             new TextRun({
-                                text: `${personal_info.name} ${personal_info.lastname} ${personal_info.second_lastname}`,
+                                text: `${cv_data.getFullName()}`,
                                 bold: true,
                                 size: 36,
                             }),
@@ -68,6 +76,16 @@ export const generateResumeDocx = async (resumeData: any) => {
                         ],
                         spacing: { after: 200 },
                     }),
+                    // Social Media
+                    ...socialMedia.flatMap((a: SocialMediaInterface) => [
+                        new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [
+                                new TextRun({ text: `${a.platform}: ${a.url}`, size: 20 }),
+                            ],
+                            spacing: { after: 200 },
+                        })
+                    ]),
 
                     // About section
                     new Paragraph({
@@ -97,6 +115,29 @@ export const generateResumeDocx = async (resumeData: any) => {
                             }),
                         ],
                         spacing: { after: 300, before: 100 },
+                    }),
+
+                    // Languages Section
+                    new Paragraph({
+                        heading: HeadingLevel.HEADING_2,
+                        children: [new TextRun({ text: "LANGUAGES", bold: true, size: 28, color: "54AFE4" })],
+                        border: {
+                            bottom: {
+                                color: "auto",
+                                space: 1,
+                                style: BorderStyle.SINGLE,
+                                size: 6,
+                            },
+                        },
+                    }),
+                    new Paragraph({
+                        spacing: { after: 300, before: 100 },
+                        children: [
+                            new TextRun({
+                                text: languages.map((a: any) => `${a.name}: ${a.level}`).join(" | "),
+                                size: 22,
+                            }),
+                        ],
                     }),
 
                     // Experience section

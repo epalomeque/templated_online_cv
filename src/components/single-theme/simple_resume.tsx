@@ -8,8 +8,6 @@ import SimpleResumePropsInterface from "../../interfaces/simpleResumeProps.ts";
 
 export default function SimpleResume (cv_data:SimpleResumePropsInterface) {
   const cvData:CVData = cv_data.cv_data
-  console.log( 'SimpleResume cv_data -> ', cv_data );
-  console.log( 'SimpleResume cvData -> ', cvData );
 
   const FontApi: string = 'https://fonts.googleapis.com/css?family=Lato:400,300,700';
   return (

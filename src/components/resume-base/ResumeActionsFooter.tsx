@@ -2,7 +2,7 @@ import React from 'react';
 import './resume_actions.scss';
 
 import CVData from "../../classes/cv_data.ts";
-import {getAppSettings} from "../../utilities/getAppSettings.ts";
+import { getAppSettings } from "../../utilities/getAppSettings.ts";
 
 interface ResumeActionsFooterProps {
     title: string;
