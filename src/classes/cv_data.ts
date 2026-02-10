@@ -5,19 +5,23 @@ import DetailsInfoInterface from '../interfaces/details_info.ts';
 import EducationInterface from "../interfaces/education_info.ts";
 import ExperienceInterface from '../interfaces/experience_info.ts';
 import HeaderInfoInterface from '../interfaces/header_Info.ts';
+import LanguagesInterface from '../interfaces/languages_info.ts';
 import PersonalInfoInterface from '../interfaces/personal_info.ts';
 import ProjectsInterface from '../interfaces/projects_info.ts';
+import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
 export default class CVData {
+  abilities?: AbilitiesInterface[] | undefined;
   about_info: AboutInfoInterface;
   contact_info: ContactInfoInterface;
-  personal_info: PersonalInfoInterface;
   education?: EducationInterface[] | undefined;
   experience?: ExperienceInterface[] | undefined;
-  abilities?: AbilitiesInterface[] | undefined;
   interests?: string[] | undefined;
+  languages?: LanguagesInterface[] | undefined;
+  personal_info: PersonalInfoInterface;
   picture?: string | undefined;
   projects?: ProjectsInterface[] | undefined;
+  social_media?: SocialMediaInterface[] | undefined;
 
   public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
     this.about_info = header.about_info;
@@ -29,6 +33,8 @@ export default class CVData {
     this.interests = details.interests;
     this.picture = details.picture;
     this.projects = details.projects;
+    this.languages = details.languages;
+    this.social_media = details.social_media;
   }
 
   public getName(): string {
@@ -93,5 +99,13 @@ export default class CVData {
 
   public getProjects():ProjectsInterface[] | undefined {
     return this.projects;
+  }
+
+  public getLanguages():LanguagesInterface[] | undefined {
+    return this.languages;
+  }
+
+  public getSocialMedia():SocialMediaInterface[] | undefined {
+    return this.social_media;
   }
 }

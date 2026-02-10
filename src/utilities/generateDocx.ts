@@ -1,12 +1,37 @@
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from 'docx';
+import {
+    AlignmentType,
+    BorderStyle,
+    Document,
+    HeadingLevel,
+    Packer,
+    Paragraph,
+    TextRun,
+} from 'docx';
 import { saveAs } from 'file-saver';
 
 export const generateResumeDocx = async (resumeData: any) => {
     if (!resumeData) return;
 
-    const { personal_info, contact_info, about, experience, education, abilities, interests } = resumeData;
+    const {
+        abilities,
+        about,
+        contact_info,
+        education,
+        experience,
+        interests,
+        personal_info,
+    } = resumeData;
 
     const doc = new Document({
+        styles: {
+            default: {
+                document: {
+                    run: {
+                        font: "Arial",
+                    },
+                },
+            },
+        },
         sections: [
             {
                 properties: {},
@@ -187,7 +212,7 @@ export const generateResumeDocx = async (resumeData: any) => {
                     }),
                 ],
             },
-        ],
+        ]
     });
 
     const blob = await Packer.toBlob(doc);

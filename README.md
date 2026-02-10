@@ -54,5 +54,9 @@ You can customize the application title by creating a `.env` file in the root di
 
 ```env content
 VITE_APP_TITLE="My Online Resume"
-SHOW_CELLPHONE=false
+VITE_RESUME_URL="/my_url_to_resume.json"
+VITE_CONFIG_SHOW_CELLPHONE=false
+VITE_CONFIG_SHOW_BTNDOC=false
+VITE_CONFIG_SHOW_BTNPDF=false
+VITE_CONFIG_SHOW_BTNEMAIL=false
 ```

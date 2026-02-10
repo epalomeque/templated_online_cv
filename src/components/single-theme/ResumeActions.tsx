@@ -11,6 +11,7 @@ interface ResumeActionsProps {
 }
 
 const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {
+    console.log(resumeData);
     const CV_Data: CVData = new CVData(
         getHeaderDataFromJson({ cvData: resumeData }),
         getDetailsDataFromJson({ cvData: resumeData }));
@@ -34,7 +35,8 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {
                     className="btn btn-pdf" 
                     title="Descargar PDF"
                 >
-                    <i className="fa fa-file-pdf-o"></i> PDF
+                    <i className="fa
+"></i> PDF
                 </button>
                 {emailToUse && (
                     <a href={`mailto:${emailToUse}`} className="btn btn-email" title="Enviar correo">
