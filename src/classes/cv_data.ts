@@ -24,17 +24,19 @@ export default class CVData {
   social_media?: SocialMediaInterface[] | undefined;
 
   public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
+    // Header Data
     this.about_info = header.about_info;
     this.contact_info = header.contact_info;
     this.personal_info = header.personal_info;
+    this.social_media = header.social_media;
+    // Details Data
+    this.abilities = details.abilities;
     this.education = details.education;
     this.experience = details.experience;
-    this.abilities = details.abilities;
     this.interests = details.interests;
+    this.languages = details.languages;
     this.picture = details.picture;
     this.projects = details.projects;
-    this.languages = details.languages;
-    this.social_media = details.social_media;
   }
 
   public getName(): string {

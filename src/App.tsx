@@ -15,14 +15,14 @@ function App() {
 
   useEffect(() => {
     getResumeInfo(URL_RESUME_DATA)
-      .then((data) => {
+      .then((data:JSON) => {
         setResumeData(data);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching resume data:', error);
         setLoading(false);
-        setLoadError(error);
+        setLoadError(error.message);
       });
   }, [URL_RESUME_DATA]);
 
@@ -40,7 +40,7 @@ function App() {
     return (
       <div className="error-container">
         <h1 className="red-text">{ TITLE }</h1>
-        <p>Error loading resume data: { loadError.message }</p>
+        <p>Error loading resume data: { loadError }</p>
       </div>
     )
   }
