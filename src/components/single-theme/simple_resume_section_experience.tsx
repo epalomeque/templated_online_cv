@@ -12,7 +12,7 @@ export default function SimpleResumeSectionExperience(props: SectionExperiencePr
     } = props;
 
     return <>
-        <div className="section" key={ TitleSection }>
+        <div className="section section__experience" key={ TitleSection }>
             <div className="section__title">{ TitleSection }</div>
             <div className="section__list">
                 <ExperienceDataMap ExperienceData = { ExperienceData }></ExperienceDataMap>
@@ -63,12 +63,17 @@ function ExperienceItem(props: ExperienceItemProps)  {
     <>
       <div className="section__list-item" key={ `experience_${id}` }>
         <div className="left">
-          <div className="name">{ job_name }</div>
-          <div className="addr">{ addr }</div>
-          <div className="duration">{ duration_start } - { duration_end }</div>
+          <div>
+          <div className="name">Company: { job_name }</div>
+          <div className="name">Position: { position_name }</div>
+          </div>
+          <div>
+          <div className="addr">Place: { addr }</div>
+          <div className="duration">Duration: { duration_start } - { duration_end }</div>
+          </div>
         </div>
         <div className="right">
-          <div className="name">{ position_name }</div>
+          <div className="name">Position: { position_name }</div>
           <div className="desc">{ pos_description }</div>
         </div>
       </div>

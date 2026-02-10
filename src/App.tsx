@@ -5,40 +5,57 @@ import SimpleResume from './components/single-theme/simple_resume.tsx';
 import ResumeActions from './components/single-theme/ResumeActions.tsx';
 
 function App() {
-  const title = import.meta.env.VITE_APP_TITLE;
-  const urlResumeData: string = '/cvdata.json';
+  const APP_CONFIG = import.meta.env as ImportMetaEnv;
+  const TITLE:string = APP_CONFIG.VITE_APP_TITLE;
+  const URL_RESUME_DATA: string = APP_CONFIG.VITE_RESUME_URL;
+
   const [resumeData, setResumeData] = useState<JSON|any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadError, setLoadError] = useState<string|null>(null);
 
   useEffect(() => {
-    getResumeInfo(urlResumeData)
-      .then((data) => {
+    getResumeInfo(URL_RESUME_DATA)
+      .then((data:JSON) => {
         setResumeData(data);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching resume data:', error);
         setLoading(false);
+        setLoadError(error.message);
       });
-  }, []);
+  }, [URL_RESUME_DATA]);
 
 
   if (loading) {
     return (
       <div className="loader-container">
-        <h1>{title}</h1>
+        <h1>{ TITLE }</h1>
         <p>Loading resume data...</p>
       </div>
     );
   }
 
+  if (loadError) {
+    return (
+      <div className="error-container">
+        <h1 className="red-text">{ TITLE }</h1>
+        <p>Error loading resume data: { loadError }</p>
+      </div>
+    )
+  }
+
   return (
     <>
-      <ResumeActions 
-        title={ title }
-        resumeData={ resumeData }
-      />
-      {resumeData && <SimpleResume cvData={ resumeData } />}
+      { !loading && !loadError && resumeData &&
+        <ResumeActions
+            title={ TITLE }
+            resumeData={ resumeData }
+        />
+      }
+      { !loading && !loadError && resumeData &&
+          <SimpleResume cvData={ resumeData } />
+      }
     </>
   )
 }

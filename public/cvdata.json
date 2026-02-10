@@ -1,7 +1,7 @@
 {
   "about": {
-    "title": "Technical Leader | FullStack Developer",
-    "description": "I am a Full Stack developer with +15 years of experience specializing in building robust and scalable applications. I have extensive expertise in FastAPI for high-performance backend development and React and Angular for creating dynamic, user-friendly frontend interfaces. Throughout my career, I have also led development teams, ensuring efficient collaboration and delivery of high-quality software. My work focuses on delivering efficient, maintainable code while optimizing performance and ensuring smooth integration with databases and external services.\nI am committed to writing high-quality code, following best development practices, and continuously improving my skills. With experience in both SQL and NoSQL databases, RESTful API integration, cloud deployment, and team leadership, I am looking for a challenging environment where I can contribute my expertise and grow further as a developer."
+    "title": "Software Engineer",
+    "description": "I am a Software Engineer with +15 years of experience specializing in building robust and scalable applications. I have extensive expertise in FastAPI for high-performance backend development and React and Angular for creating dynamic, user-friendly frontend interfaces. Throughout my career, I have also led development teams, ensuring efficient collaboration and delivery of high-quality software. My work focuses on delivering efficient, maintainable code while optimizing performance and ensuring smooth integration with databases and external services.\nI am committed to writing high-quality code, following best development practices, and continuously improving my skills. With experience in both SQL and NoSQL databases, RESTful API integration, cloud deployment, and team leadership, I am looking for a challenging environment where I can contribute my expertise and grow further as a developer."
   },
   "personal_info": {
     "name": "Emmanuel",
@@ -23,13 +23,22 @@
       "country": "México"
     }
   },
+  "social_media": [
+    { "id": 0, "platform": "LinkedIn", "url": "https://linkedin.com/in/epalomeque/" },
+    { "id": 1, "platform": "GitHub", "url": "https://github.com/epalomeque/"},
+    { "id": 2, "platform": "Twitter/X", "url": "https://x.com/epalomeque/" }
+  ],
+  "languages": [
+    { "id": 0, "name": "Spanish", "level": "Native" },
+    { "id": 1, "name": "English", "level": "Advanced" }
+  ],
   "education": [{
     "id": 0,
     "institute_name": "Universidad del Valle de México",
     "addr": "Villahermosa, TAB. MEX",
     "duration_start": "Sep-2001",
     "duration_end": "Dec-2006",
-    "grade_name":"Bachelors Degree",
+    "grade_name":"Bachelors Degree, Unfinished",
     "pos_description": "Ingeniería en Sistemas Computacionales"
   }],
   "experience": [
@@ -40,7 +49,7 @@
       "duration_start": "Mar. 2022",
       "duration_end": "Jan. 2025",
       "position_name": "UI Developer / Technical Leader",
-      "pos_description": "•\tDevelopment of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n•\tResearch and resolution of production bugs aimed at reducing the application’s error rate.\n•\tTeam coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n•\tConducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP)\n"
+      "pos_description": "• Development of new functionality components for Grupo Aeroméxico’s web platform, focusing on the Check-in and Booking flows.\n• Research and resolution of production bugs aimed at reducing the application’s error rate.\n• Team coordination and creation of technical solutions for developments in the integration and consolidation phases of the 'Software Factories' model within the Grupo Aeroméxico development department.\n• Conducting a comprehensive analysis to plan and integrate microservices, while defining key performance indicators (KPIs) for the TravelHub platform's minimum viable product (MVP)"
     },
     {
       "id": 1,
@@ -66,7 +75,7 @@
     { "id": 1, "name": "SQL", "level": 7 },
     { "id": 2, "name": "GIT", "level": 8 },
     { "id": 3, "name": "Javascript (React, TypeScript)", "level": 8 },
-    { "id": 4, "name": "Linux / OS X / Windows", "level": 7 },
+    { "id": 4, "name": "Linux / OS X / Windows", "level": 8 },
     { "id": 5, "name": "Docker", "level": 6 },
     { "id": 6, "name": "PHP (Wordpress, Drupal)", "level": 7 },
     { "id": 7, "name": "Jenkins", "level": 6 },
@@ -78,7 +87,7 @@
   "picture": {},
   "projects": [
     {
-      "id": 0, "name": "Test Name", "pos_description": "Se hizo esto y aquello y muchas cosas más"
+      "id": 0, "name": "epalomeque.net", "pos_description": "Web site created in Wordpress, with custom themes and plugins development, to share my projects and knowledge in programming and technology. It also serves as a portfolio for my work and a platform to share articles and tutorials related to software development."
     }
   ]
 }

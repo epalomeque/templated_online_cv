@@ -6,35 +6,42 @@ import DetailsInfoInterface from '../interfaces/details_info.ts';
 import ExperienceInterface from '../interfaces/experience_info.ts';
 import EducationInterface from '../interfaces/education_info.ts';
 import AbilitiesInterface from '../interfaces/abilities_info.ts';
+import LanguagesInterface from "../interfaces/languages_info.ts";
+import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
 
-export function getHeaderDataFromJson(props:JSON|any):HeaderInfoInterface {
+export function getHeaderDataFromJson(props:JSON|any): HeaderInfoInterface {
   const {
     cvData: {
       about,
       contact_info,
-      personal_info },
+      personal_info,
+      social_media,
+    },
   } = props;
 
-  const aboutData:AboutInfoInterface = {
+  const aboutData: AboutInfoInterface = {
     title: about.title,
     description: about.description
   };
-  const contactData:ContactInfoInterface = {
+  const contactData: ContactInfoInterface = {
     email: contact_info.email,
     phone_number: contact_info.phone_number,
     address: contact_info.address,
   };
-  const personalData:PersonalInfoInterface = {
+  const personalData: PersonalInfoInterface = {
     name: personal_info.name,
     lastname: personal_info.lastname,
     second_lastname: personal_info.second_lastname,
     birthdate: personal_info.birthdate,
-  }
+  };
+  const socialMediaData: SocialMediaInterface[] = social_media;
+
   return {
     about_info: aboutData,
     contact_info: contactData,
     personal_info: personalData,
+    social_media: socialMediaData,
   }
 }
 
@@ -45,21 +52,24 @@ export function getDetailsDataFromJson(cvData: JSON|any): DetailsInfoInterface {
       education,
       experience,
       interests,
+      languages,
       picture,
       projects,
     },
   } = cvData;
 
-  const ExperienceData:ExperienceInterface[] = experience;
-  const EducationData:EducationInterface[] = education;
-  const AbilitiesData:AbilitiesInterface[] = abilities;
-  const InterestData:string[] = interests;
+  const ExperienceData: ExperienceInterface[] = experience;
+  const EducationData: EducationInterface[] = education;
+  const AbilitiesData: AbilitiesInterface[] = abilities;
+  const InterestData: string[] = interests;
+  const languagesData: LanguagesInterface[] = languages;
 
   return {
     abilities: AbilitiesData,
     education: EducationData,
     experience: ExperienceData,
     interests: InterestData,
+    languages: languagesData,
     picture: picture,
     projects: projects,
   }

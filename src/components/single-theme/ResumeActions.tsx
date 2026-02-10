@@ -10,7 +10,7 @@ interface ResumeActionsProps {
     resumeData: JSON|never;
 }
 
-const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }) => {
+const ResumeActions: React.FC<ResumeActionsProps> = ({ title, resumeData }: ResumeActionsProps) => {
     const CV_Data: CVData = new CVData(
         getHeaderDataFromJson({ cvData: resumeData }),
         getDetailsDataFromJson({ cvData: resumeData }));
