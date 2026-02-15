@@ -1,61 +1,57 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
-import { getResumeInfo } from "./utilities/getinfoData.ts";
+import ResumeActions from './components/resume-base/ResumeActions.tsx';
+import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
 import SimpleResume from './components/single-theme/simple_resume.tsx';
-import ResumeActions from './components/single-theme/ResumeActions.tsx';
+import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
+import {getAppSettings} from "./utilities/getAppSettings.ts";
+import { useAppDispatch, useAppSelector } from './store/hooks.ts';
+import { setCVData, setLoading, setError } from './store/cvSlice.ts';
 
 function App() {
-  const APP_CONFIG = import.meta.env as ImportMetaEnv;
-  const TITLE:string = APP_CONFIG.VITE_APP_TITLE;
-  const URL_RESUME_DATA: string = APP_CONFIG.VITE_RESUME_URL;
-
-  const [resumeData, setResumeData] = useState<JSON|any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [loadError, setLoadError] = useState<string|null>(null);
+  const app_settings = getAppSettings();
+  const app_title = app_settings.title || 'My Resume';
+  
+  const dispatch = useAppDispatch();
+  const { isLoading, error } = useAppSelector((state) => state.cv);
 
   useEffect(() => {
-    getResumeInfo(URL_RESUME_DATA)
-      .then((data:JSON) => {
-        setResumeData(data);
-        setLoading(false);
+    dispatch(setLoading(true));
+    getResumeInfo(app_settings.resumeUrl)
+      .then((data: JSON) => {
+        const header = getHeaderDataFromJson(data);
+        const details = getDetailsDataFromJson(data);
+        dispatch(setCVData({ header, details }));
       })
-      .catch((error) => {
-        console.error('Error fetching resume data:', error);
-        setLoading(false);
-        setLoadError(error.message);
+      .catch((err: Error) => {
+        console.error('Error fetching resume data:', err);
+        dispatch(setError(err.message));
       });
-  }, [URL_RESUME_DATA]);
+  }, [app_settings.resumeUrl, dispatch]);
 
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="loader-container">
-        <h1>{ TITLE }</h1>
+        <h1>{ app_title }</h1>
         <p>Loading resume data...</p>
       </div>
     );
   }
 
-  if (loadError) {
+  if (error) {
     return (
       <div className="error-container">
-        <h1 className="red-text">{ TITLE }</h1>
-        <p>Error loading resume data: { loadError }</p>
+        <h1 className="red-text">{ app_title }</h1>
+        <p>Error loading resume data: { error }</p>
       </div>
     )
   }
 
   return (
     <>
-      { !loading && !loadError && resumeData &&
-        <ResumeActions
-            title={ TITLE }
-            resumeData={ resumeData }
-        />
-      }
-      { !loading && !loadError && resumeData &&
-          <SimpleResume cvData={ resumeData } />
-      }
+      <ResumeActions title={ app_title } />
+      <SimpleResume />
+      <ResumeActionsFooter title={ app_title } />
     </>
   )
 }

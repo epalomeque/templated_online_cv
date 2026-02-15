@@ -1,9 +1,24 @@
 import jsPDF from 'jspdf';
+import CVData from "../classes/cv_data.ts";
+import AbilitiesInterface from "../interfaces/abilities_info.ts";
+import AboutInfoInterface from "../interfaces/about_info.ts";
+import ContactInfoInterface from "../interfaces/contact_info.ts";
+import EducationInterface from "../interfaces/education_info.ts";
+import ExperienceInterface from "../interfaces/experience_info.ts";
+// import LanguagesInterface from "../interfaces/languages_info.ts";
+// import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
-export const generateResumePdf = (resumeData: JSON|any) => {
-    if (!resumeData) return;
+export const generateResumePdf = (cv_data: CVData) => {
+    if (!cv_data) return;
 
-    const { personal_info, contact_info, about, experience, education, abilities, interests } = resumeData;
+    const abilities: AbilitiesInterface[] | undefined = cv_data.getAbilities()
+    const about: AboutInfoInterface = cv_data.getAboutInfo()
+    const contact_info: ContactInfoInterface = cv_data.getContactInfo()
+    const education: EducationInterface[] | undefined = cv_data.getEducation()
+    const experience: ExperienceInterface[] | undefined = cv_data.getExperience()
+    const interests: string[] | undefined = cv_data.getInterests()
+    // const languages: LanguagesInterface[] | undefined = cv_data.getLanguages()
+    // const socialMedia: SocialMediaInterface[] | undefined = cv_data.getSocialMedia()
     const doc = new jsPDF();
 
     const primaryColor = [84, 175, 228]; // #54AFE4
@@ -11,7 +26,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     // Header: Name
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
-    const fullName = `${personal_info.name} ${personal_info.lastname} ${personal_info.second_lastname}`;
+    const fullName = `${cv_data.getFullName()}`;
     doc.text(fullName, 105, 20, { align: 'center' });
 
     // Contact Info
@@ -47,7 +62,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    experience.forEach((exp: any) => {
+    experience?.forEach((exp: ExperienceInterface) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -80,7 +95,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    education.forEach((edu: any) => {
+    education?.forEach((edu: EducationInterface) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -115,7 +130,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const skills = abilities.map((a: any) => a.name).join(", ");
+    const skills = abilities?.map((a: AbilitiesInterface) => a.name).join(", ") ?? '';
     const skillsText = doc.splitTextToSize(skills, 182);
     doc.text(skillsText, 14, currentY);
     currentY += skillsText.length * 5 + 10;
@@ -133,7 +148,7 @@ export const generateResumePdf = (resumeData: JSON|any) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const interestsText = doc.splitTextToSize(interests.join(", "), 182);
+    const interestsText = doc.splitTextToSize(interests?.join(", ") ?? '', 182);
     doc.text(interestsText, 14, currentY);
 
     doc.save("cv.pdf");
