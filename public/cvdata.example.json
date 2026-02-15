@@ -20,7 +20,7 @@
       "int_number": "12",
       "city": "My City Name",
       "state": "My State Name",
-      "country": "My Country Name",
+      "country": "My Country Name"
     }
   },
   "social_media": [
@@ -68,14 +68,14 @@
       "duration_end": "Jan. 2025",
       "position_name": "Position Name",
       "pos_description": "• Description of the responsibilities and achievements in this position. This section should highlight the key tasks performed, the technologies used, and the results obtained. It can also include any notable projects or initiatives that were part of this role."
-    },
+    }
   ],
   "abilities": [
     { "id": 0, "name": "Python (Django, FastAPI, Flask)", "level": 9 },
     { "id": 1, "name": "SQL", "level": 7 },
     { "id": 2, "name": "GIT", "level": 8 },
     { "id": 3, "name": "Javascript (React, TypeScript)", "level": 8 },
-    { "id": 4, "name": "Linux / OS X / Windows", "level": 8 },
+    { "id": 4, "name": "Linux / OS X / Windows", "level": 8 }
   ],
   "interests": ["Read", "Travels", "Music", "AI Technologies", "Programming"],
   "picture": {},
