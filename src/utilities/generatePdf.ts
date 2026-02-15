@@ -62,7 +62,7 @@ export const generateResumePdf = (cv_data: CVData) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    experience.forEach((exp: any) => {
+    experience?.forEach((exp: ExperienceInterface) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -95,7 +95,7 @@ export const generateResumePdf = (cv_data: CVData) => {
     doc.line(14, currentY + 2, 196, currentY + 2);
     currentY += 10;
 
-    education.forEach((edu: any) => {
+    education?.forEach((edu: EducationInterface) => {
         if (currentY > 260) {
             doc.addPage();
             currentY = 20;
@@ -130,7 +130,7 @@ export const generateResumePdf = (cv_data: CVData) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const skills = abilities.map((a: any) => a.name).join(", ");
+    const skills = abilities?.map((a: AbilitiesInterface) => a.name).join(", ") ?? '';
     const skillsText = doc.splitTextToSize(skills, 182);
     doc.text(skillsText, 14, currentY);
     currentY += skillsText.length * 5 + 10;
@@ -148,7 +148,7 @@ export const generateResumePdf = (cv_data: CVData) => {
     
     doc.setFontSize(11);
     doc.setTextColor(0, 0, 0);
-    const interestsText = doc.splitTextToSize(interests.join(", "), 182);
+    const interestsText = doc.splitTextToSize(interests?.join(", ") ?? '', 182);
     doc.text(interestsText, 14, currentY);
 
     doc.save("cv.pdf");

@@ -77,7 +77,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                         spacing: { after: 200 },
                     }),
                     // Social Media
-                    ...socialMedia.flatMap((a: SocialMediaInterface) => [
+                    ...(socialMedia ?? []).flatMap((a: SocialMediaInterface) => [
                         new Paragraph({
                             alignment: AlignmentType.CENTER,
                             children: [
@@ -134,7 +134,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                         spacing: { after: 300, before: 100 },
                         children: [
                             new TextRun({
-                                text: languages.map((a: any) => `${a.name}: ${a.level}`).join(" | "),
+                                text: languages?.map((a: LanguagesInterface) => `${a.name}: ${a.level}`).join(" | ") ?? '',
                                 size: 22,
                             }),
                         ],
@@ -153,7 +153,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                             },
                         },
                     }),
-                    ...experience.flatMap((exp: any) => [
+                    ...(experience ?? []).flatMap((exp: ExperienceInterface) => [
                         new Paragraph({
                             spacing: { before: 200 },
                             children: [
@@ -186,7 +186,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                             },
                         },
                     }),
-                    ...education.flatMap((edu: any) => [
+                    ...(education ?? []).flatMap((edu: EducationInterface) => [
                         new Paragraph({
                             spacing: { before: 200 },
                             children: [
@@ -222,7 +222,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                         spacing: { before: 200 },
                         children: [
                             new TextRun({
-                                text: abilities.map((a: any) => a.name).join(", "),
+                                text: abilities?.map((a: AbilitiesInterface) => a.name).join(", ") ?? '',
                                 size: 22,
                             }),
                         ],
@@ -246,7 +246,7 @@ export const generateResumeDocx = async (cv_data: CVData) => {
                         spacing: { before: 200 },
                         children: [
                             new TextRun({
-                                text: interests.join(", "),
+                                text: interests?.join(", ") ?? '',
                                 size: 22,
                             }),
                         ],

@@ -1,25 +1,30 @@
 import React from 'react';
 import './resume_actions.scss';
-import CVData from "../../classes/cv_data.ts";
-import {getAppSettings} from "../../utilities/getAppSettings.ts";
+import { useAppSelector } from '../../store/hooks';
+import CVData from '../../classes/cv_data';
+import {getAppSettings} from '../../utilities/getAppSettings.ts';
 import { generateResumeDocx } from '../../utilities/generateDocx.ts';
 import { generateResumePdf } from '../../utilities/generatePdf.ts';
 
 interface ResumeActionsProps {
     title: string;
-    cv_data: CVData|never;
 }
 
-const ResumeActions: React.FC<ResumeActionsProps> = ({title, cv_data}: ResumeActionsProps) => {
+const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsProps) => {
+    const { header } = useAppSelector((state) => state.cv);
+    const { details } = useAppSelector((state) => state.cv);
+    const cvData = new CVData(header, details);
+    
     const app_settings = getAppSettings();
-    const emailToUse = cv_data.getFirstEmail();
+    const emailToUse = cvData.getFirstEmail();
+
     return (
         <div className="resume-actions-container">
             <h1 className="resume-title">{ title }</h1>
             <div className="actions-buttons">
                 { app_settings.showBtnDoc &&
                     <button
-                        onClick={() => generateResumeDocx(cv_data)}
+                        onClick={() => generateResumeDocx(cvData)}
                         className="btn btn-doc"
                         title="Descargar DOCX"
                     >
@@ -29,8 +34,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({title, cv_data}: ResumeAct
                 {
                     app_settings.showBtnPdf &&
                     <button
-                        // TODO: Implementar generación de PDF
-                        onClick={() => generateResumePdf(cv_data)}
+                        onClick={() => generateResumePdf(cvData)}
                         className="btn btn-pdf"
                         title="Descargar PDF"
                     >
