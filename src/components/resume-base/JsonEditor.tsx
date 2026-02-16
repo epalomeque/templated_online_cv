@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useJsonEditor, JsonValidationResult } from '../../hooks/useJsonEditor';
 import './json_editor.scss';
 
@@ -9,6 +9,8 @@ interface JsonEditorProps {
 }
 
 const JsonEditor: React.FC<JsonEditorProps> = ({ initialContent, onUpdate, onClose }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   const {
     content,
     validation,
@@ -20,6 +22,39 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ initialContent, onUpdate, onClo
     copyToClipboard,
     pasteFromClipboard
   } = useJsonEditor(initialContent);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      setContent(text);
+    };
+    reader.onerror = () => {
+      console.error('Error reading file');
+    };
+    reader.readAsText(file);
+    
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const downloadJson = () => {
+    if (!content) return;
+    
+    const blob = new Blob([content], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cv-data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const handleUpdate = () => {
     if (validation.isValid) {
@@ -61,6 +96,20 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ initialContent, onUpdate, onClo
         <div className="json-editor-toolbar">
           <button 
             className="toolbar-btn" 
+            onClick={() => fileInputRef.current?.click()} 
+            title="Cargar archivo JSON"
+          >
+            <i className="fa fa-folder-open"></i> Cargar
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+          <button 
+            className="toolbar-btn" 
             onClick={copyToClipboard} 
             title="Copiar"
             disabled={!content}
@@ -73,6 +122,14 @@ const JsonEditor: React.FC<JsonEditorProps> = ({ initialContent, onUpdate, onClo
             title="Pegar"
           >
             <i className="fa fa-clipboard"></i> Pegar
+          </button>
+          <button 
+            className="toolbar-btn" 
+            onClick={downloadJson} 
+            title="Descargar archivo JSON"
+            disabled={!content || !validation.isValid}
+          >
+            <i className="fa fa-download"></i> Descargar
           </button>
           <div className="toolbar-divider"></div>
           <button 
