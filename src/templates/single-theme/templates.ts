@@ -47,7 +47,6 @@ export const singleThemeTemplates = {
                 </div>
             </div>
             <div class="right">
-                <div class="name">Position: {{position_name}}</div>
                 <div class="desc">{{pos_description}}</div>
             </div>
         </div>
