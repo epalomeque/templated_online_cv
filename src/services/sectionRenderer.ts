@@ -25,47 +25,74 @@ function getSectionContext(
   cvData: CVData
 ): object {
   switch (sectionType) {
-    case 'header':
+    case 'header': {
+      const aboutTitle = cvData.getAboutTitle();
+      const aboutDesc = cvData.getAboutDescription();
+      const socialMedia = cvData.getSocialMedia();
       return {
-        name: cvData.getName(),
-        lastName: cvData.getLastName(),
-        email: cvData.getFirstEmail(),
-        phone: cvData.getCellPhone(),
-        socialMedia: cvData.getSocialMedia(),
-        aboutTitle: cvData.getAboutTitle(),
-        aboutDescription: cvData.getAboutDescription(),
+        name: cvData.getName() || '',
+        lastName: cvData.getLastName() || '',
+        email: cvData.getFirstEmail() || '',
+        phone: cvData.getCellPhone() || '',
+        socialMedia: socialMedia && socialMedia.length > 0 ? socialMedia : null,
+        hasAbout: !!(aboutTitle || aboutDesc),
+        aboutTitle: aboutTitle,
+        aboutDescription: aboutDesc,
       };
-    case 'experience':
-      return {
-        title,
-        items: cvData.getExperience() || [],
-      };
-    case 'education':
-      return {
-        title,
-        items: cvData.getEducation() || [],
-      };
-    case 'projects':
+    }
+    case 'experience': {
+      const experience = cvData.getExperience();
       return {
         title,
-        items: cvData.getProjects() || [],
+        hasItems: !!(experience && experience.length > 0),
+        items: experience || [],
       };
-    case 'skills':
+    }
+    case 'education': {
+      const education = cvData.getEducation();
       return {
         title,
-        items: cvData.getAbilities() || [],
+        hasItems: !!(education && education.length > 0),
+        items: education || [],
       };
-    case 'interests':
+    }
+    case 'projects': {
+      const projects = cvData.getProjects();
       return {
         title,
-        items: cvData.getInterests() || [],
+        hasItems: !!(projects && projects.length > 0),
+        items: projects || [],
       };
-    case 'language':
+    }
+    case 'skills': {
+      const skills = cvData.getAbilities();
+      const skillsWithLevels = (skills || []).map(skill => ({
+        ...skill,
+        levels: Array.from({ length: 10 }, (_, i) => i < skill.level)
+      }));
       return {
         title,
-        items: cvData.getLanguages() || [],
+        hasItems: !!(skills && skills.length > 0),
+        items: skillsWithLevels,
       };
+    }
+    case 'interests': {
+      const interests = cvData.getInterests();
+      return {
+        title,
+        hasItems: !!(interests && interests.length > 0),
+        items: interests || [],
+      };
+    }
+    case 'language': {
+      const languages = cvData.getLanguages();
+      return {
+        title,
+        hasItems: !!(languages && languages.length > 0),
+        items: languages || [],
+      };
+    }
     default:
-      return { title, items: [] };
+      return { title, hasItems: false, items: [] };
   }
 }

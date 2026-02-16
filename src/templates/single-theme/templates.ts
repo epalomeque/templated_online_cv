@@ -1,5 +1,5 @@
 export const singleThemeTemplates = {
-  header: `
+  header: `{{#if hasAbout}}
 <div class="header">
     <div class="full-name">
         <span class="first-name">{{name}}</span>
@@ -21,20 +21,16 @@ export const singleThemeTemplates = {
         {{/each}}
     </div>
     {{/if}}
-    {{#if aboutTitle}}
     <div class="about">
         <span class="position">{{aboutTitle}}</span>
         <span class="desc">{{aboutDescription}}</span>
     </div>
-    {{/if}}
 </div>
-`,
+{{/if}}`,
 
-  sectionTitle: `
-<div class="section__title">{{title}}</div>
-`,
+  sectionTitle: `<div class="section__title">{{title}}</div>`,
 
-  experience: `
+  experience: `{{#if hasItems}}
 <div class="section section__experience">
     {{> sectionTitle title=title}}
     <div class="section__list">
@@ -58,9 +54,9 @@ export const singleThemeTemplates = {
         {{/each}}
     </div>
 </div>
-`,
+{{/if}}`,
 
-  education: `
+  education: `{{#if hasItems}}
 <div class="section">
     {{> sectionTitle title=title}}
     <div class="section__list">
@@ -79,9 +75,9 @@ export const singleThemeTemplates = {
         {{/each}}
     </div>
 </div>
-`,
+{{/if}}`,
 
-  projects: `
+  projects: `{{#if hasItems}}
 <div class="section">
     {{> sectionTitle title=title}}
     <div class="section__list">
@@ -93,9 +89,9 @@ export const singleThemeTemplates = {
         {{/each}}
     </div>
 </div>
-`,
+{{/if}}`,
 
-  skills: `
+  skills: `{{#if hasItems}}
 <div class="section">
     {{> sectionTitle title=title}}
     <div class="skills">
@@ -103,22 +99,18 @@ export const singleThemeTemplates = {
         <div class="skills__item">
             <div class="left"><div class="name">{{name}}</div></div>
             <div class="right">
-                {{#each (range level)}}
-                <input id="{{../name}}_{{../id}}_ck{{this}}" type="checkbox" checked="true" readonly="true" />
-                <label for="{{../name}}_{{../id}}_ck{{this}}"></label>
-                {{/each}}
-                {{#each (rangeEmpty 10 level)}}
-                <input id="{{../name}}_{{../id}}_ck{{this}}" type="checkbox" readonly="true" />
-                <label for="{{../name}}_{{../id}}_ck{{this}}"></label>
+                {{#each levels}}
+                <input type="checkbox" {{#if this}}checked{{/if}} readonly="true" />
+                <label></label>
                 {{/each}}
             </div>
         </div>
         {{/each}}
     </div>
 </div>
-`,
+{{/if}}`,
 
-  interests: `
+  interests: `{{#if hasItems}}
 <div class="section">
     {{> sectionTitle title=title}}
     <div class="section__list">
@@ -129,9 +121,9 @@ export const singleThemeTemplates = {
         </div>
     </div>
 </div>
-`,
+{{/if}}`,
 
-  language: `
+  language: `{{#if hasItems}}
 <div class="section__language">
     {{> sectionTitle title=title}}
     <div class="section__list">
@@ -143,5 +135,5 @@ export const singleThemeTemplates = {
         {{/each}}
     </div>
 </div>
-`
+{{/if}}`
 };
