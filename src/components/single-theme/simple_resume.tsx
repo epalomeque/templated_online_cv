@@ -28,12 +28,14 @@ export default function SimpleResume() {
       <link href={FontApi} rel='stylesheet' type='text/css' />
       <div className="container">
         <Section type="header" title="" cvData={cvData} theme={currentTheme} />
-        <Section type="language" title="Languages" cvData={cvData} theme={currentTheme} />
-        <Section type="experience" title="Experience" cvData={cvData} theme={currentTheme} />
-        <Section type="education" title="Education" cvData={cvData} theme={currentTheme} />
-        <Section type="projects" title="Projects" cvData={cvData} theme={currentTheme} />
-        <Section type="skills" title="Skills" cvData={cvData} theme={currentTheme} />
-        <Section type="interests" title="Interests" cvData={cvData} theme={currentTheme} />
+        <div className="details">
+          <Section type="language" title="Languages" cvData={cvData} theme={currentTheme} />
+          <Section type="experience" title="Experience" cvData={cvData} theme={currentTheme} />
+          <Section type="education" title="Education" cvData={cvData} theme={currentTheme} />
+          <Section type="projects" title="Projects" cvData={cvData} theme={currentTheme} />
+          <Section type="skills" title="Skills" cvData={cvData} theme={currentTheme} />
+          <Section type="interests" title="Interests" cvData={cvData} theme={currentTheme} />
+        </div>
       </div>
     </>
   );
