@@ -10,11 +10,14 @@ import PersonalInfoInterface from '../interfaces/personal_info';
 import ProjectsInterface from '../interfaces/projects_info';
 import SocialMediaInterface from "../interfaces/social_media_info";
 
+export type Theme = 'simple' | 'bootstrap';
+
 export interface CVState {
   header: HeaderInfoInterface;
   details: DetailsInfoInterface;
   isLoading: boolean;
   error: string | null;
+  theme: Theme;
 }
 
 export interface CVFullData {
@@ -33,10 +36,12 @@ export interface CVFullData {
 
 export const createCVState = (
   header: HeaderInfoInterface,
-  details: DetailsInfoInterface
+  details: DetailsInfoInterface,
+  theme: Theme = 'simple'
 ): CVState => ({
   header,
   details,
   isLoading: false,
   error: null,
+  theme,
 });

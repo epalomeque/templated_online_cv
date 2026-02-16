@@ -1,3 +1,4 @@
+import React from 'react';
 import AbilitiesInterface from '../../interfaces/abilities_info.ts'
 
 interface SectionSkillsProps {
@@ -34,10 +35,8 @@ function SkillsDataMap(props:SkillsDataMapProps) {
 
   if (!SkillsData) return;
 
-  return SkillsData.map((SkillsItemData: AbilitiesInterface) => {
-    return <>
-      <SkillsItem SkillsDataItem={ SkillsItemData } key={ SkillsItemData.id } />
-    </>
+  return SkillsData.map((SkillsItemData: AbilitiesInterface, index: number) => {
+    return <SkillsItem key={index} SkillsDataItem={ SkillsItemData } />
   });
 }
 
@@ -60,15 +59,14 @@ function SkillsItem(props: SkillsItemProps)  {
   const itemId = `${name}_${id}`
 
   return (
-    <>
-      <div className="skills__item" key={ itemId } >
+      <div className="skills__item">
         <div className="left"><div className="name">{ name }</div></div>
         <div className="right">
           <LevelInputs level={ level } itemId={ itemId } />
          </div>
         </div>
-    </>
-  )}
+  )
+}
 
 /**
  * LevelInputs
@@ -104,10 +102,10 @@ function LevelInputs(props: LevelInputsProps) {
     }
   }
 
-  return lvlArray.map(( { ...item } ) => {
-      return <>
+  return lvlArray.map(( { ...item }, index ) => {
+      return <React.Fragment key={index}>
         <input id={ `${item.itemId}_ck${item.idNumber}` } type="checkbox" checked={ item.isChecked } readOnly={ true } />
         <label htmlFor={ `${itemId}_ck${item.idNumber}` }></label>
-      </>
+      </React.Fragment>
   });
 }

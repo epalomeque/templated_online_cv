@@ -33,10 +33,8 @@ function LangugageDataMap(props:LangugageDataMapProps) {
 
     if (!LanguageData) return;
 
-    return LanguageData.map((LanguageItemData: LanguagesInterface)  => {
-        return <>
-            <LanguageItem LanguageDataItem={ LanguageItemData } />
-        </>
+    return LanguageData.map((LanguageItemData: LanguagesInterface, index: number)  => {
+        return <LanguageItem key={LanguageItemData.id ?? index} LanguageDataItem={ LanguageItemData } />
     });
 }
 
@@ -48,12 +46,11 @@ interface LanguageItemProps {
 }
 
 function LanguageItem(props: LanguageItemProps)  {
-    const { LanguageDataItem: {id, name, level}} = props;
+    const { LanguageDataItem: { name, level}} = props;
     return (
-        <>
-            <div className="section__list-item" key={ `experience_${id}` }>
-                <div className="name">{ name }</div>
-                <div className="addr">{ level }</div>
-            </div>
-        </>
-    )}
+        <div className="section__list-item">
+            <div className="name">{ name }</div>
+            <div className="addr">{ level }</div>
+        </div>
+    )
+}

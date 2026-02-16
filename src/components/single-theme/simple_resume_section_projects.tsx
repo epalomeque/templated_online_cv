@@ -15,8 +15,8 @@ export default function SimpleResumeSectionProjects(props: SectionProjectsProps)
         <div className="section">
             <div className="section__title">{ TitleSection }</div>
             <div className="section__list">
-              { ProjectsData && ProjectsData.map((item: ProjectsInterface) => (
-                <div className="section__list-item">
+              { ProjectsData && ProjectsData.map((item: ProjectsInterface, index: number) => (
+                <div key={index} className="section__list-item">
                   <div className="name">{ item.name }</div>
                   <div className="text">{ item.pos_description }</div>
                 </div>

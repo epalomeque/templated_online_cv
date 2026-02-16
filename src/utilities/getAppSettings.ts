@@ -11,6 +11,7 @@ export function getAppSettings(): AppSettingsInterface {
         showBtnDoc: stringToBoolean(app_config.VITE_CONFIG_SHOW_BTNDOC),
         showBtnPdf: stringToBoolean(app_config.VITE_CONFIG_SHOW_BTNPDF),
         showBtnEmail: stringToBoolean(app_config.VITE_CONFIG_SHOW_BTNEMAIL),
-        githubHostedUrl: app_config.VITE_GITHUB_HOSTED_URL
+        githubHostedUrl: app_config.VITE_GITHUB_HOSTED_URL,
+        theme: (app_config.VITE_APP_THEME as 'simple' | 'bootstrap') || 'simple'
     }
 }
