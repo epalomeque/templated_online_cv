@@ -33,10 +33,8 @@ function EducationDataMap(props:EducationDataMapProps) {
 
   if (!EducationData) return;
 
-  return EducationData.map((EducationItemData: EducationInterface) => {
-    return <>
-      <EducationItem EducationDataItem={ EducationItemData } />
-    </>
+  return EducationData.map((EducationItemData: EducationInterface, index: number) => {
+    return <EducationItem key={index} EducationDataItem={ EducationItemData } />
   });
 }
 
@@ -59,17 +57,16 @@ function EducationItem(props: EducationItemProps)  {
     },
   } = props;
   return (
-    <>
-      <div className="section__list-item">
-        <div className="left">
-          <div className="name">{ institute_name }</div>
-          <div className="addr">{ addr }</div>
-          <div className="duration">{ duration_start } - { duration_end }</div>
-        </div>
-        <div className="right">
-          <div className="name">{ grade_name }</div>
-          <div className="desc">{ pos_description }</div>
-        </div>
+    <div className="section__list-item">
+      <div className="left">
+        <div className="name">{ institute_name }</div>
+        <div className="addr">{ addr }</div>
+        <div className="duration">{ duration_start } - { duration_end }</div>
       </div>
-    </>
-  )}
+      <div className="right">
+        <div className="name">{ grade_name }</div>
+        <div className="desc">{ pos_description }</div>
+      </div>
+    </div>
+  )
+}

@@ -1,22 +1,29 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import './App.css'
 import ResumeActions from './components/resume-base/ResumeActions.tsx';
 import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
 import SimpleResume from './components/single-theme/simple_resume.tsx';
+import BootstrapResume from './components/bootstrap-theme/bootstrap_resume.tsx';
 import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
-import { setCVData, setLoading, setError } from './store/cvSlice.ts';
+import { setCVData, setLoading, setError, setTheme } from './store/cvSlice.ts';
 
 function App() {
   const app_settings = getAppSettings();
   const app_title = app_settings.title || 'My Resume';
+  const initialTheme = app_settings.theme || 'simple';
   
   const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.cv);
+  const { isLoading, error, theme } = useAppSelector((state) => state.cv);
+  const isMounted = useRef(false);
 
   useEffect(() => {
+    if (isMounted.current) return;
+    isMounted.current = true;
+    
     dispatch(setLoading(true));
+    dispatch(setTheme(initialTheme));
     getResumeInfo(app_settings.resumeUrl)
       .then((data: JSON) => {
         const header = getHeaderDataFromJson(data);
@@ -27,7 +34,16 @@ function App() {
         console.error('Error fetching resume data:', err);
         dispatch(setError(err.message));
       });
-  }, [app_settings.resumeUrl, dispatch]);
+  }, [app_settings.resumeUrl, dispatch, initialTheme]);
+
+  const renderResume = () => {
+    switch (theme) {
+      case 'bootstrap':
+        return <BootstrapResume />;
+      default:
+        return <SimpleResume />;
+    }
+  };
 
   if (isLoading) {
     return (
@@ -50,7 +66,7 @@ function App() {
   return (
     <>
       <ResumeActions title={ app_title } />
-      <SimpleResume />
+      {renderResume()}
       <ResumeActionsFooter title={ app_title } />
     </>
   )

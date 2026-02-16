@@ -6,7 +6,7 @@ import {getAppSettings} from '../../utilities/getAppSettings.ts';
 import { generateResumeDocx } from '../../utilities/generateDocx.ts';
 import { generateResumePdf } from '../../utilities/generatePdf.ts';
 import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../utilities/cvDataConverter.ts';
-import { setCVData } from '../../store/cvSlice.ts';
+import { setCVData, toggleTheme } from '../../store/cvSlice.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
 
@@ -16,7 +16,7 @@ interface ResumeActionsProps {
 
 const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsProps) => {
     const dispatch = useAppDispatch();
-    const { header, details } = useAppSelector((state) => state.cv);
+    const { header, details, theme } = useAppSelector((state) => state.cv);
     const cvData = useMemo(() => new CVData(header, details), [header, details]);
     
     const app_settings = getAppSettings();
@@ -40,6 +40,13 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             console.error('Error updating CV data:', err);
         }
     };
+
+    const handleToggleTheme = () => {
+        dispatch(toggleTheme());
+    };
+
+    const currentThemeLabel = theme === 'bootstrap' ? 'Simple' : 'Bootstrap';
+    const currentThemeIcon = theme === 'bootstrap' ? 'fa fa-file-text' : 'fa fa-bootstrap';
 
     const menuItems = [
         ...(app_settings.showBtnDoc ? [{
@@ -72,11 +79,21 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
         <>
             <div className="resume-actions-container">
                 <h1 className="resume-title">{ title }</h1>
-                <ActionsMenu 
-                    items={menuItems}
-                    triggerLabel="Acciones"
-                    triggerIcon="fa fa-download"
-                />
+                <div className="actions-wrapper">
+                    <button 
+                        className="theme-toggle-btn"
+                        onClick={handleToggleTheme}
+                        title={`Cambiar a tema ${currentThemeLabel}`}
+                    >
+                        <i className={currentThemeIcon}></i>
+                        <span>Tema {currentThemeLabel}</span>
+                    </button>
+                    <ActionsMenu 
+                        items={menuItems}
+                        triggerLabel="Acciones"
+                        triggerIcon="fa fa-download"
+                    />
+                </div>
             </div>
             {isEditorOpen && (
                 <JsonEditor

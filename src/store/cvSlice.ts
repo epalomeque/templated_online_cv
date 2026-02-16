@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import DetailsInfoInterface from '../interfaces/details_info';
 import HeaderInfoInterface from '../interfaces/header_Info';
-import { CVState } from './cvTypes';
+import { CVState, Theme } from './cvTypes';
 
 const initialState: CVState = {
   header: {
@@ -25,6 +25,7 @@ const initialState: CVState = {
   },
   isLoading: false,
   error: null,
+  theme: 'simple',
 };
 
 const cvSlice = createSlice({
@@ -47,9 +48,15 @@ const cvSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
+    setTheme: (state, action: PayloadAction<Theme>) => {
+      state.theme = action.payload;
+    },
+    toggleTheme: (state) => {
+      state.theme = state.theme === 'simple' ? 'bootstrap' : 'simple';
+    },
     clearCVData: () => initialState,
   },
 });
 
-export const { setCVData, setLoading, setError, clearCVData } = cvSlice.actions;
+export const { setCVData, setLoading, setError, setTheme, toggleTheme, clearCVData } = cvSlice.actions;
 export default cvSlice.reducer;

@@ -6,4 +6,5 @@ export default interface AppSettingsInterface {
     showBtnPdf: boolean;
     showBtnEmail: boolean;
     githubHostedUrl: string;
+    theme: 'simple' | 'bootstrap';
 }

@@ -33,10 +33,8 @@ function ExperienceDataMap(props:ExperienceDataMapProps) {
 
     if (!ExperienceData) return;
 
-    return ExperienceData.map((ExperienceItemData: ExperienceInterface)  => {
-        return <>
-          <ExperienceItem ExperienceDataItem={ ExperienceItemData } />
-        </>
+    return ExperienceData.map((ExperienceItemData: ExperienceInterface, index: number)  => {
+        return <ExperienceItem key={index} ExperienceDataItem={ ExperienceItemData } />
     });
 }
 
@@ -53,15 +51,13 @@ function ExperienceItem(props: ExperienceItemProps)  {
       addr,
       duration_end,
       duration_start,
-      id,
       job_name,
       pos_description,
       position_name,
     },
   } = props;
   return (
-    <>
-      <div className="section__list-item" key={ `experience_${id}` }>
+      <div className="section__list-item">
         <div className="left">
           <div>
           <div className="name">Company: { job_name }</div>
@@ -77,5 +73,5 @@ function ExperienceItem(props: ExperienceItemProps)  {
           <div className="desc">{ pos_description }</div>
         </div>
       </div>
-    </>
-  )}
+  )
+}

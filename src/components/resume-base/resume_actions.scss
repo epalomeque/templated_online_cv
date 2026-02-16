@@ -12,6 +12,36 @@
         color: #333;
     }
 
+    .actions-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .theme-toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        background-color: #6f42c1;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: inherit;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #5a32a3;
+        }
+
+        i {
+            font-size: 16px;
+        }
+    }
+
     .actions-buttons {
         display: flex;
         gap: 10px;
