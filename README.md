@@ -4,11 +4,20 @@ A modern, responsive online resume/CV built with React, TypeScript, Vite, and Ha
 
 ## Features
 
-- **Multiple Themes**: Choose between `simple` and `bootstrap` themes
-- **JSON Editor**: Built-in editor to modify resume data directly from the UI
+- **Multiple Themes**: Choose between `simple` and `bootstrap` themes with live switching
 - **Template System**: Extensible design using Handlebars templates
-- **Export Options**: Download as PDF, DOCX, or send via email
+- **JSON Editor**: Built-in editor to modify resume data directly from the UI
+  - Load/Save JSON files
+  - Copy/Paste support
+  - Undo/Redo history
+  - Real-time validation with error highlighting
+- **Export Options**: 
+  - Download as PDF
+  - Download as DOCX
+  - Download as standalone HTML (with embedded styles)
+  - Send via email
 - **Responsive Design**: Works on desktop and mobile devices
+- **Build Optimization**: Code-splitting for better performance
 - **Open Source**: MIT License
 
 ## Installation
@@ -59,27 +68,49 @@ The app includes two built-in themes:
 
 | Theme | Description |
 |-------|-------------|
-| `simple` | Clean, minimalist design |
-| `bootstrap` | Modern, responsive with Bootstrap 5 |
+| `simple` | Clean, minimalist design with Lato font |
+| `bootstrap` | Modern, responsive with Bootstrap 5 grid |
 
 ### Switching Themes
 
 You can switch themes in two ways:
 
-1. **From the UI**: Click the "Tema" button in the header
-2. **From environment**: Set `VITE_APP_THEME=bootstrap` in `.env`
+1. **From the UI**: Click the "Tema" button in the header - changes instantly
+2. **From environment**: Set `VITE_APP_THEME=bootstrap` or `VITE_APP_THEME=simple` in `.env`
 
 ## JSON Editor
 
-The built-in JSON editor allows you to modify your resume data directly from the browser:
+The built-in JSON editor allows you to modify your resume data directly from the browser. Access it from the "Acciones" menu.
 
+### Features:
 - **Load**: Load a JSON file from your computer
-- **Save**: Download the current JSON
+- **Save**: Download the current JSON to a file
 - **Copy/Paste**: Copy to clipboard or paste from clipboard
-- **Undo/Redo**: Revert or reapply changes
-- **Validation**: Real-time JSON syntax validation with error highlighting
+- **Undo/Redo**: Full history support (up to 50 states)
+- **Validation**: Real-time JSON syntax validation with line/column error reporting
 
-Access it from the "Acciones" menu.
+### Editor Controls:
+- Buttons: Load, Copy, Paste, Undo, Redo
+- Update button only enabled when JSON is valid
+
+## Export Options
+
+The app provides multiple export formats:
+
+| Format | Description |
+|--------|-------------|
+| **PDF** | Download as PDF document |
+| **DOCX** | Download as Word document |
+| **HTML** | Download as standalone HTML file with embedded styles |
+| **Email** | Open email client with CV data |
+
+### HTML Export
+
+The HTML export generates a completely self-contained HTML file:
+- All styles embedded (no external dependencies except Font Awesome CDN)
+- Maintains the exact same appearance as the web version
+- Works offline
+- Filename format: `cv-[theme]-[date].html`
 
 ## Environment Configuration
 
@@ -123,23 +154,42 @@ Each theme needs these templates:
 - `interests` - Interests section
 - `language` - Languages section
 
+### Theme Helper Functions
+
+Available Handlebars helpers:
+- `{{#if hasItems}}` - Check if section has data
+- `{{#each items}}` - Iterate over items
+- `{{#if this}}checked{{/if}}` - Conditional checked attribute
+
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── bootstrap-theme/     # Bootstrap theme
+│   ├── bootstrap-theme/     # Bootstrap theme (2 files)
 │   ├── resume-base/         # Shared UI components
-│   └── single-theme/        # Simple theme
+│   └── single-theme/        # Simple theme (2 files)
 ├── services/
-│   ├── handlebarsSetup.ts  # Template configuration
-│   └── sectionRenderer.ts   # Section rendering
+│   ├── handlebarsSetup.ts  # Handlebars configuration & template loading
+│   └── sectionRenderer.ts  # Section rendering service
 ├── templates/
-│   ├── bootstrap-theme/    # Bootstrap templates
-│   └── single-theme/       # Simple templates
+│   ├── bootstrap-theme/    # Bootstrap Handlebars templates
+│   └── single-theme/       # Simple Handlebars templates
 ├── store/                   # Redux store
+├── utilities/              # Helper functions
+│   └── generateHtml.ts    # HTML export utility
 └── interfaces/             # TypeScript interfaces
 ```
+
+## Technologies
+
+- **React 18** - UI Framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool with HMR
+- **Redux Toolkit** - State management
+- **Handlebars** - Template engine
+- **Bootstrap 5** - CSS framework (bootstrap theme)
+- **jsPDF + docx** - Document generation
 
 ## License
 
