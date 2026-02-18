@@ -1,8 +1,9 @@
 import Handlebars from 'handlebars';
 import { singleThemeTemplates } from '../features/resume-viewer/templates/single-theme/templates';
 import { bootstrapThemeTemplates } from '../features/resume-viewer/templates/bootstrap-theme/templates';
+import { darkThemeTemplates } from '../features/resume-viewer/templates/dark-theme/templates';
 
-export type ThemeName = 'simple' | 'bootstrap';
+export type ThemeName = 'simple' | 'bootstrap' | 'dark-theme';
 
 interface TemplateCache {
   [key: string]: HandlebarsTemplateDelegate;
@@ -49,7 +50,11 @@ const registeredThemes = new Set<ThemeName>();
 export function loadTemplates(theme: ThemeName): void {
   if (registeredThemes.has(theme)) return;
   
-  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
   
   const skipFields = ['sectionTitle', 'styles', 'externalCss'];
   
@@ -82,7 +87,11 @@ export function renderLayout(theme: ThemeName, sections: Record<string, string>)
  */
 export function getThemeStyles(theme: ThemeName): string {
   loadTemplates(theme);
-  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
   return (templates as any).styles || '';
 }
 
@@ -94,7 +103,11 @@ export function getThemeStyles(theme: ThemeName): string {
  */
 export function getThemeExternalCss(theme: ThemeName): string[] {
   loadTemplates(theme);
-  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
   return (templates as any).externalCss || [];
 }
 

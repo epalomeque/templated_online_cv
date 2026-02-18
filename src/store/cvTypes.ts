@@ -10,7 +10,7 @@ import PersonalInfoInterface from '../interfaces/personal_info';
 import ProjectsInterface from '../interfaces/projects_info';
 import SocialMediaInterface from "../interfaces/social_media_info";
 
-export type Theme = 'simple' | 'bootstrap';
+export type Theme = 'simple' | 'bootstrap' | 'dark-theme';
 
 export interface CVState {
   header: HeaderInfoInterface;

@@ -16,7 +16,8 @@ export const themeService = {
   getAvailableThemes(): ThemeOption[] {
     return [
       { id: 'simple', label: 'Simple' },
-      { id: 'bootstrap', label: 'Bootstrap' }
+      { id: 'bootstrap', label: 'Bootstrap' },
+      { id: 'dark-theme', label: 'Dark Theme (Tailwind)' }
     ];
   },
 
