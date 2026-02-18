@@ -61,6 +61,42 @@ export function loadTemplates(theme: ThemeName): void {
 }
 
 /**
+ * Renders a complete theme layout with all its sections.
+ * 
+ * @param theme - The theme name.
+ * @param sections - An object where keys are section names and values are their rendered HTML.
+ * @returns The complete rendered layout.
+ */
+export function renderLayout(theme: ThemeName, sections: Record<string, string>): string {
+  loadTemplates(theme);
+  return renderTemplate(theme, 'layout', sections);
+}
+
+/**
+ * Retrieves the embedded styles for a specific theme.
+ * 
+ * @param theme - The theme name.
+ * @returns The CSS styles as a string.
+ */
+export function getThemeStyles(theme: ThemeName): string {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  return (templates as any).styles || '';
+}
+
+/**
+ * Retrieves the external CSS links for a specific theme.
+ * 
+ * @param theme - The theme name.
+ * @returns An array of URLs to external CSS files.
+ */
+export function getThemeExternalCss(theme: ThemeName): string[] {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  return (templates as any).externalCss || [];
+}
+
+/**
  * Renders a previously loaded template with the provided context.
  * 
  * @param theme - The theme the template belongs to.
