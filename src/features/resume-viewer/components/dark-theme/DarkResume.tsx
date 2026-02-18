@@ -23,7 +23,7 @@ export default function DarkResume() {
   const currentTheme: ThemeName = theme || 'dark-theme';
 
   return (
-    <div className="dark-resume">
+    <div className="dark-theme dark-resume">
       <Section type="header" title="" cvData={cvData} theme={currentTheme} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto p-4 sm:p-8">
         <div className="md:col-span-1 space-y-8">
