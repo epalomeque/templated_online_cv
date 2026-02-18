@@ -51,8 +51,10 @@ export function loadTemplates(theme: ThemeName): void {
   
   const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
   
+  const skipFields = ['sectionTitle', 'styles', 'externalCss'];
+  
   Object.entries(templates).forEach(([name, source]) => {
-    if (name !== 'sectionTitle') {
+    if (!skipFields.includes(name) && typeof source === 'string') {
       templateCache[`${theme}.${name}`] = Handlebars.compile(source);
     }
   });

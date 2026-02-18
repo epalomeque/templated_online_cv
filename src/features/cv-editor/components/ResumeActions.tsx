@@ -7,7 +7,9 @@ import { generateResumeDocx } from '../../../utilities/generateDocx.ts';
 import { generateResumePdf } from '../../../utilities/generatePdf.ts';
 import { downloadResumeHtml } from '../../../utilities/generateHtml.ts';
 import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../../utilities/cvDataConverter.ts';
-import { setCVData, toggleTheme } from '../../../store/cvSlice.ts';
+import { setCVData, setTheme } from '../../../store/cvSlice.ts';
+import { themeService } from '../../../services/themeService.ts';
+import { ThemeName } from '../../../services/handlebarsSetup.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
 
@@ -42,12 +44,11 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
         }
     };
 
-    const handleToggleTheme = () => {
-        dispatch(toggleTheme());
+    const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setTheme(event.target.value as ThemeName));
     };
 
-    const currentThemeLabel = theme === 'bootstrap' ? 'Simple' : 'Bootstrap';
-    const currentThemeIcon = theme === 'bootstrap' ? 'fa fa-file-text' : 'fa fa-bootstrap';
+    const availableThemes = themeService.getAvailableThemes();
 
     const menuItems = [
         ...(app_settings.showBtnDoc ? [{
@@ -87,14 +88,21 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             <div className="resume-actions-container">
                 <h1 className="resume-title">{ title }</h1>
                 <div className="actions-wrapper">
-                    <button 
-                        className="theme-toggle-btn"
-                        onClick={handleToggleTheme}
-                        title={`Cambiar a tema ${currentThemeLabel}`}
-                    >
-                        <i className={currentThemeIcon}></i>
-                        <span>Tema {currentThemeLabel}</span>
-                    </button>
+                    <div className="theme-selector-container">
+                        <i className="fa fa-paint-brush selector-icon"></i>
+                        <select 
+                            className="theme-selector" 
+                            value={theme} 
+                            onChange={handleThemeChange}
+                            title="Seleccionar tema"
+                        >
+                            {availableThemes.map(t => (
+                                <option key={t.id} value={t.id}>
+                                    {t.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <ActionsMenu 
                         items={menuItems}
                         triggerLabel="Acciones"

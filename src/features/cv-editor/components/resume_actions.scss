@@ -18,27 +18,39 @@
         gap: 10px;
     }
 
-    .theme-toggle-btn {
+    .theme-selector-container {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 15px;
+        padding: 6px 10px;
         background-color: #6f42c1;
         color: #fff;
-        border: none;
         border-radius: 4px;
-        cursor: pointer;
         font-size: 14px;
         font-weight: bold;
-        font-family: inherit;
-        transition: background-color 0.2s;
+
+        .selector-icon {
+            font-size: 14px;
+        }
+
+        .theme-selector {
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+
+            option {
+                background-color: #fff;
+                color: #333;
+            }
+        }
 
         &:hover {
             background-color: #5a32a3;
-        }
-
-        i {
-            font-size: 16px;
         }
     }
 
