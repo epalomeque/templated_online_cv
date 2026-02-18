@@ -4,10 +4,10 @@ A modern, responsive online resume/CV built with React, TypeScript, Vite, and Ha
 
 ## Features
 
-- **Multiple Themes**: Choose between `simple` and `bootstrap` themes
-- **JSON Editor**: Built-in editor to modify resume data directly from the UI
-- **Template System**: Extensible design using Handlebars templates
-- **Export Options**: Download as PDF, DOCX, or send via email
+- **Multiple Themes**: Choose between `simple`, `bootstrap`, and `dark-theme` (Tailwind)
+- **JSON Editor**: Built-in editor to modify resume data with undo/redo, validation and file management
+- **Template System**: Flexible architecture using Handlebars layouts and themes
+- **Export Options**: Download as PDF, DOCX, or standalone HTML with embedded styles
 - **Responsive Design**: Works on desktop and mobile devices
 - **Open Source**: MIT License
 
@@ -55,19 +55,17 @@ The output will be in the `dist` directory.
 
 ## Themes
 
-The app includes two built-in themes:
+The app includes several built-in themes:
 
-| Theme | Description |
-|-------|-------------|
-| `simple` | Clean, minimalist design |
-| `bootstrap` | Modern, responsive with Bootstrap 5 |
+| Theme | Framework | Description |
+|-------|-----------|-------------|
+| `simple` | Sass | Clean, minimalist design |
+| `bootstrap` | Bootstrap 5 | Modern, responsive layout |
+| `dark-theme` | Tailwind CSS | Dark mode dashboard style |
 
 ### Switching Themes
 
-You can switch themes in two ways:
-
-1. **From the UI**: Click the "Tema" button in the header
-2. **From environment**: Set `VITE_APP_THEME=bootstrap` in `.env`
+Use the **Theme Selector** dropdown in the header to switch between available themes instantly. You can also set the initial theme in the `.env` file via `VITE_APP_THEME`.
 
 ## JSON Editor
 
@@ -105,12 +103,19 @@ VITE_GITHUB_HOSTED_URL="https://github.com/yourusername/templated_online_cv"
 
 ## Adding New Themes
 
-The app uses Handlebars for templating, making it easy to add new themes:
+The app uses a modular theme-agnostic system. To add a new theme:
 
-1. **Create templates**: Add new templates in `src/templates/new-theme/templates.ts`
-2. **Register templates**: Add them to `src/services/handlebarsSetup.ts`
-3. **Create styles**: Add SCSS in `src/components/new-theme/`
-4. **Create component**: Add the React component in `src/components/new-theme/`
+1.  **Define Templates**: Create `src/features/resume-viewer/templates/[name]/templates.ts` with:
+    -   `layout`: Handlebars layout for the whole document.
+    -   Individual section templates (`header`, `experience`, etc.).
+    -   `styles`: Raw CSS for standalone export.
+    -   `externalCss` / `externalScripts`: External resource links.
+2.  **Create Component**: Add a React component in `src/features/resume-viewer/components/[name]/` that uses `Section` components with the new theme name.
+3.  **Register Theme**:
+    -   Add the name to `ThemeName` type in `handlebarsSetup.ts`.
+    -   Update `loadTemplates`, `getThemeStyles`, etc., in `handlebarsSetup.ts`.
+    -   Register label and ID in `themeService.ts`.
+4.  **UI Integration**: Add the new component to the `renderResume` switch in `App.tsx`.
 
 ### Template Structure
 
@@ -127,18 +132,16 @@ Each theme needs these templates:
 
 ```
 src/
-├── components/
-│   ├── bootstrap-theme/     # Bootstrap theme
-│   ├── resume-base/         # Shared UI components
-│   └── single-theme/        # Simple theme
+├── features/
+│   ├── cv-editor/           # JSON editor and actions
+│   └── resume-viewer/       # Themes, templates and rendering
 ├── services/
-│   ├── handlebarsSetup.ts  # Template configuration
-│   └── sectionRenderer.ts   # Section rendering
-├── templates/
-│   ├── bootstrap-theme/    # Bootstrap templates
-│   └── single-theme/       # Simple templates
-├── store/                   # Redux store
-└── interfaces/             # TypeScript interfaces
+│   ├── themeService.ts      # Theme management
+│   ├── handlebarsSetup.ts   # Template compilation
+│   └── errorMiddleware.ts   # Global error handling
+├── store/                   # Redux state (cvSlice)
+├── utilities/               # PDF, DOCX, HTML generators
+└── interfaces/              # TypeScript definitions
 ```
 
 ## License
