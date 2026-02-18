@@ -1,4 +1,48 @@
 export const bootstrapThemeTemplates = {
+  layout: `
+    <div class="container-xl bootstrap-resume">
+      <div class="row">
+        <div class="col-12">
+          {{{header}}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          {{{language}}}
+          {{{experience}}}
+          {{{education}}}
+        </div>
+        <div class="col-12 col-md-6">
+          {{{projects}}}
+          {{{skills}}}
+          {{{interests}}}
+        </div>
+      </div>
+    </div>
+  `,
+  styles: `
+    .bootstrap-resume { padding: 20px; max-width: 1200px; margin: 0 auto; }
+    .bootstrap-resume .card { border: none; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; margin-bottom: 20px; }
+    .bootstrap-resume .card-header { border-radius: 8px 8px 0 0 !important; padding: 12px 20px; background-color: rgba(0,0,0,.03); }
+    .bootstrap-resume .card-header h5 { margin: 0; font-weight: 600; }
+    .bootstrap-resume .card-body { padding: 20px; }
+    .bootstrap-resume .display-4 { font-weight: 700; color: #333; }
+    .bootstrap-resume .timeline { position: relative; padding-left: 20px; }
+    .bootstrap-resume .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #dee2e6; }
+    .bootstrap-resume .timeline > div { position: relative; padding-left: 15px; margin-bottom: 15px; }
+    .bootstrap-resume .timeline > div::before { content: ''; position: absolute; left: -23px; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: #0d6efd; }
+    .bootstrap-resume .progress { border-radius: 4px; background: #e9ecef; height: 1rem; }
+    .bootstrap-resume .badge { font-weight: 500; padding: 5px 10px; }
+    @media (max-width: 768px) {
+        .bootstrap-resume .display-4 { font-size: 1.8rem; }
+        .bootstrap-resume .timeline { padding-left: 15px; }
+        .bootstrap-resume .timeline > div::before { left: -18px; }
+    }
+  `,
+  externalCss: [
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+  ],
   header: `
 <div class="card mb-4">
     <div class="card-body">
