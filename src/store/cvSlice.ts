@@ -51,12 +51,9 @@ const cvSlice = createSlice({
     setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
     },
-    toggleTheme: (state) => {
-      state.theme = state.theme === 'simple' ? 'bootstrap' : 'simple';
-    },
     clearCVData: () => initialState,
   },
 });
 
-export const { setCVData, setLoading, setError, setTheme, toggleTheme, clearCVData } = cvSlice.actions;
+export const { setCVData, setLoading, setError, setTheme, clearCVData } = cvSlice.actions;
 export default cvSlice.reducer;
