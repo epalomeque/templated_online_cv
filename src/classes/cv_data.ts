@@ -10,19 +10,28 @@ import PersonalInfoInterface from '../interfaces/personal_info.ts';
 import ProjectsInterface from '../interfaces/projects_info.ts';
 import SocialMediaInterface from "../interfaces/social_media_info.ts";
 
+/**
+ * Represents the CV data and provides helper methods to access and format it.
+ */
 export default class CVData {
-  abilities?: AbilitiesInterface[] | undefined;
+  abilities?: AbilitiesInterface[];
   about_info: AboutInfoInterface;
   contact_info: ContactInfoInterface;
-  education?: EducationInterface[] | undefined;
-  experience?: ExperienceInterface[] | undefined;
-  interests?: string[] | undefined;
-  languages?: LanguagesInterface[] | undefined;
+  education?: EducationInterface[];
+  experience?: ExperienceInterface[];
+  interests?: string[];
+  languages?: LanguagesInterface[];
   personal_info: PersonalInfoInterface;
-  picture?: string | undefined;
-  projects?: ProjectsInterface[] | undefined;
-  social_media?: SocialMediaInterface[] | undefined;
+  picture?: string;
+  projects?: ProjectsInterface[];
+  social_media?: SocialMediaInterface[];
 
+  /**
+   * Initializes a new instance of CVData.
+   * 
+   * @param header - The header information.
+   * @param details - The details information.
+   */
   public constructor(header: HeaderInfoInterface, details: DetailsInfoInterface) {
     // Header Data
     this.about_info = header.about_info;

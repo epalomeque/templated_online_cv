@@ -11,10 +11,18 @@ import { PhoneData } from '../interfaces/contact_info.ts';
 
 type AddressData = ContactInfoInterface['address'];
 
+/**
+ * Converts the application state (header and details) to a JSON format 
+ * suitable for export or storage.
+ * 
+ * @param header - The header information from state.
+ * @param details - The details information from state.
+ * @returns An object in the expected JSON schema.
+ */
 export function stateToJsonFormat(
   header: HeaderInfoInterface, 
   details: DetailsInfoInterface
-): object {
+): Record<string, unknown> {
   return {
     about: {
       title: header.about_info.title,
@@ -33,6 +41,9 @@ export function stateToJsonFormat(
   };
 }
 
+/**
+ * Interface representing the structure of the input JSON data.
+ */
 export interface JsonInput {
   about?: { title?: string; description?: string };
   contact_info?: { email?: string[]; phone_number?: PhoneData[]; address?: AddressData };
@@ -47,6 +58,12 @@ export interface JsonInput {
   projects?: ProjectsInterface[];
 }
 
+/**
+ * Converts raw JSON input into the internal application state format.
+ * 
+ * @param json - The raw JSON data.
+ * @returns An object containing header and details formatted for the Redux store.
+ */
 export function jsonToStateFormat(json: JsonInput): { header: HeaderInfoInterface; details: DetailsInfoInterface } {
   const defaultAddress: AddressData = { 
     street_name: '', ext_number: '', city: '', state: '', country: '' 
