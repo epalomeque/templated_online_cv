@@ -7,7 +7,7 @@ describe('getinfoData Utilities', () => {
     about: { title: 'Software Engineer', description: 'Experienced dev' },
     contact_info: {
       email: ['test@example.com'],
-      phone_number: [{ type: 'mobile', number: '123456789' }],
+      phone_number: [{ type: 'cel' as any, number: '123456789', country_code: '34' }],
       address: { street_name: 'Main St', ext_number: '123', city: 'Madrid', state: 'Madrid', country: 'Spain' }
     },
     personal_info: { name: 'John', lastname: 'Doe', second_lastname: 'Smith', birthdate: '1990-01-01' },
@@ -32,7 +32,7 @@ describe('getinfoData Utilities', () => {
   it('getDetailsDataFromJson should correctly map JSON to DetailsInfoInterface', () => {
     const result = getDetailsDataFromJson(mockJson);
     expect(result.abilities).toHaveLength(1);
-    expect(result.abilities[0].name).toBe('React');
+    expect(result.abilities?.[0].name).toBe('React');
     expect(result.experience).toHaveLength(1);
     expect(result.projects).toHaveLength(1);
     expect(result.interests).toContain('Music');
