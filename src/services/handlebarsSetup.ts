@@ -112,6 +112,21 @@ export function getThemeExternalCss(theme: ThemeName): string[] {
 }
 
 /**
+ * Retrieves the external script links for a specific theme (e.g., Tailwind CDN script).
+ * @param theme - The theme name.
+ * @returns An array of URLs to external script files.
+ */
+export function getThemeExternalScripts(theme: ThemeName): string[] {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap'
+    ? bootstrapThemeTemplates
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
+  return (templates as any).externalScripts || [];
+}
+
+/**
  * Renders a previously loaded template with the provided context.
  * 
  * @param theme - The theme the template belongs to.

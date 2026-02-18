@@ -1,5 +1,5 @@
 import CVData from '../classes/cv_data';
-import { ThemeName, renderLayout, getThemeStyles, getThemeExternalCss } from '../services/handlebarsSetup';
+import { ThemeName, renderLayout, getThemeStyles, getThemeExternalCss, getThemeExternalScripts } from '../services/handlebarsSetup';
 import { renderSection } from '../services/sectionRenderer';
 
 /**
@@ -31,9 +31,13 @@ export function generateResumeHtml(cvData: CVData, theme: ThemeName): string {
   // Render the layout
   const bodyContent = renderLayout(theme, sections);
 
-  // Get styles
+  // Get styles and scripts
   const externalCssLinks = getThemeExternalCss(theme)
     .map(url => `<link href="${url}" rel="stylesheet">`)
+    .join('\n    ');
+
+  const externalScripts = getThemeExternalScripts(theme)
+    .map(url => `<script src="${url}"></script>`)
     .join('\n    ');
   
   const themeCss = getThemeStyles(theme);
@@ -46,6 +50,7 @@ export function generateResumeHtml(cvData: CVData, theme: ThemeName): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     ${externalCssLinks}
+    ${externalScripts}
     <style>
         ${themeCss}
         body {

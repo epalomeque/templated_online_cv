@@ -26,6 +26,10 @@ export const darkThemeTemplates = {
   externalCss: [
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
   ],
+  // For exported standalone HTML, load Tailwind via CDN script
+  externalScripts: [
+    'https://cdn.tailwindcss.com'
+  ],
   header: `
     <header class="section-card flex flex-col md:flex-row items-center gap-6">
       {{#if picture}}
