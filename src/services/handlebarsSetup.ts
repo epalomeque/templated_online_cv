@@ -1,8 +1,9 @@
 import Handlebars from 'handlebars';
-import { singleThemeTemplates } from '../templates/single-theme/templates';
-import { bootstrapThemeTemplates } from '../templates/bootstrap-theme/templates';
+import { singleThemeTemplates } from '../features/resume-viewer/templates/single-theme/templates';
+import { bootstrapThemeTemplates } from '../features/resume-viewer/templates/bootstrap-theme/templates';
+import { darkThemeTemplates } from '../features/resume-viewer/templates/dark-theme/templates';
 
-export type ThemeName = 'simple' | 'bootstrap';
+export type ThemeName = 'simple' | 'bootstrap' | 'dark-theme';
 
 interface TemplateCache {
   [key: string]: HandlebarsTemplateDelegate;
@@ -41,13 +42,24 @@ Handlebars.registerHelper('multiply', function(a: number, b: number): number {
 
 const registeredThemes = new Set<ThemeName>();
 
+/**
+ * Loads and compiles templates for a specific theme if they are not already registered.
+ * 
+ * @param theme - The name of the theme to load.
+ */
 export function loadTemplates(theme: ThemeName): void {
   if (registeredThemes.has(theme)) return;
   
-  const templates = theme === 'bootstrap' ? bootstrapThemeTemplates : singleThemeTemplates;
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
+  
+  const skipFields = ['sectionTitle', 'styles', 'externalCss'];
   
   Object.entries(templates).forEach(([name, source]) => {
-    if (name !== 'sectionTitle') {
+    if (!skipFields.includes(name) && typeof source === 'string') {
       templateCache[`${theme}.${name}`] = Handlebars.compile(source);
     }
   });
@@ -55,7 +67,75 @@ export function loadTemplates(theme: ThemeName): void {
   registeredThemes.add(theme);
 }
 
-export function renderTemplate(theme: ThemeName, templateName: string, context: object): string {
+/**
+ * Renders a complete theme layout with all its sections.
+ * 
+ * @param theme - The theme name.
+ * @param sections - An object where keys are section names and values are their rendered HTML.
+ * @returns The complete rendered layout.
+ */
+export function renderLayout(theme: ThemeName, sections: Record<string, string>): string {
+  loadTemplates(theme);
+  return renderTemplate(theme, 'layout', sections);
+}
+
+/**
+ * Retrieves the embedded styles for a specific theme.
+ * 
+ * @param theme - The theme name.
+ * @returns The CSS styles as a string.
+ */
+export function getThemeStyles(theme: ThemeName): string {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
+  return (templates as any).styles || '';
+}
+
+/**
+ * Retrieves the external CSS links for a specific theme.
+ * 
+ * @param theme - The theme name.
+ * @returns An array of URLs to external CSS files.
+ */
+export function getThemeExternalCss(theme: ThemeName): string[] {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap' 
+    ? bootstrapThemeTemplates 
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
+  return (templates as any).externalCss || [];
+}
+
+/**
+ * Retrieves the external script links for a specific theme (e.g., Tailwind CDN script).
+ * @param theme - The theme name.
+ * @returns An array of URLs to external script files.
+ */
+export function getThemeExternalScripts(theme: ThemeName): string[] {
+  loadTemplates(theme);
+  const templates = theme === 'bootstrap'
+    ? bootstrapThemeTemplates
+    : theme === 'dark-theme'
+      ? darkThemeTemplates
+      : singleThemeTemplates;
+  return (templates as any).externalScripts || [];
+}
+
+/**
+ * Renders a previously loaded template with the provided context.
+ * 
+ * @param theme - The theme the template belongs to.
+ * @param templateName - The name of the template to render.
+ * @param context - The data to pass to the template.
+ * @returns The rendered string.
+ * @throws Error if the template has not been loaded.
+ */
+export function renderTemplate(theme: ThemeName, templateName: string, context: Record<string, unknown>): string {
   const template = templateCache[`${theme}.${templateName}`];
   if (!template) {
     throw new Error(`Template '${theme}.${templateName}' not found`);

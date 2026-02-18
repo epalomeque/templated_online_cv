@@ -13,6 +13,7 @@ interface ImportMetaEnv {
     readonly VITE_CONFIG_SHOW_BTNPDF: string;
     readonly VITE_CONFIG_SHOW_BTNEMAIL: string;
     readonly VITE_GITHUB_HOSTED_URL: string;
+    readonly VITE_APP_THEME: string;
 }
 
 interface ImportMeta {

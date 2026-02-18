@@ -1,13 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import './resume_actions.scss';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import CVData from '../../classes/cv_data';
-import {getAppSettings} from '../../utilities/getAppSettings.ts';
-import { generateResumeDocx } from '../../utilities/generateDocx.ts';
-import { generateResumePdf } from '../../utilities/generatePdf.ts';
-import { generateHtmlFromCv, downloadHtml } from '../../utilities/generateHtml.ts';
-import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../utilities/cvDataConverter.ts';
-import { setCVData, toggleTheme } from '../../store/cvSlice.ts';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import CVData from '../../../classes/cv_data';
+import {getAppSettings} from '../../../utilities/getAppSettings.ts';
+import { generateResumeDocx } from '../../../utilities/generateDocx.ts';
+import { generateResumePdf } from '../../../utilities/generatePdf.ts';
+import { downloadResumeHtml } from '../../../utilities/generateHtml.ts';
+import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../../utilities/cvDataConverter.ts';
+import { setCVData, setTheme } from '../../../store/cvSlice.ts';
+import { themeService } from '../../../services/themeService.ts';
+import { ThemeName } from '../../../services/handlebarsSetup.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
 
@@ -42,19 +44,11 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
         }
     };
 
-    const handleToggleTheme = () => {
-        dispatch(toggleTheme());
+    const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setTheme(event.target.value as ThemeName));
     };
 
-    const handleExportHtml = () => {
-        const currentTheme = theme || 'simple';
-        const html = generateHtmlFromCv(cvData, currentTheme, title);
-        const filename = `cv-${currentTheme}-${new Date().toISOString().split('T')[0]}.html`;
-        downloadHtml(html, filename);
-    };
-
-    const currentThemeLabel = theme === 'bootstrap' ? 'Simple' : 'Bootstrap';
-    const currentThemeIcon = theme === 'bootstrap' ? 'fa fa-file-text' : 'fa fa-bootstrap';
+    const availableThemes = themeService.getAvailableThemes();
 
     const menuItems = [
         ...(app_settings.showBtnDoc ? [{
@@ -69,18 +63,18 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             icon: 'fa fa-file-pdf-o',
             onClick: () => generateResumePdf(cvData)
         }] : []),
+        {
+            id: 'html',
+            label: 'Descargar HTML',
+            icon: 'fa fa-file-code-o',
+            onClick: () => downloadResumeHtml(cvData, theme as any)
+        },
         ...(emailToUse && app_settings.showBtnEmail ? [{
             id: 'email',
             label: 'Enviar por email',
             icon: 'fa fa-envelope-o',
             href: `mailto:${emailToUse}`
         }] : []),
-        {
-            id: 'html',
-            label: 'Descargar HTML',
-            icon: 'fa fa-html5',
-            onClick: handleExportHtml
-        },
         {
             id: 'edit-json',
             label: 'Editar JSON',
@@ -94,14 +88,21 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             <div className="resume-actions-container">
                 <h1 className="resume-title">{ title }</h1>
                 <div className="actions-wrapper">
-                    <button 
-                        className="theme-toggle-btn"
-                        onClick={handleToggleTheme}
-                        title={`Cambiar a tema ${currentThemeLabel}`}
-                    >
-                        <i className={currentThemeIcon}></i>
-                        <span>Tema {currentThemeLabel}</span>
-                    </button>
+                    <div className="theme-selector-container">
+                        <i className="fa fa-paint-brush selector-icon"></i>
+                        <select 
+                            className="theme-selector" 
+                            value={theme} 
+                            onChange={handleThemeChange}
+                            title="Seleccionar tema"
+                        >
+                            {availableThemes.map(t => (
+                                <option key={t.id} value={t.id}>
+                                    {t.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <ActionsMenu 
                         items={menuItems}
                         triggerLabel="Acciones"

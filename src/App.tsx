@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react'
 import './App.css'
-import ResumeActions from './components/resume-base/ResumeActions.tsx';
-import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
-import SimpleResume from './components/single-theme/simple_resume.tsx';
-import BootstrapResume from './components/bootstrap-theme/bootstrap_resume.tsx';
+import ResumeActions from './features/cv-editor/components/ResumeActions.tsx';
+import ResumeActionsFooter from "./features/cv-editor/components/ResumeActionsFooter.tsx";
+import SimpleResume from './features/resume-viewer/components/single-theme/SimpleResume.tsx';
+import BootstrapResume from './features/resume-viewer/components/bootstrap-theme/BootstrapResume.tsx';
+import DarkResume from './features/resume-viewer/components/dark-theme/DarkResume.tsx';
 import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
 import { setCVData, setLoading, setError, setTheme } from './store/cvSlice.ts';
+import { JsonInput } from './utilities/cvDataConverter.ts';
 
 function App() {
   const app_settings = getAppSettings();
@@ -19,13 +21,18 @@ function App() {
   const isMounted = useRef(false);
 
   useEffect(() => {
+    // Add theme class to body to allow global background styling
+    document.body.className = theme;
+  }, [theme]);
+
+  useEffect(() => {
     if (isMounted.current) return;
     isMounted.current = true;
     
     dispatch(setLoading(true));
     dispatch(setTheme(initialTheme));
     getResumeInfo(app_settings.resumeUrl)
-      .then((data: JSON) => {
+      .then((data: JsonInput) => {
         const header = getHeaderDataFromJson(data);
         const details = getDetailsDataFromJson(data);
         dispatch(setCVData({ header, details }));
@@ -40,6 +47,8 @@ function App() {
     switch (theme) {
       case 'bootstrap':
         return <BootstrapResume />;
+      case 'dark-theme':
+        return <DarkResume />;
       default:
         return <SimpleResume />;
     }
