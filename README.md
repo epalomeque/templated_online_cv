@@ -4,20 +4,11 @@ A modern, responsive online resume/CV built with React, TypeScript, Vite, and Ha
 
 ## Features
 
-- **Multiple Themes**: Choose between `simple` and `bootstrap` themes with live switching
-- **Template System**: Extensible design using Handlebars templates
-- **JSON Editor**: Built-in editor to modify resume data directly from the UI
-  - Load/Save JSON files
-  - Copy/Paste support
-  - Undo/Redo history
-  - Real-time validation with error highlighting
-- **Export Options**: 
-  - Download as PDF
-  - Download as DOCX
-  - Download as standalone HTML (with embedded styles)
-  - Send via email
+- **Multiple Themes**: Choose between `simple`, `bootstrap`, and `dark-theme` (Tailwind)
+- **JSON Editor**: Built-in editor to modify resume data with undo/redo, validation and file management
+- **Template System**: Flexible architecture using Handlebars layouts and themes
+- **Export Options**: Download as PDF, DOCX, or standalone HTML with embedded styles
 - **Responsive Design**: Works on desktop and mobile devices
-- **Build Optimization**: Code-splitting for better performance
 - **Open Source**: MIT License
 
 ## Installation
@@ -64,53 +55,29 @@ The output will be in the `dist` directory.
 
 ## Themes
 
-The app includes two built-in themes:
+The app includes several built-in themes:
 
-| Theme | Description |
-|-------|-------------|
-| `simple` | Clean, minimalist design with Lato font |
-| `bootstrap` | Modern, responsive with Bootstrap 5 grid |
+| Theme | Framework | Description |
+|-------|-----------|-------------|
+| `simple` | Sass | Clean, minimalist design |
+| `bootstrap` | Bootstrap 5 | Modern, responsive layout |
+| `dark-theme` | Tailwind CSS | Dark mode dashboard style |
 
 ### Switching Themes
 
-You can switch themes in two ways:
-
-1. **From the UI**: Click the "Tema" button in the header - changes instantly
-2. **From environment**: Set `VITE_APP_THEME=bootstrap` or `VITE_APP_THEME=simple` in `.env`
+Use the **Theme Selector** dropdown in the header to switch between available themes instantly. You can also set the initial theme in the `.env` file via `VITE_APP_THEME`.
 
 ## JSON Editor
 
-The built-in JSON editor allows you to modify your resume data directly from the browser. Access it from the "Acciones" menu.
+The built-in JSON editor allows you to modify your resume data directly from the browser:
 
-### Features:
 - **Load**: Load a JSON file from your computer
-- **Save**: Download the current JSON to a file
+- **Save**: Download the current JSON
 - **Copy/Paste**: Copy to clipboard or paste from clipboard
-- **Undo/Redo**: Full history support (up to 50 states)
-- **Validation**: Real-time JSON syntax validation with line/column error reporting
+- **Undo/Redo**: Revert or reapply changes
+- **Validation**: Real-time JSON syntax validation with error highlighting
 
-### Editor Controls:
-- Buttons: Load, Copy, Paste, Undo, Redo
-- Update button only enabled when JSON is valid
-
-## Export Options
-
-The app provides multiple export formats:
-
-| Format | Description |
-|--------|-------------|
-| **PDF** | Download as PDF document |
-| **DOCX** | Download as Word document |
-| **HTML** | Download as standalone HTML file with embedded styles |
-| **Email** | Open email client with CV data |
-
-### HTML Export
-
-The HTML export generates a completely self-contained HTML file:
-- All styles embedded (no external dependencies except Font Awesome CDN)
-- Maintains the exact same appearance as the web version
-- Works offline
-- Filename format: `cv-[theme]-[date].html`
+Access it from the "Acciones" menu.
 
 ## Environment Configuration
 
@@ -136,12 +103,19 @@ VITE_GITHUB_HOSTED_URL="https://github.com/yourusername/templated_online_cv"
 
 ## Adding New Themes
 
-The app uses Handlebars for templating, making it easy to add new themes:
+The app uses a modular theme-agnostic system. To add a new theme:
 
-1. **Create templates**: Add new templates in `src/templates/new-theme/templates.ts`
-2. **Register templates**: Add them to `src/services/handlebarsSetup.ts`
-3. **Create styles**: Add SCSS in `src/components/new-theme/`
-4. **Create component**: Add the React component in `src/components/new-theme/`
+1.  **Define Templates**: Create `src/features/resume-viewer/templates/[name]/templates.ts` with:
+    -   `layout`: Handlebars layout for the whole document.
+    -   Individual section templates (`header`, `experience`, etc.).
+    -   `styles`: Raw CSS for standalone export.
+    -   `externalCss` / `externalScripts`: External resource links.
+2.  **Create Component**: Add a React component in `src/features/resume-viewer/components/[name]/` that uses `Section` components with the new theme name.
+3.  **Register Theme**:
+    -   Add the name to `ThemeName` type in `handlebarsSetup.ts`.
+    -   Update `loadTemplates`, `getThemeStyles`, etc., in `handlebarsSetup.ts`.
+    -   Register label and ID in `themeService.ts`.
+4.  **UI Integration**: Add the new component to the `renderResume` switch in `App.tsx`.
 
 ### Template Structure
 
@@ -154,42 +128,21 @@ Each theme needs these templates:
 - `interests` - Interests section
 - `language` - Languages section
 
-### Theme Helper Functions
-
-Available Handlebars helpers:
-- `{{#if hasItems}}` - Check if section has data
-- `{{#each items}}` - Iterate over items
-- `{{#if this}}checked{{/if}}` - Conditional checked attribute
-
 ## Project Structure
 
 ```
 src/
-├── components/
-│   ├── bootstrap-theme/     # Bootstrap theme (2 files)
-│   ├── resume-base/         # Shared UI components
-│   └── single-theme/        # Simple theme (2 files)
+├── features/
+│   ├── cv-editor/           # JSON editor and actions
+│   └── resume-viewer/       # Themes, templates and rendering
 ├── services/
-│   ├── handlebarsSetup.ts  # Handlebars configuration & template loading
-│   └── sectionRenderer.ts  # Section rendering service
-├── templates/
-│   ├── bootstrap-theme/    # Bootstrap Handlebars templates
-│   └── single-theme/       # Simple Handlebars templates
-├── store/                   # Redux store
-├── utilities/              # Helper functions
-│   └── generateHtml.ts    # HTML export utility
-└── interfaces/             # TypeScript interfaces
+│   ├── themeService.ts      # Theme management
+│   ├── handlebarsSetup.ts   # Template compilation
+│   └── errorMiddleware.ts   # Global error handling
+├── store/                   # Redux state (cvSlice)
+├── utilities/               # PDF, DOCX, HTML generators
+└── interfaces/              # TypeScript definitions
 ```
-
-## Technologies
-
-- **React 18** - UI Framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool with HMR
-- **Redux Toolkit** - State management
-- **Handlebars** - Template engine
-- **Bootstrap 5** - CSS framework (bootstrap theme)
-- **jsPDF + docx** - Document generation
 
 ## License
 
