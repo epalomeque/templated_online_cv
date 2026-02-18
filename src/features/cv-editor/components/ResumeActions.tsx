@@ -1,13 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import './resume_actions.scss';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import CVData from '../../classes/cv_data';
-import {getAppSettings} from '../../utilities/getAppSettings.ts';
-import { generateResumeDocx } from '../../utilities/generateDocx.ts';
-import { generateResumePdf } from '../../utilities/generatePdf.ts';
-import { generateHtmlFromCv, downloadHtml } from '../../utilities/generateHtml.ts';
-import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../utilities/cvDataConverter.ts';
-import { setCVData, toggleTheme } from '../../store/cvSlice.ts';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import CVData from '../../../classes/cv_data';
+import {getAppSettings} from '../../../utilities/getAppSettings.ts';
+import { generateResumeDocx } from '../../../utilities/generateDocx.ts';
+import { generateResumePdf } from '../../../utilities/generatePdf.ts';
+import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../../utilities/cvDataConverter.ts';
+import { setCVData, toggleTheme } from '../../../store/cvSlice.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
 
@@ -46,13 +45,6 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
         dispatch(toggleTheme());
     };
 
-    const handleExportHtml = () => {
-        const currentTheme = theme || 'simple';
-        const html = generateHtmlFromCv(cvData, currentTheme, title);
-        const filename = `cv-${currentTheme}-${new Date().toISOString().split('T')[0]}.html`;
-        downloadHtml(html, filename);
-    };
-
     const currentThemeLabel = theme === 'bootstrap' ? 'Simple' : 'Bootstrap';
     const currentThemeIcon = theme === 'bootstrap' ? 'fa fa-file-text' : 'fa fa-bootstrap';
 
@@ -75,12 +67,6 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             icon: 'fa fa-envelope-o',
             href: `mailto:${emailToUse}`
         }] : []),
-        {
-            id: 'html',
-            label: 'Descargar HTML',
-            icon: 'fa fa-html5',
-            onClick: handleExportHtml
-        },
         {
             id: 'edit-json',
             label: 'Editar JSON',

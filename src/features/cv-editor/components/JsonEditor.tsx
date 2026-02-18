@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useJsonEditor, JsonValidationResult } from '../../hooks/useJsonEditor';
+import { useJsonEditor, JsonValidationResult } from '../../../hooks/useJsonEditor';
 import './json_editor.scss';
 
 interface JsonEditorProps {
