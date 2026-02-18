@@ -21,6 +21,11 @@ function App() {
   const isMounted = useRef(false);
 
   useEffect(() => {
+    // Add theme class to body to allow global background styling
+    document.body.className = theme;
+  }, [theme]);
+
+  useEffect(() => {
     if (isMounted.current) return;
     isMounted.current = true;
     
