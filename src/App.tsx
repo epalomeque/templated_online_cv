@@ -4,6 +4,7 @@ import ResumeActions from './features/cv-editor/components/ResumeActions.tsx';
 import ResumeActionsFooter from "./features/cv-editor/components/ResumeActionsFooter.tsx";
 import SimpleResume from './features/resume-viewer/components/single-theme/SimpleResume.tsx';
 import BootstrapResume from './features/resume-viewer/components/bootstrap-theme/BootstrapResume.tsx';
+import DarkResume from './features/resume-viewer/components/dark-theme/DarkResume.tsx';
 import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
@@ -41,6 +42,8 @@ function App() {
     switch (theme) {
       case 'bootstrap':
         return <BootstrapResume />;
+      case 'dark-theme':
+        return <DarkResume />;
       default:
         return <SimpleResume />;
     }
