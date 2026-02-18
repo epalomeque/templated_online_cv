@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
-import { singleThemeTemplates } from '../templates/single-theme/templates';
-import { bootstrapThemeTemplates } from '../templates/bootstrap-theme/templates';
+import { singleThemeTemplates } from '../features/resume-viewer/templates/single-theme/templates';
+import { bootstrapThemeTemplates } from '../features/resume-viewer/templates/bootstrap-theme/templates';
 
 export type ThemeName = 'simple' | 'bootstrap';
 

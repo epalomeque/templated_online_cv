@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import './resume_actions.scss';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import CVData from '../../classes/cv_data';
-import {getAppSettings} from '../../utilities/getAppSettings.ts';
-import { generateResumeDocx } from '../../utilities/generateDocx.ts';
-import { generateResumePdf } from '../../utilities/generatePdf.ts';
-import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../utilities/cvDataConverter.ts';
-import { setCVData, toggleTheme } from '../../store/cvSlice.ts';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import CVData from '../../../classes/cv_data';
+import {getAppSettings} from '../../../utilities/getAppSettings.ts';
+import { generateResumeDocx } from '../../../utilities/generateDocx.ts';
+import { generateResumePdf } from '../../../utilities/generatePdf.ts';
+import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../../utilities/cvDataConverter.ts';
+import { setCVData, toggleTheme } from '../../../store/cvSlice.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
 

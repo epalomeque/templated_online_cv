@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import './App.css'
-import ResumeActions from './components/resume-base/ResumeActions.tsx';
-import ResumeActionsFooter from "./components/resume-base/ResumeActionsFooter.tsx";
-import SimpleResume from './components/single-theme/simple_resume.tsx';
-import BootstrapResume from './components/bootstrap-theme/bootstrap_resume.tsx';
+import ResumeActions from './features/cv-editor/components/ResumeActions.tsx';
+import ResumeActionsFooter from "./features/cv-editor/components/ResumeActionsFooter.tsx";
+import SimpleResume from './features/resume-viewer/components/single-theme/SimpleResume.tsx';
+import BootstrapResume from './features/resume-viewer/components/bootstrap-theme/BootstrapResume.tsx';
 import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./utilities/getinfoData.ts";
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
