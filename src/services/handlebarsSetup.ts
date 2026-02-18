@@ -41,6 +41,11 @@ Handlebars.registerHelper('multiply', function(a: number, b: number): number {
 
 const registeredThemes = new Set<ThemeName>();
 
+/**
+ * Loads and compiles templates for a specific theme if they are not already registered.
+ * 
+ * @param theme - The name of the theme to load.
+ */
 export function loadTemplates(theme: ThemeName): void {
   if (registeredThemes.has(theme)) return;
   
@@ -55,7 +60,16 @@ export function loadTemplates(theme: ThemeName): void {
   registeredThemes.add(theme);
 }
 
-export function renderTemplate(theme: ThemeName, templateName: string, context: object): string {
+/**
+ * Renders a previously loaded template with the provided context.
+ * 
+ * @param theme - The theme the template belongs to.
+ * @param templateName - The name of the template to render.
+ * @param context - The data to pass to the template.
+ * @returns The rendered string.
+ * @throws Error if the template has not been loaded.
+ */
+export function renderTemplate(theme: ThemeName, templateName: string, context: Record<string, unknown>): string {
   const template = templateCache[`${theme}.${templateName}`];
   if (!template) {
     throw new Error(`Template '${theme}.${templateName}' not found`);

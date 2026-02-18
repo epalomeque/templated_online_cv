@@ -8,6 +8,7 @@ import { getHeaderDataFromJson, getDetailsDataFromJson, getResumeInfo } from "./
 import {getAppSettings} from "./utilities/getAppSettings.ts";
 import { useAppDispatch, useAppSelector } from './store/hooks.ts';
 import { setCVData, setLoading, setError, setTheme } from './store/cvSlice.ts';
+import { JsonInput } from './utilities/cvDataConverter.ts';
 
 function App() {
   const app_settings = getAppSettings();
@@ -25,7 +26,7 @@ function App() {
     dispatch(setLoading(true));
     dispatch(setTheme(initialTheme));
     getResumeInfo(app_settings.resumeUrl)
-      .then((data: JSON) => {
+      .then((data: JsonInput) => {
         const header = getHeaderDataFromJson(data);
         const details = getDetailsDataFromJson(data);
         dispatch(setCVData({ header, details }));

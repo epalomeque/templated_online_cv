@@ -7,6 +7,15 @@ export interface SectionTemplateProps {
   theme: ThemeName;
 }
 
+/**
+ * Renders a specific section of the resume using Handlebars templates.
+ * 
+ * @param sectionType - The type of section to render (e.g., 'header', 'experience').
+ * @param title - The title to display for this section.
+ * @param cvData - The CV data instance.
+ * @param theme - The theme name to use for rendering.
+ * @returns The rendered HTML string.
+ */
 export function renderSection(
   sectionType: string,
   title: string,
@@ -19,11 +28,19 @@ export function renderSection(
   return renderTemplate(theme, sectionType, context);
 }
 
+/**
+ * Prepares the context object for a specific section template.
+ * 
+ * @param sectionType - The type of section.
+ * @param title - The section title.
+ * @param cvData - The CV data instance.
+ * @returns An object containing the data needed by the template.
+ */
 function getSectionContext(
   sectionType: string,
   title: string,
   cvData: CVData
-): object {
+): Record<string, unknown> {
   switch (sectionType) {
     case 'header': {
       const aboutTitle = cvData.getAboutTitle();

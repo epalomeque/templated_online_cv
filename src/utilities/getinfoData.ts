@@ -3,38 +3,28 @@ import AboutInfoInterface from '../interfaces/about_info.ts';
 import ContactInfoInterface from '../interfaces/contact_info.ts';
 import PersonalInfoInterface from '../interfaces/personal_info.ts';
 import DetailsInfoInterface from '../interfaces/details_info.ts';
-import ExperienceInterface from '../interfaces/experience_info.ts';
-import EducationInterface from '../interfaces/education_info.ts';
-import AbilitiesInterface from '../interfaces/abilities_info.ts';
-import LanguagesInterface from "../interfaces/languages_info.ts";
 import SocialMediaInterface from "../interfaces/social_media_info.ts";
 import CVData from "../classes/cv_data.ts";
+import { JsonInput } from "./cvDataConverter.ts";
 
 
-export function getHeaderDataFromJson(props:JSON|any): HeaderInfoInterface {
-  const {
-      about,
-      contact_info,
-      personal_info,
-      social_media,
-  } = props;
-
+export function getHeaderDataFromJson(props: JsonInput): HeaderInfoInterface {
   const aboutData: AboutInfoInterface = {
-    title: about.title,
-    description: about.description
+    title: props.about?.title ?? '',
+    description: props.about?.description ?? ''
   };
   const contactData: ContactInfoInterface = {
-    email: contact_info.email,
-    phone_number: contact_info.phone_number,
-    address: contact_info.address,
+    email: props.contact_info?.email ?? [],
+    phone_number: props.contact_info?.phone_number ?? [],
+    address: props.contact_info?.address ?? { street_name: '', ext_number: '', city: '', state: '', country: '' },
   };
   const personalData: PersonalInfoInterface = {
-    name: personal_info.name,
-    lastname: personal_info.lastname,
-    second_lastname: personal_info.second_lastname,
-    birthdate: personal_info.birthdate,
+    name: props.personal_info?.name ?? '',
+    lastname: props.personal_info?.lastname ?? '',
+    second_lastname: props.personal_info?.second_lastname ?? '',
+    birthdate: props.personal_info?.birthdate ?? '',
   };
-  const socialMediaData: SocialMediaInterface[] = social_media;
+  const socialMediaData: SocialMediaInterface[] = props.social_media ?? [];
 
   return {
     about_info: aboutData,
@@ -44,35 +34,19 @@ export function getHeaderDataFromJson(props:JSON|any): HeaderInfoInterface {
   }
 }
 
-export function getDetailsDataFromJson(props: JSON|any): DetailsInfoInterface {
-  const {
-      abilities,
-      education,
-      experience,
-      interests,
-      languages,
-      picture,
-      projects,
-  } = props;
-
-  const ExperienceData: ExperienceInterface[] = experience;
-  const EducationData: EducationInterface[] = education;
-  const AbilitiesData: AbilitiesInterface[] = abilities;
-  const InterestData: string[] = interests;
-  const languagesData: LanguagesInterface[] = languages;
-
+export function getDetailsDataFromJson(props: JsonInput): DetailsInfoInterface {
   return {
-    abilities: AbilitiesData,
-    education: EducationData,
-    experience: ExperienceData,
-    interests: InterestData,
-    languages: languagesData,
-    picture: picture,
-    projects: projects,
+    abilities: props.abilities ?? [],
+    education: props.education ?? [],
+    experience: props.experience ?? [],
+    interests: props.interests ?? [],
+    languages: props.languages ?? [],
+    picture: props.picture ?? '',
+    projects: props.projects ?? [],
   }
 }
 
-export async function getResumeInfo(url:string):Promise<any> {
+export async function getResumeInfo(url: string): Promise<JsonInput> {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Error on fetch request: ' + response.statusText);
@@ -80,7 +54,7 @@ export async function getResumeInfo(url:string):Promise<any> {
   return await response.json();
 }
 
-export function getCVDataFromJson(resumeCvData: JSON|any): CVData {
+export function getCVDataFromJson(resumeCvData: JsonInput): CVData {
   return new CVData(
       getHeaderDataFromJson(resumeCvData),
       getDetailsDataFromJson(resumeCvData));

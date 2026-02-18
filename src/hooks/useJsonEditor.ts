@@ -115,20 +115,22 @@ export function useJsonEditor(initialContent: string): UseJsonEditorReturn {
     }
   }, [historyIndex, history, validateJson]);
 
-  const copyToClipboard = useCallback(async () => {
+  const copyToClipboard = useCallback(async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(content);
     } catch (err) {
       console.error('Failed to copy:', err);
+      throw err;
     }
   }, [content]);
 
-  const pasteFromClipboard = useCallback(async () => {
+  const pasteFromClipboard = useCallback(async (): Promise<void> => {
     try {
       const text = await navigator.clipboard.readText();
       setContent(text);
     } catch (err) {
       console.error('Failed to paste:', err);
+      throw err;
     }
   }, [setContent]);
 
