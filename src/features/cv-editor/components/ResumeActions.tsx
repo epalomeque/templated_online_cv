@@ -5,6 +5,7 @@ import CVData from '../../../classes/cv_data';
 import {getAppSettings} from '../../../utilities/getAppSettings.ts';
 import { generateResumeDocx } from '../../../utilities/generateDocx.ts';
 import { generateResumePdf } from '../../../utilities/generatePdf.ts';
+import { downloadResumeHtml } from '../../../utilities/generateHtml.ts';
 import { stateToJsonFormat, jsonToStateFormat, JsonInput } from '../../../utilities/cvDataConverter.ts';
 import { setCVData, toggleTheme } from '../../../store/cvSlice.ts';
 import ActionsMenu from './ActionsMenu.tsx';
@@ -61,6 +62,12 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             icon: 'fa fa-file-pdf-o',
             onClick: () => generateResumePdf(cvData)
         }] : []),
+        {
+            id: 'html',
+            label: 'Descargar HTML',
+            icon: 'fa fa-file-code-o',
+            onClick: () => downloadResumeHtml(cvData, theme as any)
+        },
         ...(emailToUse && app_settings.showBtnEmail ? [{
             id: 'email',
             label: 'Enviar por email',
