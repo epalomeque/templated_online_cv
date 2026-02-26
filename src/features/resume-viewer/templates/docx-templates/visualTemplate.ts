@@ -23,7 +23,7 @@ import { DocxTemplate } from './defaultTemplate';
 export const visualDocxTemplate: DocxTemplate = {
     id: 'visual',
     name: 'Visual Template',
-    generateChildren: (cv_data: CVData) => {
+    generateChildren: (cv_data: CVData): (Paragraph | Table)[] => {
         const abilities: AbilitiesInterface[] | undefined = cv_data.getAbilities();
         const about: AboutInfoInterface = cv_data.getAboutInfo();
         const contact_info: ContactInfoInterface = cv_data.getContactInfo();
@@ -224,6 +224,20 @@ export const visualDocxTemplate: DocxTemplate = {
                 ],
             }),
 
+            // Social Media
+            createSectionHeading("Social Media"),
+            new Paragraph({
+                children: (socialMedia ?? []).flatMap((a: SocialMediaInterface, index: number) => [
+                    new TextRun({
+                        text: `${a.platform}: ${a.url}`,
+                        size: 20,
+                        font: "Calibri",
+                    }),
+                    ...(index < (socialMedia?.length ?? 0) - 1 ? [new TextRun({ text: " | ", size: 20, font: "Calibri" })] : []),
+                ]),
+                spacing: { after: 200 },
+            }),
+
             // Education
             createSectionHeading("Education"),
             ...(education ?? []).flatMap((edu: EducationInterface) => [
@@ -240,6 +254,18 @@ export const visualDocxTemplate: DocxTemplate = {
                     ],
                 }),
             ]),
+
+            // Interests
+            createSectionHeading("Interests"),
+            new Paragraph({
+                children: [
+                    new TextRun({
+                        text: interests?.join(", ") ?? '',
+                        size: 20,
+                        font: "Calibri",
+                    }),
+                ],
+            }),
         ];
     }
 };

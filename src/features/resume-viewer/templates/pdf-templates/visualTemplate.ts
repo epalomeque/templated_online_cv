@@ -77,6 +77,23 @@ export const visualPdfTemplate: PdfTemplate = {
             sidebarY += 5;
         });
 
+        // Interests in Sidebar
+        if (interests && interests.length > 0) {
+            sidebarY += 10;
+            doc.setFontSize(10);
+            doc.text("INTERESTS", 35, sidebarY, { align: 'center' });
+            sidebarY += 5;
+            doc.line(15, sidebarY, 55, sidebarY);
+            sidebarY += 8;
+            
+            doc.setFontSize(9);
+            interests.forEach(interest => {
+                const lines = doc.splitTextToSize(interest, 60);
+                doc.text(lines, 35, sidebarY, { align: 'center' });
+                sidebarY += lines.length * 5;
+            });
+        }
+
         // Main Content
         let mainY = 20;
         const mainX = 80;

@@ -4,7 +4,7 @@ import {
     HeadingLevel,
     Paragraph,
     TextRun,
-    IParagraphOptions,
+    Table,
 } from 'docx';
 import CVData from '../../../../classes/cv_data';
 import ContactInfoInterface from '../../../../interfaces/contact_info';
@@ -18,7 +18,7 @@ import AbilitiesInterface from '../../../../interfaces/abilities_info';
 export interface DocxTemplate {
     id: string;
     name: string;
-    generateChildren: (cv_data: CVData) => any[];
+    generateChildren: (cv_data: CVData) => (Paragraph | Table)[];
 }
 
 export const defaultDocxTemplate: DocxTemplate = {

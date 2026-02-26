@@ -83,7 +83,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             id: 'html',
             label: 'Descargar HTML',
             icon: 'fa fa-file-code-o',
-            onClick: () => downloadResumeHtml(cvData, theme as any)
+            onClick: () => downloadResumeHtml(cvData, theme as ThemeName)
         },
         ...(emailToUse && app_settings.showBtnEmail ? [{
             id: 'email',

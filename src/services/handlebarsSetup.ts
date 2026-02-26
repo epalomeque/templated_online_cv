@@ -50,7 +50,7 @@ const registeredThemes = new Set<ThemeName>();
 export function loadTemplates(theme: ThemeName): void {
   if (registeredThemes.has(theme)) return;
   
-  const templates = theme === 'bootstrap' 
+  const templates: Record<string, string | string[]> = theme === 'bootstrap' 
     ? bootstrapThemeTemplates 
     : theme === 'dark-theme'
       ? darkThemeTemplates
@@ -79,6 +79,13 @@ export function renderLayout(theme: ThemeName, sections: Record<string, string>)
   return renderTemplate(theme, 'layout', sections);
 }
 
+interface ThemeTemplates {
+  styles?: string;
+  externalCss?: string[];
+  externalScripts?: string[];
+  [key: string]: string | string[] | undefined;
+}
+
 /**
  * Retrieves the embedded styles for a specific theme.
  * 
@@ -92,7 +99,7 @@ export function getThemeStyles(theme: ThemeName): string {
     : theme === 'dark-theme'
       ? darkThemeTemplates
       : singleThemeTemplates;
-  return (templates as any).styles || '';
+  return (templates as ThemeTemplates).styles || '';
 }
 
 /**
@@ -108,7 +115,7 @@ export function getThemeExternalCss(theme: ThemeName): string[] {
     : theme === 'dark-theme'
       ? darkThemeTemplates
       : singleThemeTemplates;
-  return (templates as any).externalCss || [];
+  return (templates as ThemeTemplates).externalCss || [];
 }
 
 /**
@@ -123,7 +130,7 @@ export function getThemeExternalScripts(theme: ThemeName): string[] {
     : theme === 'dark-theme'
       ? darkThemeTemplates
       : singleThemeTemplates;
-  return (templates as any).externalScripts || [];
+  return (templates as ThemeTemplates).externalScripts || [];
 }
 
 /**
