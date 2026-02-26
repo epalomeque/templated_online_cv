@@ -84,7 +84,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
     ];
 
     return (
-        <>
+        <div className="resume-actions-scope">
             <div className="resume-actions-container">
                 <h1 className="resume-title">{ title }</h1>
                 <div className="actions-wrapper">
@@ -117,7 +117,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                     onClose={() => setIsEditorOpen(false)}
                 />
             )}
-        </>
+        </div>
     );
 };
 
