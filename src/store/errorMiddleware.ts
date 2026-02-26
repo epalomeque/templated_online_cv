@@ -16,6 +16,6 @@ export const errorMiddleware: Middleware = (store) => (next) => (action) => {
   return next(action);
 };
 
-function isErrorAction(action: UnknownAction): action is { error: { message: string } } {
-  return action.type.endsWith('/rejected') || (action.payload instanceof Error);
+function isErrorAction(action: UnknownAction): action is { type: string; error: { message: string } } {
+  return typeof action.type === 'string' && (action.type.endsWith('/rejected') || (action.payload instanceof Error));
 }
