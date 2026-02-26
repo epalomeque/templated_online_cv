@@ -32,6 +32,28 @@
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
     }
+    &.embedded {
+      position: static;
+      display: block;
+      z-index: auto;
+      background: none;
+      padding: 0;
+
+      .json-editor-modal {
+        box-shadow: none;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+      }
+
+      .json-editor-content {
+        min-height: 500px;
+        .json-textarea {
+          min-height: 450px;
+        }
+      }
+    }
   }
 
   .json-editor-modal {
@@ -283,5 +305,52 @@
         justify-content: center;
       }
     }
+  }
+  .modal-tabs {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-color: #f8f9fa;
+    margin-bottom: 0;
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+
+    .tab-btn {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      background: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      i {
+        font-size: 16px;
+      }
+
+      &:hover {
+        background-color: #e9ecef;
+        color: #333;
+      }
+
+      &.active {
+        background-color: #fff;
+        color: #6f42c1;
+        border-bottom: 3px solid #6f42c1;
+      }
+    }
+  }
+
+  .modal-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #fff;
   }
 }

@@ -8,6 +8,7 @@ interface MenuItem {
     onClick?: () => void;
     href?: string;
     render?: React.ReactNode;
+    children?: MenuItem[];
 }
 
 interface ActionsMenuProps {
@@ -22,12 +23,14 @@ const ActionsMenu: React.FC<ActionsMenuProps> = ({
     triggerIcon = 'fa fa-bars' 
 }: ActionsMenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
     const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
+                setOpenSubmenus({});
             }
         };
 
@@ -35,22 +38,40 @@ const ActionsMenu: React.FC<ActionsMenuProps> = ({
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const handleItemClick = (item: MenuItem) => {
+    const toggleSubmenu = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setOpenSubmenus(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    };
+
+    const handleItemClick = (item: MenuItem, e: React.MouseEvent) => {
+        if (item.children) {
+            toggleSubmenu(item.id, e);
+            return;
+        }
+
         if (item.onClick) {
             item.onClick();
         }
         setIsOpen(false);
+        setOpenSubmenus({});
     };
 
-    const renderMenuItem = (item: MenuItem) => {
+    const renderMenuItem = (item: MenuItem, isSubmenu: boolean = false) => {
         if (item.render) {
-            return <div key={item.id} onClick={() => handleItemClick(item)}>{item.render}</div>;
+            return <div key={item.id} onClick={(e) => handleItemClick(item, e)}>{item.render}</div>;
         }
+
+        const hasChildren = !!item.children;
+        const isSubOpen = openSubmenus[item.id];
 
         const content = (
             <>
                 {item.icon && <i className={item.icon}></i>}
-                <span>{item.label}</span>
+                <span className="label-text">{item.label}</span>
+                {hasChildren && <i className={`fa fa-chevron-${isSubOpen ? 'down' : 'right'} submenu-indicator`}></i>}
             </>
         );
 
@@ -59,8 +80,11 @@ const ActionsMenu: React.FC<ActionsMenuProps> = ({
                 <a 
                     key={item.id} 
                     href={item.href} 
-                    className="menu-item"
-                    onClick={() => setIsOpen(false)}
+                    className={`menu-item ${isSubmenu ? 'submenu-item' : ''}`}
+                    onClick={() => {
+                        setIsOpen(false);
+                        setOpenSubmenus({});
+                    }}
                 >
                     {content}
                 </a>
@@ -68,13 +92,19 @@ const ActionsMenu: React.FC<ActionsMenuProps> = ({
         }
 
         return (
-            <button 
-                key={item.id} 
-                className="menu-item"
-                onClick={() => handleItemClick(item)}
-            >
-                {content}
-            </button>
+            <div key={item.id} className="menu-item-wrapper">
+                <button 
+                    className={`menu-item ${isSubmenu ? 'submenu-item' : ''} ${hasChildren ? 'has-children' : ''} ${isSubOpen ? 'is-open' : ''}`}
+                    onClick={(e) => handleItemClick(item, e)}
+                >
+                    {content}
+                </button>
+                {hasChildren && isSubOpen && (
+                    <div className="submenu-dropdown">
+                        {item.children?.map(child => renderMenuItem(child, true))}
+                    </div>
+                )}
+            </div>
         );
     };
 

@@ -1,0 +1,235 @@
+.cv-editor-form {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 100%;
+  margin: 0;
+
+  .form-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: 8px;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #6f42c1;
+      padding-bottom: 5px;
+
+      h3 {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+
+    h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #6f42c1;
+      display: block;
+
+      i {
+        margin-right: 10px;
+        color: #6f42c1;
+      }
+    }
+  }
+
+  .list-item-container {
+    position: relative;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+
+    &.card {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+  }
+
+  .mb-2 {
+    margin-bottom: 10px;
+  }
+
+  .add-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+
+  .remove-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+
+  .remove-btn-absolute {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #dc3545;
+      color: #fff;
+    }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+
+    input[type="text"] {
+      flex: 1;
+      padding: 5px 8px;
+    }
+
+    .level-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100px;
+
+      input[type="range"] {
+        flex: 1;
+        cursor: pointer;
+      }
+
+      span {
+        font-size: 12px;
+        font-weight: bold;
+        color: #6f42c1;
+        min-width: 15px;
+      }
+    }
+  }
+
+  .remove-btn-small {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    padding: 5px;
+
+    &:hover {
+      color: #dc3545;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #6f42c1;
+        box-shadow: 0 0 0 2px rgba(111, 66, 193, 0.1);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+
+  .form-info-note {
+    background-color: #e9ecef;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+
+    i {
+      margin-right: 8px;
+      color: #6f42c1;
+    }
+
+    strong {
+      color: #333;
+    }
+  }
+}
+
