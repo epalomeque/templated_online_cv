@@ -1,13 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { getHeaderDataFromJson, getDetailsDataFromJson } from '../utilities/getinfoData';
 import { JsonInput } from '../utilities/cvDataConverter';
+import { PhoneType } from '../interfaces/contact_info';
 
 describe('getinfoData Utilities', () => {
   const mockJson: JsonInput = {
     about: { title: 'Software Engineer', description: 'Experienced dev' },
     contact_info: {
       email: ['test@example.com'],
-      phone_number: [{ type: 'cel' as any, number: '123456789', country_code: '34' }],
+      phone_number: [{ type: PhoneType.cel, number: '123456789', country_code: '34' }],
       address: { street_name: 'Main St', ext_number: '123', city: 'Madrid', state: 'Madrid', country: 'Spain' }
     },
     personal_info: { name: 'John', lastname: 'Doe', second_lastname: 'Smith', birthdate: '1990-01-01' },

@@ -1,4 +1,4 @@
-enum PhoneType {
+export enum PhoneType {
   cel = 'cel',
   home = 'home',
   office = 'office',
