@@ -51,18 +51,34 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
     const availableThemes = themeService.getAvailableThemes();
 
     const menuItems = [
-        ...(app_settings.showBtnDoc ? [{
-            id: 'docx',
-            label: 'Descargar DOCX',
-            icon: 'fa fa-file-word-o',
-            onClick: () => generateResumeDocx(cvData)
-        }] : []),
-        ...(app_settings.showBtnPdf ? [{
-            id: 'pdf',
-            label: 'Descargar PDF',
-            icon: 'fa fa-file-pdf-o',
-            onClick: () => generateResumePdf(cvData)
-        }] : []),
+        ...(app_settings.showBtnDoc ? [
+            {
+                id: 'docx-default',
+                label: 'Descargar DOCX (Simple)',
+                icon: 'fa fa-file-word-o',
+                onClick: () => generateResumeDocx(cvData, 'default')
+            },
+            {
+                id: 'docx-visual',
+                label: 'Descargar DOCX (Visual)',
+                icon: 'fa fa-file-word-o',
+                onClick: () => generateResumeDocx(cvData, 'visual')
+            }
+        ] : []),
+        ...(app_settings.showBtnPdf ? [
+            {
+                id: 'pdf-default',
+                label: 'Descargar PDF (Simple)',
+                icon: 'fa fa-file-pdf-o',
+                onClick: () => generateResumePdf(cvData, 'default')
+            },
+            {
+                id: 'pdf-visual',
+                label: 'Descargar PDF (Visual)',
+                icon: 'fa fa-file-pdf-o',
+                onClick: () => generateResumePdf(cvData, 'visual')
+            }
+        ] : []),
         {
             id: 'html',
             label: 'Descargar HTML',
