@@ -12,6 +12,8 @@ import { themeService } from '../../../services/themeService.ts';
 import { ThemeName } from '../../../services/handlebarsSetup.ts';
 import ActionsMenu from './ActionsMenu.tsx';
 import JsonEditor from './JsonEditor.tsx';
+import CVEditorForm from './CVEditorForm.tsx';
+import './cv_editor_form.scss';
 
 interface ResumeActionsProps {
     title: string;
@@ -27,18 +29,20 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
 
     const [isEditorOpen, setIsEditorOpen] = useState(false);
     const [jsonContent, setJsonContent] = useState('');
+    const [activeTab, setActiveTab] = useState<'preview' | 'edit' | 'json'>('preview');
 
-    const openJsonEditor = () => {
+    const openEditor = (tab: 'edit' | 'json') => {
         const fullData = stateToJsonFormat(header, details);
         setJsonContent(JSON.stringify(fullData, null, 2));
         setIsEditorOpen(true);
+        setActiveTab(tab);
     };
 
-    const handleJsonUpdate = (parsedData: Record<string, unknown>) => {
+    const handleDataUpdate = (parsedData: Record<string, unknown>) => {
         try {
             const { header: newHeader, details: newDetails } = jsonToStateFormat(parsedData as JsonInput);
             dispatch(setCVData({ header: newHeader, details: newDetails }));
-            setIsEditorOpen(false);
+            // We don't necessarily close the editor here if we want to stay in the modal
         } catch (err) {
             console.error('Error updating CV data:', err);
         }
@@ -51,51 +55,81 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
     const availableThemes = themeService.getAvailableThemes();
 
     const menuItems = [
-        ...(app_settings.showBtnDoc ? [
-            {
-                id: 'docx-default',
-                label: 'Descargar DOCX (Simple)',
-                icon: 'fa fa-file-word-o',
-                onClick: () => generateResumeDocx(cvData, 'default')
-            },
-            {
-                id: 'docx-visual',
-                label: 'Descargar DOCX (Visual)',
-                icon: 'fa fa-file-word-o',
-                onClick: () => generateResumeDocx(cvData, 'visual')
-            }
-        ] : []),
-        ...(app_settings.showBtnPdf ? [
-            {
-                id: 'pdf-default',
-                label: 'Descargar PDF (Simple)',
-                icon: 'fa fa-file-pdf-o',
-                onClick: () => generateResumePdf(cvData, 'default')
-            },
-            {
-                id: 'pdf-visual',
-                label: 'Descargar PDF (Visual)',
-                icon: 'fa fa-file-pdf-o',
-                onClick: () => generateResumePdf(cvData, 'visual')
-            }
-        ] : []),
-        {
-            id: 'html',
-            label: 'Descargar HTML',
-            icon: 'fa fa-file-code-o',
-            onClick: () => downloadResumeHtml(cvData, theme as ThemeName)
-        },
         ...(emailToUse && app_settings.showBtnEmail ? [{
             id: 'email',
-            label: 'Enviar por email',
+            label: 'Enviar por correo',
             icon: 'fa fa-envelope-o',
             href: `mailto:${emailToUse}`
         }] : []),
         {
-            id: 'edit-json',
-            label: 'Editar JSON',
-            icon: 'fa fa-code',
-            onClick: openJsonEditor
+            id: 'download-files',
+            label: 'Descargar archivos',
+            icon: 'fa fa-download',
+            children: [
+                ...(app_settings.showBtnDoc ? [{
+                    id: 'docx-group',
+                    label: 'Docx',
+                    icon: 'fa fa-file-word-o',
+                    children: [
+                        {
+                            id: 'docx-default',
+                            label: 'Tema Simple',
+                            icon: 'fa fa-file-text-o',
+                            onClick: () => generateResumeDocx(cvData, 'default')
+                        },
+                        {
+                            id: 'docx-visual',
+                            label: 'Tema Visual',
+                            icon: 'fa fa-file-text-o',
+                            onClick: () => generateResumeDocx(cvData, 'visual')
+                        }
+                    ]
+                }] : []),
+                ...(app_settings.showBtnPdf ? [{
+                    id: 'pdf-group',
+                    label: 'PDF',
+                    icon: 'fa fa-file-pdf-o',
+                    children: [
+                        {
+                            id: 'pdf-default',
+                            label: 'Tema Simple',
+                            icon: 'fa fa-file-text-o',
+                            onClick: () => generateResumePdf(cvData, 'default')
+                        },
+                        {
+                            id: 'pdf-visual',
+                            label: 'Tema Visual',
+                            icon: 'fa fa-file-text-o',
+                            onClick: () => generateResumePdf(cvData, 'visual')
+                        }
+                    ]
+                }] : []),
+                {
+                    id: 'html',
+                    label: 'HTML',
+                    icon: 'fa fa-file-code-o',
+                    onClick: () => downloadResumeHtml(cvData, theme as ThemeName)
+                }
+            ]
+        },
+        {
+            id: 'edit-data-group',
+            label: 'Editar Datos',
+            icon: 'fa fa-edit',
+            children: [
+                {
+                    id: 'edit-simple',
+                    label: 'Modo simple (Formulario)',
+                    icon: 'fa fa-wpforms',
+                    onClick: () => openEditor('edit')
+                },
+                {
+                    id: 'edit-advanced',
+                    label: 'Modo avanzado (JSON)',
+                    icon: 'fa fa-code',
+                    onClick: () => openEditor('json')
+                }
+            ]
         }
     ];
 
@@ -126,12 +160,48 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                     />
                 </div>
             </div>
+            
             {isEditorOpen && (
-                <JsonEditor
-                    initialContent={jsonContent}
-                    onUpdate={handleJsonUpdate}
-                    onClose={() => setIsEditorOpen(false)}
-                />
+                <div className="json-editor-scope">
+                    <div className="json-editor-overlay" onClick={() => setIsEditorOpen(false)}>
+                        <div className="json-editor-modal" onClick={e => e.stopPropagation()}>
+                            <div className="json-editor-header">
+                                <h2>Editor de CV</h2>
+                                <button className="close-btn" onClick={() => setIsEditorOpen(false)} aria-label="Cerrar">
+                                    &times;
+                                </button>
+                            </div>
+                            
+                            <div className="editor-tabs modal-tabs">
+                                <button 
+                                    className={`tab-btn ${activeTab === 'edit' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('edit')}
+                                >
+                                    <i className="fa fa-edit"></i> Formulario
+                                </button>
+                                <button 
+                                    className={`tab-btn ${activeTab === 'json' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('json')}
+                                >
+                                    <i className="fa fa-code"></i> JSON
+                                </button>
+                            </div>
+
+                            <div className="modal-content-scroll">
+                                {activeTab === 'edit' ? (
+                                    <CVEditorForm />
+                                ) : (
+                                    <JsonEditor
+                                        initialContent={jsonContent}
+                                        onUpdate={handleDataUpdate}
+                                        onClose={() => setIsEditorOpen(false)}
+                                        isEmbedded={true}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

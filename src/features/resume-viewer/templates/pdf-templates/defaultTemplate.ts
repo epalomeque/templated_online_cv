@@ -5,6 +5,7 @@ import AboutInfoInterface from '../../../../interfaces/about_info';
 import ContactInfoInterface from '../../../../interfaces/contact_info';
 import EducationInterface from '../../../../interfaces/education_info';
 import ExperienceInterface from '../../../../interfaces/experience_info';
+import SocialMediaInterface from '../../../../interfaces/social_media_info';
 
 export interface PdfTemplate {
     id: string;
@@ -22,6 +23,7 @@ export const defaultPdfTemplate: PdfTemplate = {
         const education: EducationInterface[] | undefined = cv_data.getEducation();
         const experience: ExperienceInterface[] | undefined = cv_data.getExperience();
         const interests: string[] | undefined = cv_data.getInterests();
+        const socialMedia: SocialMediaInterface[] | undefined = cv_data.getSocialMedia();
 
         const primaryColor = [84, 175, 228]; // #54AFE4
 
@@ -41,7 +43,14 @@ export const defaultPdfTemplate: PdfTemplate = {
         const address = `${contact_info.address.city}, ${contact_info.address.state}, ${contact_info.address.country}`;
         doc.text(address, 105, 35, { align: 'center' });
 
-        let currentY = 45;
+        // Social Media
+        if (socialMedia && socialMedia.length > 0) {
+            doc.setFontSize(9);
+            const socialLinks = socialMedia.map(s => `${s.platform}: ${s.url}`).join(' | ');
+            doc.text(socialLinks, 105, 40, { align: 'center' });
+        }
+
+        let currentY = 50;
 
         const createHeading = (text: string) => {
             if (currentY > 250) {
