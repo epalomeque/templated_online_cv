@@ -73,27 +73,27 @@ const CVEditorForm: React.FC = () => {
 
   // --- List Handlers ---
 
-  const handleListChange = (section: keyof typeof details, index: number, field: string, value: any) => {
+  const handleListChange = (section: keyof typeof details, index: number, field: string, value: string | number) => {
     const newDetails = { ...details };
-    const list = [...(newDetails[section] as any[])];
+    const list = [...((newDetails[section] as unknown) as Record<string, unknown>[])];
     list[index] = { ...list[index], [field]: value };
-    (newDetails as any)[section] = list;
+    Object.assign(newDetails, { [section]: list });
     updateCV(header, newDetails);
   };
 
-  const addListItem = (section: keyof typeof details, emptyItem: any) => {
+  const addListItem = (section: keyof typeof details, emptyItem: Record<string, unknown>) => {
     const newDetails = { ...details };
-    const list = [...(newDetails[section] as any[]) || []];
+    const list = [...((newDetails[section] as unknown) as Record<string, unknown>[]) || []];
     list.push(emptyItem);
-    (newDetails as any)[section] = list;
+    Object.assign(newDetails, { [section]: list });
     updateCV(header, newDetails);
   };
 
   const removeListItem = (section: keyof typeof details, index: number) => {
     const newDetails = { ...details };
-    const list = [...(newDetails[section] as any[])];
+    const list = [...((newDetails[section] as unknown) as Record<string, unknown>[])];
     list.splice(index, 1);
-    (newDetails as any)[section] = list;
+    Object.assign(newDetails, { [section]: list });
     updateCV(header, newDetails);
   };
 

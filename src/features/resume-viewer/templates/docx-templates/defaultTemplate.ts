@@ -24,7 +24,7 @@ export interface DocxTemplate {
 export const defaultDocxTemplate: DocxTemplate = {
     id: 'default',
     name: 'Default Template',
-    generateChildren: (cv_data: CVData) => {
+    generateChildren: (cv_data: CVData): (Paragraph | Table)[] => {
         const abilities: AbilitiesInterface[] | undefined = cv_data.getAbilities();
         const about: AboutInfoInterface = cv_data.getAboutInfo();
         const contact_info: ContactInfoInterface = cv_data.getContactInfo();

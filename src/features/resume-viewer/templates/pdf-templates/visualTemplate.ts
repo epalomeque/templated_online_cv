@@ -5,6 +5,7 @@ import AboutInfoInterface from '../../../../interfaces/about_info';
 import ContactInfoInterface from '../../../../interfaces/contact_info';
 import EducationInterface from '../../../../interfaces/education_info';
 import ExperienceInterface from '../../../../interfaces/experience_info';
+import SocialMediaInterface from '../../../../interfaces/social_media_info';
 import { PdfTemplate } from './defaultTemplate';
 
 export const visualPdfTemplate: PdfTemplate = {
@@ -17,6 +18,7 @@ export const visualPdfTemplate: PdfTemplate = {
         const education: EducationInterface[] | undefined = cv_data.getEducation();
         const experience: ExperienceInterface[] | undefined = cv_data.getExperience();
         const interests: string[] | undefined = cv_data.getInterests();
+        const socialMedia: SocialMediaInterface[] | undefined = cv_data.getSocialMedia();
 
         const primaryColor = [44, 62, 80]; // #2C3E50
         const accentColor = [231, 76, 60]; // #E74C3C
@@ -62,7 +64,25 @@ export const visualPdfTemplate: PdfTemplate = {
         const address = `${contact_info.address.city}, ${contact_info.address.country}`;
         const addressLines = doc.splitTextToSize(address, 60);
         doc.text(addressLines, 35, sidebarY, { align: 'center' });
-        sidebarY += addressLines.length * 5 + 10;
+        sidebarY += addressLines.length * 5 + 8;
+
+        // Social Media in Sidebar
+        if (socialMedia && socialMedia.length > 0) {
+            doc.setFontSize(10);
+            doc.text("SOCIAL", 35, sidebarY, { align: 'center' });
+            sidebarY += 5;
+            doc.line(15, sidebarY, 55, sidebarY);
+            sidebarY += 8;
+            
+            doc.setFontSize(8);
+            socialMedia.forEach(sm => {
+                const text = `${sm.platform}: ${sm.url}`;
+                const lines = doc.splitTextToSize(text, 60);
+                doc.text(lines, 35, sidebarY, { align: 'center' });
+                sidebarY += lines.length * 5;
+            });
+            sidebarY += 5;
+        }
 
         // Skills in Sidebar
         doc.setFontSize(10);
