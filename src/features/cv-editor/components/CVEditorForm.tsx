@@ -215,16 +215,36 @@ const CVEditorForm: React.FC = () => {
         {details.experience?.map((exp, index) => (
           <div key={exp.id || index} className="list-item-container card">
             <div className="input-row mb-2">
-              <input type="text" placeholder="Empresa" value={exp.job_name} onChange={(e) => handleListChange('experience', index, 'job_name', e.target.value)} />
-              <input type="text" placeholder="Cargo" value={exp.position_name} onChange={(e) => handleListChange('experience', index, 'position_name', e.target.value)} />
+              <div className="input-group">
+                <label>Empresa</label>
+                <input type="text" placeholder="Nombre de la empresa" value={exp.job_name} onChange={(e) => handleListChange('experience', index, 'job_name', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Cargo</label>
+                <input type="text" placeholder="Puesto o cargo" value={exp.position_name} onChange={(e) => handleListChange('experience', index, 'position_name', e.target.value)} />
+              </div>
             </div>
             <div className="input-row mb-2">
-              <input type="text" placeholder="Inicio" value={exp.duration_start} onChange={(e) => handleListChange('experience', index, 'duration_start', e.target.value)} />
-              <input type="text" placeholder="Fin" value={exp.duration_end} onChange={(e) => handleListChange('experience', index, 'duration_end', e.target.value)} />
-              <input type="text" placeholder="Ubicación" value={exp.addr} onChange={(e) => handleListChange('experience', index, 'addr', e.target.value)} />
+              <div className="input-group">
+                <label>Inicio</label>
+                <input type="text" placeholder="Fecha de inicio" value={exp.duration_start} onChange={(e) => handleListChange('experience', index, 'duration_start', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Fin</label>
+                <input type="text" placeholder="Fecha de fin" value={exp.duration_end} onChange={(e) => handleListChange('experience', index, 'duration_end', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Ubicación</label>
+                <input type="text" placeholder="Ciudad, País" value={exp.addr} onChange={(e) => handleListChange('experience', index, 'addr', e.target.value)} />
+              </div>
             </div>
-            <textarea placeholder="Descripción de responsabilidades" value={exp.pos_description} onChange={(e) => handleListChange('experience', index, 'pos_description', e.target.value)} rows={3} />
-            <button className="remove-btn-absolute" onClick={() => removeListItem('experience', index)}><i className="fa fa-trash"></i></button>
+            <div className="input-group">
+              <label>Descripción</label>
+              <textarea placeholder="Describe tus responsabilidades y logros" value={exp.pos_description} onChange={(e) => handleListChange('experience', index, 'pos_description', e.target.value)} rows={3} />
+            </div>
+            <div className="input-row-remove">
+              <button className="remove-btn-inline" onClick={() => removeListItem('experience', index)}><i className="fa fa-trash"></i> Eliminar</button>
+            </div>
           </div>
         ))}
       </section>
@@ -240,16 +260,36 @@ const CVEditorForm: React.FC = () => {
         {details.education?.map((edu, index) => (
           <div key={index} className="list-item-container card">
             <div className="input-row mb-2">
-              <input type="text" placeholder="Institución" value={edu.institute_name} onChange={(e) => handleListChange('education', index, 'institute_name', e.target.value)} />
-              <input type="text" placeholder="Título" value={edu.grade_name} onChange={(e) => handleListChange('education', index, 'grade_name', e.target.value)} />
+              <div className="input-group">
+                <label>Institución</label>
+                <input type="text" placeholder="Nombre de la institución" value={edu.institute_name} onChange={(e) => handleListChange('education', index, 'institute_name', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Título</label>
+                <input type="text" placeholder="Título obtenido" value={edu.grade_name} onChange={(e) => handleListChange('education', index, 'grade_name', e.target.value)} />
+              </div>
             </div>
             <div className="input-row mb-2">
-              <input type="text" placeholder="Inicio" value={edu.duration_start} onChange={(e) => handleListChange('education', index, 'duration_start', e.target.value)} />
-              <input type="text" placeholder="Fin" value={edu.duration_end} onChange={(e) => handleListChange('education', index, 'duration_end', e.target.value)} />
-              <input type="text" placeholder="Ubicación" value={edu.addr} onChange={(e) => handleListChange('education', index, 'addr', e.target.value)} />
+              <div className="input-group">
+                <label>Inicio</label>
+                <input type="text" placeholder="Fecha de inicio" value={edu.duration_start} onChange={(e) => handleListChange('education', index, 'duration_start', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Fin</label>
+                <input type="text" placeholder="Fecha de fin" value={edu.duration_end} onChange={(e) => handleListChange('education', index, 'duration_end', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Ubicación</label>
+                <input type="text" placeholder="Ciudad, País" value={edu.addr} onChange={(e) => handleListChange('education', index, 'addr', e.target.value)} />
+              </div>
             </div>
-            <textarea placeholder="Detalles adicionales" value={edu.pos_description} onChange={(e) => handleListChange('education', index, 'pos_description', e.target.value)} rows={2} />
-            <button className="remove-btn-absolute" onClick={() => removeListItem('education', index)}><i className="fa fa-trash"></i></button>
+            <div className="input-group">
+              <label>Detalles</label>
+              <textarea placeholder="Detalles adicionales, logros, promedio..." value={edu.pos_description} onChange={(e) => handleListChange('education', index, 'pos_description', e.target.value)} rows={2} />
+            </div>
+            <div className="input-row-remove">
+              <button className="remove-btn-inline" onClick={() => removeListItem('education', index)}><i className="fa fa-trash"></i> Eliminar</button>
+            </div>
           </div>
         ))}
       </section>
@@ -265,12 +305,16 @@ const CVEditorForm: React.FC = () => {
         <div className="skills-grid">
           {details.abilities?.map((skill, index) => (
             <div key={skill.id || index} className="skill-item">
-              <input type="text" placeholder="Habilidad" value={skill.name} onChange={(e) => handleListChange('abilities', index, 'name', e.target.value)} />
+              <div className="input-group">
+                <label>Habilidad</label>
+                <input type="text" placeholder="Nombre de la habilidad" value={skill.name} onChange={(e) => handleListChange('abilities', index, 'name', e.target.value)} />
+              </div>
               <div className="level-container">
+                <label>Nivel</label>
                 <input type="range" min="1" max="10" value={skill.level} onChange={(e) => handleListChange('abilities', index, 'level', parseInt(e.target.value))} />
                 <span>{skill.level}</span>
               </div>
-              <button className="remove-btn-small" onClick={() => removeListItem('abilities', index)}><i className="fa fa-times"></i></button>
+              <button className="remove-btn-inline" onClick={() => removeListItem('abilities', index)}><i className="fa fa-trash"></i></button>
             </div>
           ))}
         </div>
@@ -280,16 +324,32 @@ const CVEditorForm: React.FC = () => {
       <section className="form-section">
         <div className="section-header">
           <h3><i className="fa fa-language"></i> Idiomas</h3>
-          <button className="add-btn" onClick={() => addListItem('languages', { id: Date.now(), name: '', level: '' })}>
+          <button className="add-btn" onClick={() => addListItem('languages', { id: Date.now(), name: '', level: 'Nativo' })}>
             <i className="fa fa-plus"></i> Añadir
           </button>
         </div>
         {details.languages?.map((lang, index) => (
           <div key={lang.id || index} className="list-item-container">
             <div className="input-row">
-              <input type="text" placeholder="Idioma" value={lang.name} onChange={(e) => handleListChange('languages', index, 'name', e.target.value)} />
-              <input type="text" placeholder="Nivel (B2, Nativo...)" value={lang.level} onChange={(e) => handleListChange('languages', index, 'level', e.target.value)} />
-              <button className="remove-btn" onClick={() => removeListItem('languages', index)}><i className="fa fa-trash"></i></button>
+              <div className="input-group">
+                <label>Idioma</label>
+                <input type="text" placeholder="Nombre del idioma" value={lang.name} onChange={(e) => handleListChange('languages', index, 'name', e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Nivel</label>
+                <select value={lang.level} onChange={(e) => handleListChange('languages', index, 'level', e.target.value)}>
+                  <option value="Nativo">Nativo</option>
+                  <option value="C2 - Maestría">C2 - Maestría</option>
+                  <option value="C1 - Avanzado">C1 - Avanzado</option>
+                  <option value="B2 - Intermedio alto">B2 - Intermedio alto</option>
+                  <option value="B1 - Intermedio">B1 - Intermedio</option>
+                  <option value="A2 - Elemental">A2 - Elemental</option>
+                  <option value="A1 - Básico">A1 - Básico</option>
+                </select>
+              </div>
+            </div>
+            <div className="input-row-remove">
+              <button className="remove-btn-inline" onClick={() => removeListItem('languages', index)}><i className="fa fa-trash"></i> Eliminar</button>
             </div>
           </div>
         ))}
@@ -305,9 +365,17 @@ const CVEditorForm: React.FC = () => {
         </div>
         {details.projects?.map((proj, index) => (
           <div key={proj.id || index} className="list-item-container card">
-            <input type="text" className="mb-2" placeholder="Nombre del Proyecto" value={proj.name} onChange={(e) => handleListChange('projects', index, 'name', e.target.value)} />
-            <textarea placeholder="Descripción del proyecto" value={proj.pos_description} onChange={(e) => handleListChange('projects', index, 'pos_description', e.target.value)} rows={2} />
-            <button className="remove-btn-absolute" onClick={() => removeListItem('projects', index)}><i className="fa fa-trash"></i></button>
+            <div className="input-group mb-2">
+              <label>Nombre del Proyecto</label>
+              <input type="text" placeholder="Título o nombre del proyecto" value={proj.name} onChange={(e) => handleListChange('projects', index, 'name', e.target.value)} />
+            </div>
+            <div className="input-group">
+              <label>Descripción</label>
+              <textarea placeholder="Describe el proyecto, tecnologías usadas, objetivos..." value={proj.pos_description} onChange={(e) => handleListChange('projects', index, 'pos_description', e.target.value)} rows={2} />
+            </div>
+            <div className="input-row-remove">
+              <button className="remove-btn-inline" onClick={() => removeListItem('projects', index)}><i className="fa fa-trash"></i> Eliminar</button>
+            </div>
           </div>
         ))}
       </section>
