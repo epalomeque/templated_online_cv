@@ -121,11 +121,6 @@ const CVEditorForm: React.FC = () => {
     updateCV(newHeader, details);
   };
 
-  const handleInterestsChange = (value: string) => {
-    const newDetails = { ...details, interests: value.split(',').map(s => s.trim()) };
-    updateCV(header, newDetails);
-  };
-
   return (
     <div className="cv-editor-form">
       {/* INFORMACIÓN PERSONAL */}
@@ -383,9 +378,51 @@ const CVEditorForm: React.FC = () => {
       {/* INTERESES */}
       <section className="form-section">
         <h3><i className="fa fa-heart"></i> Intereses</h3>
-        <div className="form-group">
-          <label>Intereses (separados por comas)</label>
-          <input type="text" value={details.interests?.join(', ') || ''} onChange={(e) => handleInterestsChange(e.target.value)} placeholder="Música, Deporte, Lectura..." />
+        <div className="interests-input-container">
+          <input 
+            type="text" 
+            placeholder="Escribe un interés y presiona Enter" 
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                const target = e.target as HTMLInputElement;
+                const value = target.value.trim();
+                if (value && !details.interests?.includes(value)) {
+                  updateCV(header, { ...details, interests: [...(details.interests || []), value] });
+                  target.value = '';
+                }
+              }
+            }}
+          />
+          <button 
+            className="add-btn" 
+            onClick={(e) => {
+              const input = (e.target as HTMLElement).previousElementSibling as HTMLInputElement;
+              const value = input.value.trim();
+              if (value && !details.interests?.includes(value)) {
+                updateCV(header, { ...details, interests: [...(details.interests || []), value] });
+                input.value = '';
+              }
+            }}
+          >
+            <i className="fa fa-plus"></i> Agregar
+          </button>
+        </div>
+        <div className="interests-pills">
+          {(details.interests || []).map((interest, index) => (
+            <span key={index} className="interest-pill">
+              {interest}
+              <button 
+                onClick={() => {
+                  const newInterests = [...(details.interests || [])];
+                  newInterests.splice(index, 1);
+                  updateCV(header, { ...details, interests: newInterests });
+                }}
+              >
+                <i className="fa fa-times"></i>
+              </button>
+            </span>
+          ))}
         </div>
       </section>
       

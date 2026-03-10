@@ -327,5 +327,92 @@
       color: #333;
     }
   }
+
+  .interests-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #aaa;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: #fafafa;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #6f42c1;
+        box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.15);
+        background-color: #fff;
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .add-btn {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+  }
+
+  .interests-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .interest-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #e9ecef;
+      color: #333;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+
+      button {
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #dc3545;
+          color: #fff;
+        }
+
+        i {
+          font-size: 10px;
+        }
+      }
+    }
+  }
 }
 
