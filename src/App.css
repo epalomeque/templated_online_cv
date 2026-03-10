@@ -9,6 +9,10 @@
   text-align: center;
 }
 
+.app-content {
+  padding-top: 120px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

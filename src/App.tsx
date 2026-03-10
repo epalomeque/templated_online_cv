@@ -73,11 +73,11 @@ function App() {
   }
 
   return (
-    <>
+    <div className="app-content">
       <ResumeActions title={ app_title } />
       {renderResume()}
       <ResumeActionsFooter title={ app_title } />
-    </>
+    </div>
   )
 }
 
