@@ -139,7 +139,65 @@ const CVEditorForm: React.FC = () => {
         </div>
         <div className="form-group">
           <label>Fecha de Nacimiento</label>
-          <input type="text" name="personal_info.birthdate" placeholder="YYYY-MM-DD" value={header.personal_info.birthdate} onChange={handleHeaderChange} />
+          <div className="birthdate-row">
+            <select 
+              value={header.personal_info.birthdate?.split('-')[2] || ''}
+              onChange={(e) => {
+                const parts = (header.personal_info.birthdate || '').split('-');
+                const day = e.target.value;
+                const month = parts[1] || '';
+                const year = parts[0] || '';
+                const newBirthdate = year ? `${year}-${month}-${day}` : '';
+                handleHeaderChange({ target: { name: 'personal_info.birthdate', value: newBirthdate } } as React.ChangeEvent<HTMLInputElement>);
+              }}
+            >
+              <option value="">Día</option>
+              {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                <option key={d} value={d.toString().padStart(2, '0')}>{d}</option>
+              ))}
+            </select>
+            <select 
+              value={header.personal_info.birthdate?.split('-')[1] || ''}
+              onChange={(e) => {
+                const parts = (header.personal_info.birthdate || '').split('-');
+                const day = parts[2] || '';
+                const month = e.target.value;
+                const year = parts[0] || '';
+                const newBirthdate = year ? `${year}-${month}-${day}` : '';
+                handleHeaderChange({ target: { name: 'personal_info.birthdate', value: newBirthdate } } as React.ChangeEvent<HTMLInputElement>);
+              }}
+            >
+              <option value="">Mes</option>
+              <option value="01">Enero</option>
+              <option value="02">Febrero</option>
+              <option value="03">Marzo</option>
+              <option value="04">Abril</option>
+              <option value="05">Mayo</option>
+              <option value="06">Junio</option>
+              <option value="07">Julio</option>
+              <option value="08">Agosto</option>
+              <option value="09">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+            <select 
+              value={header.personal_info.birthdate?.split('-')[0] || ''}
+              onChange={(e) => {
+                const parts = (header.personal_info.birthdate || '').split('-');
+                const day = parts[2] || '';
+                const month = parts[1] || '';
+                const year = e.target.value;
+                const newBirthdate = year ? `${year}-${month}-${day}` : '';
+                handleHeaderChange({ target: { name: 'personal_info.birthdate', value: newBirthdate } } as React.ChangeEvent<HTMLInputElement>);
+              }}
+            >
+              <option value="">Año</option>
+              {Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i).map(y => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </section>
 
@@ -220,13 +278,129 @@ const CVEditorForm: React.FC = () => {
               </div>
             </div>
             <div className="input-row mb-2">
-              <div className="input-group">
+              <div className="input-group date-group">
                 <label>Inicio</label>
-                <input type="text" placeholder="Fecha de inicio" value={exp.duration_start} onChange={(e) => handleListChange('experience', index, 'duration_start', e.target.value)} />
+                <div className="birthdate-row compact">
+                  <select 
+                    value={exp.duration_start?.split('-')[2] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_start || '').split('-');
+                      const day = e.target.value;
+                      const month = parts[1] || '';
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Día</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                      <option key={d} value={d.toString().padStart(2, '0')}>{d}</option>
+                    ))}
+                  </select>
+                  <select 
+                    value={exp.duration_start?.split('-')[1] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_start || '').split('-');
+                      const day = parts[2] || '';
+                      const month = e.target.value;
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Mes</option>
+                    <option value="01">Ene</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Abr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Ago</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dic</option>
+                  </select>
+                  <select 
+                    value={exp.duration_start?.split('-')[0] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_start || '').split('-');
+                      const day = parts[2] || '';
+                      const month = parts[1] || '';
+                      const year = e.target.value;
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Año</option>
+                    {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              <div className="input-group">
+              <div className="input-group date-group">
                 <label>Fin</label>
-                <input type="text" placeholder="Fecha de fin" value={exp.duration_end} onChange={(e) => handleListChange('experience', index, 'duration_end', e.target.value)} />
+                <div className="birthdate-row compact">
+                  <select 
+                    value={exp.duration_end?.split('-')[2] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_end || '').split('-');
+                      const day = e.target.value;
+                      const month = parts[1] || '';
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Día</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                      <option key={d} value={d.toString().padStart(2, '0')}>{d}</option>
+                    ))}
+                  </select>
+                  <select 
+                    value={exp.duration_end?.split('-')[1] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_end || '').split('-');
+                      const day = parts[2] || '';
+                      const month = e.target.value;
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Mes</option>
+                    <option value="01">Ene</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Abr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Ago</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dic</option>
+                  </select>
+                  <select 
+                    value={exp.duration_end?.split('-')[0] || ''}
+                    onChange={(e) => {
+                      const parts = (exp.duration_end || '').split('-');
+                      const day = parts[2] || '';
+                      const month = parts[1] || '';
+                      const year = e.target.value;
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('experience', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Año</option>
+                    {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
               <div className="input-group">
                 <label>Ubicación</label>
@@ -265,13 +439,129 @@ const CVEditorForm: React.FC = () => {
               </div>
             </div>
             <div className="input-row mb-2">
-              <div className="input-group">
+              <div className="input-group date-group">
                 <label>Inicio</label>
-                <input type="text" placeholder="Fecha de inicio" value={edu.duration_start} onChange={(e) => handleListChange('education', index, 'duration_start', e.target.value)} />
+                <div className="birthdate-row compact">
+                  <select 
+                    value={edu.duration_start?.split('-')[2] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_start || '').split('-');
+                      const day = e.target.value;
+                      const month = parts[1] || '';
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Día</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                      <option key={d} value={d.toString().padStart(2, '0')}>{d}</option>
+                    ))}
+                  </select>
+                  <select 
+                    value={edu.duration_start?.split('-')[1] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_start || '').split('-');
+                      const day = parts[2] || '';
+                      const month = e.target.value;
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Mes</option>
+                    <option value="01">Ene</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Abr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Ago</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dic</option>
+                  </select>
+                  <select 
+                    value={edu.duration_start?.split('-')[0] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_start || '').split('-');
+                      const day = parts[2] || '';
+                      const month = parts[1] || '';
+                      const year = e.target.value;
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_start', newDate);
+                    }}
+                  >
+                    <option value="">Año</option>
+                    {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
-              <div className="input-group">
+              <div className="input-group date-group">
                 <label>Fin</label>
-                <input type="text" placeholder="Fecha de fin" value={edu.duration_end} onChange={(e) => handleListChange('education', index, 'duration_end', e.target.value)} />
+                <div className="birthdate-row compact">
+                  <select 
+                    value={edu.duration_end?.split('-')[2] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_end || '').split('-');
+                      const day = e.target.value;
+                      const month = parts[1] || '';
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Día</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                      <option key={d} value={d.toString().padStart(2, '0')}>{d}</option>
+                    ))}
+                  </select>
+                  <select 
+                    value={edu.duration_end?.split('-')[1] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_end || '').split('-');
+                      const day = parts[2] || '';
+                      const month = e.target.value;
+                      const year = parts[0] || '';
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Mes</option>
+                    <option value="01">Ene</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Abr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Ago</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dic</option>
+                  </select>
+                  <select 
+                    value={edu.duration_end?.split('-')[0] || ''}
+                    onChange={(e) => {
+                      const parts = (edu.duration_end || '').split('-');
+                      const day = parts[2] || '';
+                      const month = parts[1] || '';
+                      const year = e.target.value;
+                      const newDate = year || month || day ? `${year}-${month}-${day}` : '';
+                      handleListChange('education', index, 'duration_end', newDate);
+                    }}
+                  >
+                    <option value="">Año</option>
+                    {Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
               <div className="input-group">
                 <label>Ubicación</label>
