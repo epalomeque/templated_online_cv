@@ -1,14 +1,15 @@
 # Templated Resume App
 
-A modern, responsive online resume/CV built with React, TypeScript, Vite, and Handlebars.
+A modern, responsive online resume/CV built with React, TypeScript, Vite, Redux Toolkit, and Handlebars.
 
 ## Features
 
 - **Multiple Themes**: Choose between `simple`, `bootstrap`, and `dark-theme` (Tailwind)
-- **JSON Editor**: Built-in editor to modify resume data with undo/redo, validation and file management
+- **Dual Editor**: Form-based editor with intuitive UI and JSON editor for advanced users
 - **Template System**: Flexible architecture using Handlebars layouts and themes
 - **Export Options**: Download as PDF, DOCX, or standalone HTML with embedded styles
 - **Responsive Design**: Works on desktop and mobile devices
+- **Spanish Localization**: Full Spanish interface and date formatting
 - **Open Source**: MIT License
 
 ## Installation
@@ -65,19 +66,45 @@ The app includes several built-in themes:
 
 ### Switching Themes
 
-Use the **Theme Selector** dropdown in the header to switch between available themes instantly. You can also set the initial theme in the `.env` file via `VITE_APP_THEME`.
+Use the **hamburger menu** (☰) in the header to access the theme selector. You can also set the initial theme in the `.env` file via `VITE_APP_THEME`.
 
-## JSON Editor
+## Editor
 
-The built-in JSON editor allows you to modify your resume data directly from the browser:
+The app provides two ways to edit your resume:
 
+### Form Editor (Recommended)
+- Intuitive form with labeled input fields
+- Date pickers for dates (day/month/year selectors)
+- Skills with level slider (1-10)
+- Languages with proficiency dropdown (Nativo, C2, C1, B2, B1, A2, A1)
+- Interests as interactive chips/pills
+- Add/Remove buttons for all list items
+
+### JSON Editor
+For advanced users who prefer direct JSON editing:
 - **Load**: Load a JSON file from your computer
 - **Save**: Download the current JSON
 - **Copy/Paste**: Copy to clipboard or paste from clipboard
 - **Undo/Redo**: Revert or reapply changes
 - **Validation**: Real-time JSON syntax validation with error highlighting
 
-Access it from the "Acciones" menu.
+Access the editor by clicking the **"Editar CV"** button in the header.
+
+## Date Formatting
+
+All dates are displayed in Spanish format:
+- **Birthdate**: Day, Month (full name), Year
+- **Experience/Education**: Month-Year (e.g., "Enero 2024 - Marzo 2026")
+
+## Section Titles
+
+All section titles are displayed in Spanish:
+- Experience → Experiencia Laboral
+- Education → Educación
+- Skills → Habilidades
+- Projects → Proyectos
+- Languages → Idiomas
+- Interests → Intereses
 
 ## Environment Configuration
 
@@ -85,7 +112,7 @@ Create a `.env` file in the root directory with the following options:
 
 ```env
 # App Configuration
-VITE_APP_TITLE="My Online Resume"
+VITE_APP_TITLE="Mi Currículum"
 VITE_RESUME_URL="/cvdata.json"
 
 # Button Visibility
@@ -94,8 +121,8 @@ VITE_CONFIG_SHOW_BTNDOC=true
 VITE_CONFIG_SHOW_BTNPDF=true
 VITE_CONFIG_SHOW_BTNEMAIL=true
 
-# Theme: 'simple' or 'bootstrap'
-VITE_APP_THEME=bootstrap
+# Theme: 'simple', 'bootstrap', or 'dark-theme'
+VITE_APP_THEME=simple
 
 # GitHub URL
 VITE_GITHUB_HOSTED_URL="https://github.com/yourusername/templated_online_cv"
@@ -133,14 +160,18 @@ Each theme needs these templates:
 ```
 src/
 ├── features/
-│   ├── cv-editor/           # JSON editor and actions
+│   ├── cv-editor/           # Form editor, JSON editor and actions
+│   │   └── components/      # CVEditorForm, ActionsMenu, etc.
 │   └── resume-viewer/       # Themes, templates and rendering
+│       ├── components/      # Theme-specific React components
+│       └── templates/       # Handlebars templates per theme
 ├── services/
 │   ├── themeService.ts      # Theme management
-│   ├── handlebarsSetup.ts   # Template compilation
-│   └── errorMiddleware.ts   # Global error handling
+│   ├── handlebarsSetup.ts   # Template compilation and helpers
+│   └── sectionRenderer.ts   # Section rendering logic
 ├── store/                   # Redux state (cvSlice)
 ├── utilities/               # PDF, DOCX, HTML generators
+├── classes/                 # CVData class
 └── interfaces/              # TypeScript definitions
 ```
 

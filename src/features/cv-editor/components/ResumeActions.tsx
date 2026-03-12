@@ -28,6 +28,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
     const emailToUse = cvData.getFirstEmail();
 
     const [isEditorOpen, setIsEditorOpen] = useState(false);
+    const [showHelp, setShowHelp] = useState(false);
     const [jsonContent, setJsonContent] = useState('');
     const [activeTab, setActiveTab] = useState<'preview' | 'edit' | 'json'>('preview');
 
@@ -119,25 +120,31 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             icon: 'fa fa-envelope-o',
             href: `mailto:${emailToUse}`
         }] : []),
+                {
+                    id: 'edit-data-group',
+                    label: 'Editar Datos',
+                    icon: 'fa fa-edit',
+                    children: [
+                        {
+                            id: 'edit-simple',
+                            label: 'Modo simple (Formulario)',
+                            icon: 'fa fa-wpforms',
+                            onClick: () => openEditor('edit')
+                        },
+                        {
+                            id: 'edit-advanced',
+                            label: 'Modo avanzado (JSON)',
+                            icon: 'fa fa-code',
+                            onClick: () => openEditor('json')
+                        }
+                    ]
+        },
         {
-            id: 'edit-data-group',
-            label: 'Editar Datos',
-            icon: 'fa fa-edit',
-            children: [
-                {
-                    id: 'edit-simple',
-                    label: 'Modo simple (Formulario)',
-                    icon: 'fa fa-wpforms',
-                    onClick: () => openEditor('edit')
-                },
-                {
-                    id: 'edit-advanced',
-                    label: 'Modo avanzado (JSON)',
-                    icon: 'fa fa-code',
-                    onClick: () => openEditor('json')
+                    id: 'help',
+                    label: '¿Cómo uso esta app?',
+                    icon: 'fa fa-question-circle',
+                    onClick: () => setShowHelp(true)
                 }
-            ]
-        }
     ];
 
     return (
@@ -196,6 +203,58 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                                         isEmbedded={true}
                                     />
                                 )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showHelp && (
+                <div className="json-editor-scope">
+                    <div className="json-editor-overlay" onClick={() => setShowHelp(false)}>
+                        <div className="json-editor-modal help-modal" onClick={e => e.stopPropagation()}>
+                            <div className="json-editor-header">
+                                <h2><i className="fa fa-question-circle"></i> ¿Cómo uso esta app?</h2>
+                                <button className="close-btn" onClick={() => setShowHelp(false)} aria-label="Cerrar">
+                                    &times;
+                                </button>
+                            </div>
+                            <div className="modal-content-scroll help-content">
+                                <div className="help-section">
+                                    <h3><i className="fa fa-edit"></i> 1. Edita tu información</h3>
+                                    <p>Haz clic en el botón <strong>"Editar CV"</strong> en la parte superior. Puedes elegir entre:</p>
+                                    <ul>
+                                        <li><strong>Formulario:</strong> Llena tus datos usando campos simples y понятны.</li>
+                                        <li><strong>JSON:</strong> Edita directamente el código si sabes cómo usarlo.</li>
+                                    </ul>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-paint-brush"></i> 2. Elige un estilo</h3>
+                                    <p>En el menú (☰) selecciona <strong>"Cambiar tema"</strong> para ver diferentes diseños:</p>
+                                    <ul>
+                                        <li><strong>Simple:</strong> Diseño limpio y profesional</li>
+                                        <li><strong>Bootstrap:</strong> Estilo moderno con colores</li>
+                                        <li><strong>Dark:</strong> Fondo oscuro elegante</li>
+                                    </ul>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-download"></i> 3. Descarga tu currículum</h3>
+                                    <p>En el menú (☰) tienes opciones para guardar:</p>
+                                    <ul>
+                                        <li><strong>PDF:</strong> Para imprimir o enviar por email</li>
+                                        <li><strong>DOCX:</strong> Para editar en Word</li>
+                                        <li><strong>HTML:</strong> Página web independiente</li>
+                                    </ul>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-tips"></i> Tips útiles</h3>
+                                    <ul>
+                                        <li>Usa el <strong>selector de fechas</strong> para indicar cuándo trabajaste o estudiaste</li>
+                                        <li>En <strong>habilidades</strong>, ajusta el nivel con el slider (1-10)</li>
+                                        <li>En <strong>idiomas</strong>, selecciona tu nivel (Nativo, C2, C1, etc.)</li>
+                                        <li>En <strong>intereses</strong>, escribe y presiona Enter para agregar</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

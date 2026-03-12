@@ -222,4 +222,70 @@
             padding: 15px;
         }
     }
+
+    .help-modal {
+        max-width: 600px;
+        padding: 0;
+
+        .json-editor-header {
+            h2 {
+                margin: 0;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        .help-content {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .help-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+            h3 {
+                color: #6f42c1;
+                font-size: 16px;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                i {
+                    font-size: 14px;
+                }
+            }
+
+            p {
+                color: #555;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
+
+            ul {
+                margin: 0;
+                padding-left: 20px;
+                color: #555;
+                line-height: 1.8;
+
+                li {
+                    margin-bottom: 5px;
+                }
+
+                strong {
+                    color: #333;
+                }
+            }
+        }
+    }
 }
