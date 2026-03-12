@@ -314,6 +314,20 @@
           padding-right: 24px;
         }
       }
+
+      &.month-year-row {
+        display: flex;
+        gap: 8px;
+
+        select {
+          flex: 1;
+          padding: 8px 10px;
+          font-size: 13px;
+          background-position: right 8px center;
+          background-size: 10px;
+          padding-right: 28px;
+        }
+      }
     }
 
     &.date-group {

@@ -73,7 +73,7 @@ export const darkThemeTemplates = {
           <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-sky-500 border-4 border-slate-900"></div>
           <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
             <h4 class="text-lg font-bold text-white">{{job_name}}</h4>
-            <span class="text-sm font-medium text-sky-400">{{duration_start}} - {{duration_end}}</span>
+            <span class="text-sm font-medium text-sky-400">{{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</span>
           </div>
           <div class="text-sky-300 font-medium mb-2">{{position_name}} | <span class="text-slate-400 text-sm">{{addr}}</span></div>
           <p class="text-slate-400 text-sm leading-relaxed">{{pos_description}}</p>
@@ -93,7 +93,7 @@ export const darkThemeTemplates = {
           <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-4 border-slate-900"></div>
           <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
             <h4 class="text-lg font-bold text-white">{{institute_name}}</h4>
-            <span class="text-sm font-medium text-emerald-400">{{duration_start}} - {{duration_end}}</span>
+            <span class="text-sm font-medium text-emerald-400">{{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</span>
           </div>
           <div class="text-emerald-300 font-medium mb-2">{{grade_name}} | <span class="text-slate-400 text-sm">{{addr}}</span></div>
           <p class="text-slate-400 text-sm leading-relaxed">{{pos_description}}</p>

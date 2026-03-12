@@ -94,7 +94,7 @@ export const singleThemeTemplates = {
                 </div>
                 <div>
                 <div class="addr">Place: {{addr}}</div>
-                <div class="duration">Duration: {{duration_start}} - {{duration_end}}</div>
+                <div class="duration">Duration: {{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</div>
                 </div>
             </div>
             <div class="right">
@@ -115,7 +115,7 @@ export const singleThemeTemplates = {
             <div class="left">
                 <div class="name">{{institute_name}}</div>
                 <div class="addr">{{addr}}</div>
-                <div class="duration">{{duration_start}} - {{duration_end}}</div>
+                <div class="duration">{{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</div>
             </div>
             <div class="right">
                 <div class="name">{{grade_name}}</div>

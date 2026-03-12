@@ -33,14 +33,14 @@ export default function BootstrapResume() {
       </div>
       <div className="row">
         <div className="col-12 col-md-6">
-          <Section type="language" title="Languages" cvData={cvData} theme={currentTheme} />
-          <Section type="experience" title="Experience" cvData={cvData} theme={currentTheme} />
-          <Section type="education" title="Education" cvData={cvData} theme={currentTheme} />
+          <Section type="language" title="Idiomas" cvData={cvData} theme={currentTheme} />
+          <Section type="experience" title="Experiencia Laboral" cvData={cvData} theme={currentTheme} />
+          <Section type="education" title="Educación" cvData={cvData} theme={currentTheme} />
         </div>
         <div className="col-12 col-md-6">
-          <Section type="projects" title="Projects" cvData={cvData} theme={currentTheme} />
-          <Section type="skills" title="Skills" cvData={cvData} theme={currentTheme} />
-          <Section type="interests" title="Interests" cvData={cvData} theme={currentTheme} />
+          <Section type="projects" title="Proyectos" cvData={cvData} theme={currentTheme} />
+          <Section type="skills" title="Habilidades" cvData={cvData} theme={currentTheme} />
+          <Section type="interests" title="Intereses" cvData={cvData} theme={currentTheme} />
         </div>
       </div>
     </div>

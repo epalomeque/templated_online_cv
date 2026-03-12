@@ -154,8 +154,8 @@ export const visualDocxTemplate: DocxTemplate = {
                 spacing: { after: 200 },
             }),
 
-            // Experience
-            createSectionHeading("Experience"),
+            // Experiencia Laboral
+            createSectionHeading("Experiencia Laboral"),
             ...(experience ?? []).flatMap((exp: ExperienceInterface) => [
                 new Paragraph({
                     children: [
@@ -191,7 +191,7 @@ export const visualDocxTemplate: DocxTemplate = {
                         children: [
                             new TableCell({
                                 children: [
-                                    createSectionHeading("Skills"),
+                                    createSectionHeading("Habilidades"),
                                     new Paragraph({
                                         children: [
                                             new TextRun({
@@ -206,7 +206,7 @@ export const visualDocxTemplate: DocxTemplate = {
                             }),
                             new TableCell({
                                 children: [
-                                    createSectionHeading("Languages"),
+                                    createSectionHeading("Idiomas"),
                                     new Paragraph({
                                         children: [
                                             new TextRun({
@@ -238,8 +238,8 @@ export const visualDocxTemplate: DocxTemplate = {
                 spacing: { after: 200 },
             }),
 
-            // Education
-            createSectionHeading("Education"),
+            // Educación
+            createSectionHeading("Educación"),
             ...(education ?? []).flatMap((edu: EducationInterface) => [
                 new Paragraph({
                     children: [
@@ -255,8 +255,8 @@ export const visualDocxTemplate: DocxTemplate = {
                 }),
             ]),
 
-            // Interests
-            createSectionHeading("Interests"),
+            // Intereses
+            createSectionHeading("Intereses"),
             new Paragraph({
                 children: [
                     new TextRun({

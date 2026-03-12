@@ -100,7 +100,7 @@ export const bootstrapThemeTemplates = {
                         <h6 class="mb-1">{{job_name}}</h6>
                         <p class="mb-1 text-muted">{{position_name}}</p>
                     </div>
-                    <span class="badge bg-secondary">{{duration_start}} - {{duration_end}}</span>
+                    <span class="badge bg-secondary">{{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</span>
                 </div>
                 <small class="text-muted"><i class="fa fa-map-marker me-1"></i>{{addr}}</small>
                 {{#if pos_description}}
@@ -126,7 +126,7 @@ export const bootstrapThemeTemplates = {
                     <h6 class="mb-1">{{institute_name}}</h6>
                     <p class="mb-1 text-muted">{{grade_name}}</p>
                 </div>
-                <span class="badge bg-secondary">{{duration_start}} - {{duration_end}}</span>
+                <span class="badge bg-secondary">{{formatMonthYear duration_start}} - {{formatMonthYear duration_end}}</span>
             </div>
             <small class="text-muted"><i class="fa fa-map-marker me-1"></i>{{addr}}</small>
             {{#if pos_description}}
