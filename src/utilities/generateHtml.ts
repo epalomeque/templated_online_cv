@@ -15,12 +15,12 @@ export function generateResumeHtml(cvData: CVData, theme: ThemeName): string {
   // Sections to render
   const sectionTypes = ['header', 'language', 'experience', 'education', 'projects', 'skills', 'interests'];
   const titles: Record<string, string> = {
-    language: 'Languages',
-    experience: 'Experience',
-    education: 'Education',
-    projects: 'Projects',
-    skills: 'Skills',
-    interests: 'Interests'
+    language: 'Idiomas',
+    experience: 'Experiencia Laboral',
+    education: 'Educación',
+    projects: 'Proyectos',
+    skills: 'Habilidades',
+    interests: 'Intereses'
   };
 
   const sections: Record<string, string> = {};

@@ -33,7 +33,7 @@
       -webkit-font-smoothing: antialiased;
     }
     &.embedded {
-      position: static;
+      position: relative;
       display: block;
       z-index: auto;
       background: none;

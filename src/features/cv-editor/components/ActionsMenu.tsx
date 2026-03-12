@@ -13,13 +13,11 @@ interface MenuItem {
 
 interface ActionsMenuProps {
     items: MenuItem[];
-    triggerLabel?: string;
     triggerIcon?: string;
 }
 
 const ActionsMenu: React.FC<ActionsMenuProps> = ({ 
     items, 
-    triggerLabel = 'Acciones',
     triggerIcon = 'fa fa-bars' 
 }: ActionsMenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -115,10 +113,9 @@ const ActionsMenu: React.FC<ActionsMenuProps> = ({
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
                 aria-haspopup="true"
+                aria-label="Menú"
             >
                 <i className={triggerIcon}></i>
-                {triggerLabel && <span>{triggerLabel}</span>}
-                <i className={`fa fa-chevron-${isOpen ? 'up' : 'down'}`}></i>
             </button>
             
             {isOpen && (

@@ -144,8 +144,8 @@ export const visualPdfTemplate: PdfTemplate = {
         doc.text(profileText, mainX, mainY);
         mainY += profileText.length * 5 + 10;
 
-        // Experience
-        createMainHeading("Experience");
+        // Experiencia Laboral
+        createMainHeading("Experiencia Laboral");
         experience?.forEach(exp => {
             if (mainY > 250) {
                 doc.addPage();
@@ -174,8 +174,8 @@ export const visualPdfTemplate: PdfTemplate = {
             mainY += desc.length * 5 + 8;
         });
 
-        // Education
-        createMainHeading("Education");
+        // Educación
+        createMainHeading("Educación");
         education?.forEach(edu => {
             if (mainY > 260) {
                 doc.addPage();

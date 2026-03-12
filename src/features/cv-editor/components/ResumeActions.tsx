@@ -48,20 +48,10 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
         }
     };
 
-    const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        dispatch(setTheme(event.target.value as ThemeName));
-    };
-
     const availableThemes = themeService.getAvailableThemes();
 
     const menuItems = [
-        ...(emailToUse && app_settings.showBtnEmail ? [{
-            id: 'email',
-            label: 'Enviar por correo',
-            icon: 'fa fa-envelope-o',
-            href: `mailto:${emailToUse}`
-        }] : []),
-        {
+        ...(app_settings.showBtnDoc || app_settings.showBtnPdf ? [{
             id: 'download-files',
             label: 'Descargar archivos',
             icon: 'fa fa-download',
@@ -111,7 +101,24 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                     onClick: () => downloadResumeHtml(cvData, theme as ThemeName)
                 }
             ]
+        }] : []),
+        {
+            id: 'theme-group',
+            label: 'Cambiar tema',
+            icon: 'fa fa-paint-brush',
+            children: availableThemes.map(t => ({
+                id: `theme-${t.id}`,
+                label: t.label,
+                icon: theme === t.id ? 'fa fa-check-square-o' : 'fa fa-square-o',
+                onClick: () => dispatch(setTheme(t.id as ThemeName))
+            }))
         },
+        ...(emailToUse && app_settings.showBtnEmail ? [{
+            id: 'email',
+            label: 'Enviar por correo',
+            icon: 'fa fa-envelope-o',
+            href: `mailto:${emailToUse}`
+        }] : []),
         {
             id: 'edit-data-group',
             label: 'Editar Datos',
@@ -138,25 +145,16 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
             <div className="resume-actions-container">
                 <h1 className="resume-title">{ title }</h1>
                 <div className="actions-wrapper">
-                    <div className="theme-selector-container">
-                        <i className="fa fa-paint-brush selector-icon"></i>
-                        <select 
-                            className="theme-selector" 
-                            value={theme} 
-                            onChange={handleThemeChange}
-                            title="Seleccionar tema"
-                        >
-                            {availableThemes.map(t => (
-                                <option key={t.id} value={t.id}>
-                                    {t.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <button 
+                        className="edit-cv-btn"
+                        onClick={() => openEditor('edit')}
+                        title="Editar datos del CV"
+                    >
+                        <i className="fa fa-edit"></i> Editar CV
+                    </button>
                     <ActionsMenu 
                         items={menuItems}
-                        triggerLabel="Acciones"
-                        triggerIcon="fa fa-download"
+                        triggerIcon="fa fa-bars"
                     />
                 </div>
             </div>

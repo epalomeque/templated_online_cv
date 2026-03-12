@@ -30,14 +30,14 @@
   ],
   "languages": [
     { "id": 0, "name": "Spanish", "level": "Native" },
-    { "id": 1, "name": "English", "level": "Advanced" }
+    { "id": 1, "name": "English", "level": "C1 - Avanzado" }
   ],
   "education": [{
     "id": 0,
     "institute_name": "Universidad del Valle de México",
     "addr": "Villahermosa, TAB. MEX",
-    "duration_start": "Sep-2001",
-    "duration_end": "Dec-2006",
+    "duration_start": "2001-09-01",
+    "duration_end": "2006-12-01",
     "grade_name":"Bachelors Degree, Unfinished",
     "pos_description": "Ingeniería en Sistemas Computacionales"
   }],
@@ -46,8 +46,8 @@
       "id": 0,
       "job_name": "Company Name",
       "addr": "Oaxaca, MEX",
-      "duration_start": "Mar. 2022",
-      "duration_end": "Jan. 2025",
+      "duration_start": "2022-03-01",
+      "duration_end": "2025-01-31",
       "position_name": "Position Name",
       "pos_description": "• Description of the responsibilities and achievements in this position. This section should highlight the key tasks performed, the technologies used, and the results obtained. It can also include any notable projects or initiatives that were part of this role."
     },
@@ -55,8 +55,8 @@
       "id": 1,
       "job_name": "Company Name",
       "addr": "Oaxaca, MEX",
-      "duration_start": "Mar. 2022",
-      "duration_end": "Jan. 2025",
+      "duration_start": "2022-03-01",
+      "duration_end": "2025-01-31",
       "position_name": "Position Name",
       "pos_description": "• Description of the responsibilities and achievements in this position. This section should highlight the key tasks performed, the technologies used, and the results obtained. It can also include any notable projects or initiatives that were part of this role."
     },
@@ -64,8 +64,8 @@
       "id": 2,
       "job_name": "Company Name",
       "addr": "Oaxaca, MEX",
-      "duration_start": "Mar. 2022",
-      "duration_end": "Jan. 2025",
+      "duration_start": "2002-03-01",
+      "duration_end": "2002-01-01",
       "position_name": "Position Name",
       "pos_description": "• Description of the responsibilities and achievements in this position. This section should highlight the key tasks performed, the technologies used, and the results obtained. It can also include any notable projects or initiatives that were part of this role."
     }
