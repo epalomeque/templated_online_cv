@@ -1,15 +1,44 @@
 # Templated Resume App
 
-A modern, responsive online resume/CV built with React, TypeScript, Vite, and Handlebars.
+Una aplicación moderna y responsiva para crear currículums en línea, desarrollada con React, TypeScript, Vite y Handlebars.
 
-## Features
+## Características
 
-- **Multiple Themes**: Choose between `simple`, `bootstrap`, and `dark-theme` (Tailwind)
-- **JSON Editor**: Built-in editor to modify resume data with undo/redo, validation and file management
-- **Template System**: Flexible architecture using Handlebars layouts and themes
-- **Export Options**: Download as PDF, DOCX, or standalone HTML with embedded styles
-- **Responsive Design**: Works on desktop and mobile devices
-- **Open Source**: MIT License
+- **Múltiples Temas**: Elige entre `simple`, `bootstrap` y `dark-theme` (Tailwind)
+- **Editor JSON**: Editor integrado para modificar los datos del currículum con deshacer/rehacer, validación y gestión de archivos
+- **Sistema de Plantillas**: Arquitectura flexible usando Handlebars
+- **Opciones de Exportación**: Descarga en PDF, DOCX o HTML independiente con estilos embebidos
+- **Diseño Responsivo**: Funciona en dispositivos móviles y escritorio
+- **Código Abierto**: Licencia MIT
+
+## ¿Cómo usar esta aplicación?
+
+### 1. Editar tu CV
+
+Puedes modificar los datos de tu currículum de dos formas:
+
+- **Modo Formulario**: Haz clic en "Editar CV" o busca "Modo simple (Formulario)" en el menú. Rellena los campos uno por uno de forma sencilla.
+- **Modo JSON**: En el menú busca "Modo avanzado (JSON)" para editar los datos directamente en formato JSON.
+
+### 2. Cambiar el diseño
+
+En el menú (icono de tres líneas) puedes elegir entre diferentes temas visuales:
+- **Simple**: Diseño limpio y minimalista
+- **Bootstrap**: Estilo moderno y responsivo
+- **Tema Oscuro**: Estilo oscuro con Tailwind CSS
+
+### 3. Descargar tu CV
+
+Desde el menú "Descargar archivos" puedes guardar tu currículum en:
+- **PDF**: Ideal para enviar por email o imprimir
+- **Word (DOCX)**: Para que otras personas puedan editarlo
+- **HTML**: Una página web independiente que puedes subir a internet
+
+### 4. Guardar cambios
+
+Los cambios que haces se guardan en el navegador temporalmente. Para conservarlos:
+- Descarga el archivo JSON desde el editor
+- O exporta tu CV en el formato que prefieras
 
 ## Installation
 

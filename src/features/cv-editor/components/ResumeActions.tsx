@@ -30,6 +30,7 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
     const [isEditorOpen, setIsEditorOpen] = useState(false);
     const [jsonContent, setJsonContent] = useState('');
     const [activeTab, setActiveTab] = useState<'preview' | 'edit' | 'json'>('preview');
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
 
     const openEditor = (tab: 'edit' | 'json') => {
         const fullData = stateToJsonFormat(header, details);
@@ -137,6 +138,12 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                     onClick: () => openEditor('json')
                 }
             ]
+        },
+        {
+            id: 'how-to-use',
+            label: '¿Cómo uso esta app?',
+            icon: 'fa fa-question-circle',
+            onClick: () => setIsHelpOpen(true)
         }
     ];
 
@@ -196,6 +203,48 @@ const ResumeActions: React.FC<ResumeActionsProps> = ({ title }: ResumeActionsPro
                                         isEmbedded={true}
                                     />
                                 )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {isHelpOpen && (
+                <div className="json-editor-scope">
+                    <div className="json-editor-overlay" onClick={() => setIsHelpOpen(false)}>
+                        <div className="json-editor-modal" onClick={e => e.stopPropagation()}>
+                            <div className="json-editor-header">
+                                <h2>¿Cómo uso esta app?</h2>
+                                <button className="close-btn" onClick={() => setIsHelpOpen(false)} aria-label="Cerrar">
+                                    &times;
+                                </button>
+                            </div>
+                            <div className="modal-content-scroll help-content">
+                                <div className="help-section">
+                                    <h3><i className="fa fa-edit"></i> Editar tu CV</h3>
+                                    <p>Puedes modificar los datos de tu currículum de dos formas:</p>
+                                    <ul>
+                                        <li><strong>Modo Formulario:</strong> Rellena los campos uno por uno de forma sencilla.</li>
+                                        <li><strong>Modo JSON:</strong> Edita los datos directamente en formato JSON (para usuarios avanzados).</li>
+                                    </ul>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-paint-brush"></i> Cambiar el diseño</h3>
+                                    <p>En el menú (tres líneas) puedes elegir entre diferentes temas visuales como Simple, Bootstrap o Tema Oscuro.</p>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-download"></i> Descargar tu CV</h3>
+                                    <p>Desde el menú puedes guardar tu currículum en diferentes formatos:</p>
+                                    <ul>
+                                        <li><strong>PDF:</strong> Ideal para enviar por email o imprimir.</li>
+                                        <li><strong>Word (DOCX):</strong> Para que otras personas puedan editarlo.</li>
+                                        <li><strong>HTML:</strong> Una página web independiente que puedes subir a internet.</li>
+                                    </ul>
+                                </div>
+                                <div className="help-section">
+                                    <h3><i className="fa fa-floppy-o"></i> Guardar cambios</h3>
+                                    <p>Los cambios que haces se guardan en el navegador. Para conservarlos, descarga el archivo JSON desde el editor o exporta tu CV en el formato que prefieras.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
