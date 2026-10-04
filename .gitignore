@@ -27,3 +27,4 @@ cvdata.json
 .env
 context/*
 AGENTS.md
+/public/my_data/*
