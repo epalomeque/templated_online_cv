@@ -25,4 +25,5 @@ dist-ssr
 ./public/cvdata.json
 cvdata.json
 .env
+context/*
 AGENTS.md
